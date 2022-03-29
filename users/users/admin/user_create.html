@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form method="POST">
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <button type="submit" class="button-primary">Save</button>
+    <a href="{% url 'users:admin:manage' %}" class="button">Cancel</a>
+</form>
+
+{% endblock content %}

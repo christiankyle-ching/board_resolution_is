@@ -1,0 +1,248 @@
+/* TODO: Apply styles here */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* -------------------- Globals -------------------- */
+
+/* #region Headers */
+h1 {
+  @apply text-4xl font-bold;
+}
+
+h2 {
+  @apply text-3xl font-bold;
+}
+
+h3 {
+  @apply text-2xl font-bold;
+}
+
+h4 {
+  @apply text-xl font-bold;
+}
+
+h5 {
+  @apply text-lg font-medium;
+}
+
+h6 {
+  @apply text-base font-medium;
+}
+/* #endregion */
+
+/* #region Text Colors */
+
+.text-warning {
+  @apply text-yellow-800;
+}
+
+.text-info {
+  @apply text-blue-800;
+}
+
+/* #endregion */
+
+/* Fix Nav Header Text Spacing */
+nav h1,
+nav h2,
+nav h3,
+nav h4,
+nav h5,
+nav h6 {
+  line-height: unset !important;
+}
+
+hr {
+  @apply mb-2;
+}
+
+/* -------------------- Components -------------------- */
+
+/* #region Button */
+/*
+Use @apply then the list of all utility classes you want
+for button elements and .button classed elements 
+*/
+.button {
+  @apply inline-block py-2 px-4 font-semibold rounded-2xl shadow-md text-center focus:outline-none focus:ring-2 focus:ring-opacity-75 cursor-pointer;
+  @apply text-black hover:bg-primary hover:text-white;
+  @apply no-underline !important;
+}
+
+.button-image {
+  @apply p-0 m-0 !important;
+}
+
+.button-rounded {
+  @apply rounded-full !important;
+}
+
+.button-sm {
+  @apply button;
+  @apply py-2 px-3 text-sm !important;
+}
+
+.button-primary {
+  @apply button;
+  @apply bg-primary focus:ring-lightPrimary text-white !important;
+}
+
+.button-secondary {
+  @apply button;
+  @apply bg-lightPrimary focus:ring-primary text-primary !important;
+}
+
+.button-danger {
+  @apply button;
+  @apply ring-danger ring-1 text-danger hover:bg-danger hover:text-white !important;
+}
+
+/* #endregion */
+
+/* #region Card */
+.card {
+  @apply rounded-2xl shadow-md border-gray hover:shadow-lg;
+}
+/* #endregion */
+
+/* #region Forms */
+
+#errorMsg,
+.errorlist {
+  @apply text-danger;
+}
+
+form .errorField,
+form .asteriskField {
+  @apply text-danger;
+}
+
+form .helptext {
+  @apply text-sm;
+}
+
+/* Input Container */
+form > p {
+  @apply col-span-1 flex flex-col;
+}
+
+form > p > label {
+  @apply my-2;
+}
+
+form > p.hiddenField {
+  position: absolute !important;
+  height: 0px !important;
+  overflow: hidden !important;
+}
+
+input,
+select,
+textarea {
+  /* Remove default style */
+  @apply border-0 !important;
+  @apply ring-1 ring-gray focus:ring-2 focus:ring-primary rounded-2xl !important;
+}
+
+/* #endregion Forms */
+
+/* #region Drag Drop Image */
+label[data-drag-drop] {
+  cursor: pointer;
+
+  @apply bg-lightGray border-gray border-2 border-dashed;
+
+  display: grid;
+  height: 100%;
+  width: 100%;
+
+  position: relative;
+}
+
+label[data-drag-drop] > * {
+  /* Stacks all elements on top of each other */
+  grid-column: 1;
+  grid-row: 1;
+  margin: auto;
+}
+
+label[data-drag-drop] > img.preview {
+  @apply absolute top-0 left-0 w-full h-full object-contain;
+}
+
+label[data-drag-drop] > .counter {
+  @apply w-full h-full z-10 flex items-center justify-center;
+}
+
+label[data-drag-drop] ul.errors {
+  @apply text-danger text-center font-bold;
+}
+
+/* #endregion */
+
+/* #region Avatar */
+
+.avatar {
+  @apply h-20 w-20 object-cover rounded-full object-top bg-primary;
+}
+
+.avatar-sm {
+  @apply avatar;
+  @apply h-10 w-10 !important;
+}
+
+/* #endregion */
+
+/* #region Filename Preview */
+
+textarea[data-filename-preview] {
+  opacity: 1 !important;
+}
+
+/* #endregion */
+
+/* #region Dropdown */
+
+.dropdown {
+  @apply relative;
+}
+
+.dropdown [data-toggle] {
+  @apply cursor-pointer;
+}
+
+.dropdown > .dropdown_content {
+  @apply cursor-pointer;
+
+  left: 0;
+  right: unset;
+}
+
+.dropdown.right > .dropdown_content {
+  left: unset;
+  right: 0;
+}
+
+.dropdown.on-top > .dropdown_content {
+  top: 0;
+}
+
+.dropdown > .dropdown_content {
+  /* Animation */
+  @apply absolute;
+  @apply opacity-0 transition-opacity;
+  @apply invisible;
+}
+
+.dropdown > .dropdown_content.active {
+  @apply opacity-100 !important;
+  @apply visible !important;
+}
+
+.menu > .menuItem {
+  @apply block p-2;
+}
+
+/* #endregion */

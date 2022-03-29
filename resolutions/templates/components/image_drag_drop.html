@@ -1,0 +1,14 @@
+{% load static %}
+
+<!-- Image Drag Drop -->
+<label for="{{ input_id }}" data-drag-drop data-input-id="{{ input_id }}">
+    <div class="flex flex-col justify-center items-center">
+        <img src="{% static 'resolutions/img/upload-solid.svg' %}" class="opacity-50 h-20 w-20">
+        <p class="pt-4">Drag image here to upload</p>
+        <ul class="errors"></ul>
+    </div>
+    {% if not multiple %}
+    <img data-no-broken {% if preview_img %} src="{{ preview_img.url }}" {% endif %} class="preview">
+    {% endif %}
+    <h2 class="counter"></h2>
+</label>

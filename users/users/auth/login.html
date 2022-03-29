@@ -1,0 +1,77 @@
+{% load static %}
+{% load static tailwind_tags %}
+{% load settings_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% tailwind_preload_css %} {% tailwind_css %}
+
+  <title>Login - {% get_settings_val 'CLIENT_NAME' %}</title>
+  <link rel="shortcut icon" href="{% static 'client-logo.png' %}" type="image/x-icon">
+
+</head>
+
+<body>
+
+  <div class="h-screen w-screen grid grid-cols-2">
+    <!-- Left Column -->
+    <div class="col-span-2 flex relative md:col-span-1">
+      <div class="m-auto w-3/4">
+        <h1 class="font-bold">LOGIN</h1>
+        <hr>
+        <form method="post" class="mx-6">
+
+          {% csrf_token %}
+
+          {{ form.as_p }}
+
+          <div class="text-center">
+            <button type="submit" class="my-4 button-primary">Login</button>
+            <br>
+            <a href="{% url 'users:auth:password_reset' %}" class="text-sm underline">
+              Forgot Password?
+            </a>
+          </div>
+
+        </form>
+      </div>
+
+      <!-- Bottom Left -->
+      <img src="{% static 'client-logo.png' %}" class="absolute bottom-0 left-0 w-1/4 object-contain">
+    </div>
+
+    <!-- Right Column -->
+    <div class="col-span-1 relative hidden md:flex">
+      <!-- Background Image -->
+      <img src="" class="absolute top-0 left-0 w-full h-full object-cover -z-10 bg-primary">
+
+      <!-- Top Left -->
+      <img src="{% static 'client-logo.png' %}" class="absolute top-0 left-0 w-1/4 object-contain -z-10">
+
+      <!-- Bottom Right -->
+      <img src="{% static 'client-logo.png' %}" class="absolute bottom-0 right-0 w-1/4 object-contain -z-10">
+
+      <!-- Center -->
+      <img src="{% static 'client-logo.png' %}"
+        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 object-contain -z-10">
+
+      <div class="m-auto uppercase text-center text-white">
+        <h1>Welcome!</h1>
+        <br>
+        <br>
+        <h1>{% get_settings_val 'CLIENT_NAME' %}</h1>
+        <br>
+        <img src="{% static 'client-logo.png' %}" alt="PLV Logo" class="avatar m-auto">
+      </div>
+    </div>
+
+  </div>
+
+</body>
+
+</html>
