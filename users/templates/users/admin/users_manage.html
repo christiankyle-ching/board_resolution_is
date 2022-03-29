@@ -16,6 +16,7 @@
             <th>Username</th>
             <th>Full Name</th>
             <th>Email</th>
+            <th>Can Export</th>
             <th>Operation</th>
         </tr>
     </thead>
@@ -29,6 +30,7 @@
             <td>{{ u.username }}</td>
             <td>{{ u.profile.full_name }}</td>
             <td>{{ u.email }}</td>
+            <td>{{ u.can_export }}</td>
             <td>
                 <a href="{% url 'users:admin:user_change_password' u.id %}" class="button">Change Password</a>
                 <a href="{% url 'users:admin:user_delete' u.id %}" class="button-danger">Delete</a>

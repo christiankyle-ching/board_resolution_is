@@ -136,7 +136,7 @@ class AdminUserChangePasswordView(LoginRequiredMixin, HasAdminPermission, View):
 
 class AdminUserDeleteView(LoginRequiredMixin, HasAdminPermission, generic.DeleteView):
     model = _User
-    template_name = 'admin/user_delete.html'
+    template_name = 'users/admin/user_delete.html'
     success_url = reverse_lazy('users:admin:manage')
 
 # endregion

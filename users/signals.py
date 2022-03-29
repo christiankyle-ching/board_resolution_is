@@ -11,6 +11,9 @@ def set_role(sender, instance, *args, **kwargs):
     if instance.is_superuser:
         instance.role = ROLE_ADMIN
 
+    if int(instance.role) == ROLE_ADMIN:
+        instance.can_export = True
+
 
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
 def create_profile(sender, instance, created, **kwargs):
