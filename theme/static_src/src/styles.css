@@ -51,11 +51,32 @@ nav h3,
 nav h4,
 nav h5,
 nav h6 {
-  line-height: unset !important;
+  line-height: normal !important;
+}
+
+* {
+  /* For Debug Only */
+  /* outline:1px blue solid; */
 }
 
 hr {
   @apply mb-2;
+}
+
+.icon-sm {
+  @apply h-5 w-5;
+}
+
+.icon {
+  @apply h-10 w-10;
+}
+
+.icon-md {
+  @apply h-16 w-16;
+}
+
+.icon-lg {
+  @apply h-20 w-20;
 }
 
 /* -------------------- Components -------------------- */
@@ -184,13 +205,24 @@ label[data-drag-drop] ul.errors {
 
 /* #region Avatar */
 
-.avatar {
-  @apply h-20 w-20 object-cover rounded-full object-top bg-primary;
-}
-
 .avatar-sm {
   @apply avatar;
-  @apply h-10 w-10 !important;
+  @apply icon-sm !important;
+}
+
+.avatar {
+  @apply object-cover rounded-full object-top bg-white;
+  @apply icon;
+}
+
+.avatar-md {
+  @apply avatar;
+  @apply icon-md !important;
+}
+
+.avatar-lg {
+  @apply avatar;
+  @apply icon-lg !important;
 }
 
 /* #endregion */
@@ -242,7 +274,11 @@ textarea[data-filename-preview] {
 }
 
 .menu > .menuItem {
-  @apply block p-2;
+  @apply flex flex-row items-center p-2;
+}
+
+.menu > .menuItem > :not(:first-child) {
+  @apply ml-2;
 }
 
 /* #endregion */

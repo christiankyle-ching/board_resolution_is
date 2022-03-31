@@ -12,7 +12,7 @@
 <a href="{% url 'users:profile_change_password' %}" class="button-primary">Change Password</a>
 
 <!-- Avatar -->
-<img data-image-preview data-input-id="id_avatar" class="avatar" src="{{ user.profile.avatar_url }}">
+<img data-image-preview data-input-id="id_avatar" src="{{ user.profile.avatar_url }}" class="avatar-lg">
 
 <form action="{% url 'users:profile' %}" method="POST" enctype="multipart/form-data">
     {% csrf_token %}

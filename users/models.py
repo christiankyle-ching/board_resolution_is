@@ -74,4 +74,4 @@ class Profile(models.Model):
         if self.avatar:
             return self.avatar.url
 
-        return static('users/img/user-solid.svg')
+        return static('users/img/user.png')

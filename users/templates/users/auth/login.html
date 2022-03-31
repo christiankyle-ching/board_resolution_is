@@ -47,8 +47,13 @@
 
     <!-- Right Column -->
     <div class="col-span-1 relative hidden md:flex">
+
+      <!-- Dark color background -->
+      <div class="bg-black absolute left-0 top-0 w-full h-full -z-20"></div>
+
       <!-- Background Image -->
-      <img src="" class="absolute top-0 left-0 w-full h-full object-cover -z-10 bg-primary">
+      <img src="{% static 'users/img/client-login-bg.jpg' %}"
+        class="absolute top-0 left-0 w-full h-full object-cover -z-10 opacity-30">
 
       <!-- Top Left -->
       <img src="{% static 'client-logo.png' %}" class="absolute top-0 left-0 w-1/4 object-contain -z-10">
@@ -56,9 +61,10 @@
       <!-- Bottom Right -->
       <img src="{% static 'client-logo.png' %}" class="absolute bottom-0 right-0 w-1/4 object-contain -z-10">
 
-      <!-- Center -->
-      <img src="{% static 'client-logo.png' %}"
-        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 object-contain -z-10">
+      <!-- Center Brush -->
+      <img src="{% static 'users/img/brush.png' %}"
+        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 object-contain -z-10 w-3/4 h-3/4 opacity-50">
+
 
       <div class="m-auto uppercase text-center text-white">
         <h1>Welcome!</h1>

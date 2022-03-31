@@ -21,7 +21,7 @@
 </head>
 
 <body>
-  <nav class="p-2 bg-dirtyWhite text-primary print:hidden">
+  <nav class="p-2 bg-dirtyWhite text-black print:hidden">
     <!-- Container -->
     <div class="container mx-auto flex justify-between align-middle">
       <!-- Left Column -->
@@ -37,18 +37,18 @@
 
         <div class="dropdown right on-top">
           <button class="flex justify-center items-center" data-toggle>
-            <img class="avatar-sm" src="{{ user.profile.avatar_url }}">
+            <img class="avatar" src="{{ user.profile.avatar_url }}">
 
-            <div class="ml-2">
-              <h5>{{ user.username }}</h5>
-              <small>{{ user.role_name }}</small>
+            <div class="ml-2 flex flex-col items-center justify-center">
+              <span class="text-lg font-bold leading-tight">{{ user.username }}</span>
+              <span class="text-sm leading-tight">{{ user.role_name }}</span>
             </div>
           </button>
           <div class="dropdown_content bg-white shadow-md rounded-lg w-64">
             <div class="menu">
               <!-- Avatar with hr -->
-              <div class="relative my-6">
-                <img class="relative avatar m-auto bg-white z-10" src="{{ user.profile.avatar_url }}">
+              <div class="relative mt-4 mb-2">
+                <img class="relative avatar-lg m-auto bg-white z-10" src="{{ user.profile.avatar_url }}">
                 <hr class="absolute left-0 right-0 top-1/2">
               </div>
 
@@ -57,19 +57,25 @@
                 <small>{{ user.role_name }}</small>
               </div>
 
-              <hr class="border-dashed">
+              <hr class="border-dashed mt-2">
 
-              <a href="{% url 'users:profile' %}" class="menuItem">Settings</a>
-              <a href="{% url 'users:auth:logout' %}" class="menuItem">Logout</a>
+              <a href="{% url 'users:profile' %}" class="menuItem">
+                <img src="{% static 'users/img/settings.svg' %}" alt="" class="icon-sm">
+                <span>Settings</span>
+              </a>
+              <a href="{% url 'users:auth:logout' %}" class="menuItem">
+                <img src="{% static 'users/img/signout.svg' %}" alt="" class="icon-sm">
+                <span>Logout</span>
+              </a>
 
               {% if user.has_admin_permission %}
 
-              <hr class="border-dashed">
+              <hr class="border-dashed mt-2">
 
               <div class="flex justify-between p-2">
                 <h6>Other Accounts</h6>
                 <a href="{% url 'users:admin:manage' %}" class="button-image button-rounded">
-                  Manage
+                  <img src="{% static 'users/img/settings.svg' %}" alt="" class="icon-sm">
                 </a>
               </div>
 
@@ -81,7 +87,7 @@
               </div>
               {% endfor %}
               {% else %}
-              <p class="menuItem text-center">No Accounts</p>
+              <p class="p-2 text-center">No Accounts</p>
               {% endif %}
 
               {% endif %}

@@ -16,9 +16,9 @@ from django.core.wsgi import get_wsgi_application
 # These 2 lines are needed on a Windows server
 # Root folder and django project folder
 # USE FORWARD SLASH!
-sys.path.append('C:/Users/Kyle/repos/board_resolution_is')
-sys.path.append('C:/Users/Kyle/repos/board_resolution_is/board_resolution_is')
+sys.path.append('C:/Users/Kyle/repos/board_resolution_is_v2')
+sys.path.append('C:/Users/Kyle/repos/board_resolution_is_v2/board_resolution_is_v2')
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'board_resolution_is.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'board_resolution_is_v2.settings')
 
 application = get_wsgi_application()
