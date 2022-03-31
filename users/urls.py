@@ -43,11 +43,11 @@ urlpatterns = [
     # Default Auth Views
     path('auth/', include(auth_urlpatterns)),
 
+    # Admin Only
+    path('admin/', include(admin_urlpatterns)),
+
     # Profile Views
     path('profile_change_password/', views.UserChangePasswordView.as_view(),
          name='profile_change_password'),
     path('profile/', views.UserProfileView.as_view(), name='profile'),
-
-    # Admin Only
-    path('admin/', include(admin_urlpatterns))
 ]

@@ -4,45 +4,67 @@
 
 {% block content %}
 
-<a href="{% url 'users:admin:user_create' %}" class="button-primary">Add User</a>
+<div class="flex justify-between">
+    <h1>Staff</h1>
 
-<h1>Manage Users</h1>
+    <div>
+        <a href="{% url 'users:admin:user_create' %}" class="button-primary">
+            <span>Add New</span>
+            <img src="{% static 'users/img/plus.svg' %}" alt="" class="icon-sm">
+        </a>
+    </div>
+</div>
+
+
+
 
 {% if users %}
-<table class="w-full">
-    <thead>
-        <tr>
-            <th>Photo</th>
-            <th>Username</th>
-            <th>Full Name</th>
-            <th>Email</th>
-            <th>Can Export</th>
-            <th>Operation</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for u in users %}
-        <tr>
-            <td>
-                <img class="avatar-sm" {% if u.profile.avatar %} src="{{ u.profile.avatar.url }}"
-                    {% else %} src="{% static 'users/img/user.png' %}" {% endif %}>
-            </td>
-            <td>{{ u.username }}</td>
-            <td>{{ u.profile.full_name }}</td>
-            <td>{{ u.email }}</td>
-            <td>{{ u.can_export }}</td>
-            <td>
-                <a href="{% url 'users:admin:user_change_password' u.id %}" class="button">Change Password</a>
-                <a href="{% url 'users:admin:user_delete' u.id %}" class="button-danger">Delete</a>
-            </td>
-        </tr>
+<div class="card p-12">
+    <table class="w-full">
+        <thead>
+            <tr>
+                <th>Photo</th>
+                <th>Username</th>
+                <th>Full Name</th>
+                <th>Email</th>
+                <th>Can Export</th>
+                <th>Operation</th>
+            </tr>
+        </thead>
+        <tbody class="text-center">
+            {% for u in users %}
+            <tr>
+                <td>
+                    <img class="avatar m-auto" {% if u.profile.avatar %} src="{{ u.profile.avatar.url }}" {% else %}
+                        src="{% static 'users/img/user.png' %}" {% endif %}>
+                </td>
+                <td>{{ u.username }}</td>
+                <td>{{ u.profile.full_name }}</td>
+                <td>{{ u.email }}</td>
+                <td>{{ u.can_export }}</td>
+                <td class="text-left">
+                    <a href="{% url 'users:admin:user_change_password' u.id %}" class="button button-sm m-1">
+                        <img src="{% static 'users/img/edit.png' %}" alt="" class="icon-sm">
+                        <span>Change Password</span>
+                    </a>
+                    <br>
+                    <a href="{% url 'users:admin:user_delete' u.id %}" class="button-danger button-sm m-1">
+                        <img src="{% static 'users/img/trash.png' %}" alt="" class="icon-sm">
+                        <span>Delete</span>
+                    </a>
+                </td>
+            </tr>
 
-        {% endfor %}
-    </tbody>
+            {% endfor %}
+        </tbody>
 
-</table>
+    </table>
+</div>
 {% else %}
-<p>No Users</p>
+<p class="text-center py-12">
+    No staff accounts yet.
+    <a href="{% url 'users:admin:user_create' %}" class="underline">Add one</a>.
+</p>
 {% endif %}
 
 {% endblock content %}

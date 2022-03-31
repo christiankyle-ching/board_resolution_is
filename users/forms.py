@@ -55,5 +55,5 @@ class UserCreateForm(forms.ModelForm):
             'can_export'
         ]
         help_texts = {
-            'can_export': _('Effective for Staff only. All Admins can export regardless whether this is checked or not.'),
+            'can_export': _('Effective for Staff only.'),
         }

@@ -2,13 +2,21 @@
 
 {% block content %}
 
-<form method="POST">
-    {% csrf_token %}
+<div class="card p-12">
+    <h1>Add Staff</h1>
+    <hr>
 
-    {{ form.as_p }}
+    <form method="POST" class="grid grid-cols-2 gap-6">
 
-    <button type="submit" class="button-primary">Save</button>
-    <a href="{% url 'users:admin:manage' %}" class="button">Cancel</a>
-</form>
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <div class="col-span-2 text-right">
+            <button type="submit" class="button-primary">Confirm</button>
+            <a href="{% url 'users:admin:manage' %}" class="button-danger ml-2">Cancel</a>
+        </div>
+    </form>
+</div>
 
 {% endblock content %}

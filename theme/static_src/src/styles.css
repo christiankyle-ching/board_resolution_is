@@ -1,8 +1,16 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
 /* TODO: Apply styles here */
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  html {
+    font-family: "Poppins", sans-serif;
+  }
+}
 
 /* -------------------- Globals -------------------- */
 
@@ -60,7 +68,7 @@ nav h6 {
 }
 
 hr {
-  @apply mb-2;
+  @apply mb-6;
 }
 
 .icon-sm {
@@ -87,9 +95,14 @@ Use @apply then the list of all utility classes you want
 for button elements and .button classed elements 
 */
 .button {
-  @apply inline-block py-2 px-4 font-semibold rounded-2xl shadow-md text-center focus:outline-none focus:ring-2 focus:ring-opacity-75 cursor-pointer;
-  @apply text-black hover:bg-primary hover:text-white;
+  @apply inline-flex items-center justify-center py-2 px-4 font-semibold rounded-2xl shadow-md text-center focus:outline-none focus:ring-2 focus:ring-opacity-75 cursor-pointer;
+  @apply text-black hover:ring-primary hover:ring-2;
   @apply no-underline !important;
+  @apply transition-colors transition-shadow;
+}
+
+.button > :not(:first-child) {
+  @apply ml-2;
 }
 
 .button-image {
@@ -107,17 +120,22 @@ for button elements and .button classed elements
 
 .button-primary {
   @apply button;
-  @apply bg-primary focus:ring-lightPrimary text-white !important;
+  @apply bg-primary text-white !important;
 }
 
 .button-secondary {
   @apply button;
-  @apply bg-lightPrimary focus:ring-primary text-primary !important;
+  @apply bg-lightPrimary text-primary !important;
+}
+
+.button-transparent-primary {
+  @apply button;
+  @apply bg-transparent ring-primary text-primary hover:ring-primary hover:ring-2 !important;
 }
 
 .button-danger {
   @apply button;
-  @apply ring-danger ring-1 text-danger hover:bg-danger hover:text-white !important;
+  @apply ring-danger ring-1 text-danger hover:ring-danger hover:ring-2 !important;
 }
 
 /* #endregion */
@@ -141,7 +159,7 @@ form .asteriskField {
 }
 
 form .helptext {
-  @apply text-sm;
+  @apply text-sm mt-2;
 }
 
 /* Input Container */
@@ -150,7 +168,7 @@ form > p {
 }
 
 form > p > label {
-  @apply my-2;
+  @apply mb-2;
 }
 
 form > p.hiddenField {
@@ -274,7 +292,7 @@ textarea[data-filename-preview] {
 }
 
 .menu > .menuItem {
-  @apply flex flex-row items-center p-2;
+  @apply flex flex-row items-center px-4 py-2;
 }
 
 .menu > .menuItem > :not(:first-child) {

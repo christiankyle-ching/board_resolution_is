@@ -110,7 +110,7 @@ class AdminUserChangePasswordView(LoginRequiredMixin, HasAdminPermission, View):
     def get(self, request, pk):
         user = get_object_or_404(_User, pk=pk)
 
-        return render(request, 'users/admin/user_change_password.html', {'user': user, 'errors': []})
+        return render(request, 'users/admin/user_change_password.html', {'selected_user': user, 'errors': []})
 
     def post(self, request, pk):
         user = get_object_or_404(_User, pk=pk)
@@ -131,12 +131,13 @@ class AdminUserChangePasswordView(LoginRequiredMixin, HasAdminPermission, View):
 
             return redirect(reverse('users:admin:manage'))
 
-        return render(request, 'users/admin/user_change_password.html', {'user': user, 'errors': errors})
+        return render(request, 'users/admin/user_change_password.html', {'selected_user': user, 'errors': errors})
 
 
 class AdminUserDeleteView(LoginRequiredMixin, HasAdminPermission, generic.DeleteView):
     model = _User
     template_name = 'users/admin/user_delete.html'
     success_url = reverse_lazy('users:admin:manage')
+    context_object_name = 'selected_user'
 
 # endregion

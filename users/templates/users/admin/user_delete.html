@@ -1,13 +1,48 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
 
-<p>Are you sure you want to delete {{ user.id }}?</p>
+<div class="card p-12">
 
-<form method="POST">
-    {% csrf_token %}
-    <button type="submit" class="button-danger">Delete</button>
-    <a href="{% url 'users:admin:manage' %}">Cancel</a>
-</form>
+    <div class="text-center">
+        <h3>Delete Account?</h3>
+        <p>Are you sure you want to delete this account:</p>
+
+        <ul class="my-2">
+            <li>
+                <b>Full Name:</b>
+                {{ selected_user.profile.full_name }}
+            </li>
+            <li>
+                <b>Username:</b>
+                @{{ selected_user.username }}
+            </li>
+            <li>
+                <b>Email:</b>
+                {{ selected_user.email }}
+            </li>
+        </ul>
+    </div>
+
+    <div class="bg-lightDanger border-l-2 border-l-danger p-6 mb-4">
+        <div class="flex items-center mb-2">
+            <img src="{% static 'users/img/warning.png' %}" alt="" class="icon-sm">
+            <h3 class="ml-2">Warning!</h3>
+        </div>
+
+        <ul class="list-disc ml-4">
+            <li>By deleting this, you are removing it from the account list.</li>
+            <li>This operation cannot be undone.</li>
+        </ul>
+
+    </div>
+
+    <form method="POST" class="text-center">
+        {% csrf_token %}
+        <a href="{% url 'users:admin:manage' %}" class="button-transparent-primary">Cancel</a>
+        <button type="submit" class="button-danger ml-2">Confirm</button>
+    </form>
+</div>
 
 {% endblock content %}

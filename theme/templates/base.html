@@ -21,28 +21,29 @@
 </head>
 
 <body>
-  <nav class="p-2 bg-dirtyWhite text-black print:hidden">
+  <nav class="p-2 bg-dirtyWhite text-black shadow-lg">
     <!-- Container -->
     <div class="container mx-auto flex justify-between align-middle">
       <!-- Left Column -->
-      <a href="{% url 'resolutions:index' %}" class="flex justify-center align-middle">
+      <a href="{% url 'resolutions:index' %}" class="flex justify-center items-center">
         <img src="{% static 'client-logo.png' %}" class="h-10 w-10 mr-2">
-        <h3 class="font-bold">{% get_settings_val 'CLIENT_NAME' %}</h3>
+        <p class="text-2xl font-semibold leading-none">{% get_settings_val 'CLIENT_NAME' %}</p>
       </a>
 
       <!-- Right Column -->
       <div>
         {% if user.is_authenticated %}
 
-
         <div class="dropdown right on-top">
           <button class="flex justify-center items-center" data-toggle>
             <img class="avatar" src="{{ user.profile.avatar_url }}">
 
-            <div class="ml-2 flex flex-col items-center justify-center">
+            <div class="mx-2 flex flex-col items-center justify-center">
               <span class="text-lg font-bold leading-tight">{{ user.username }}</span>
               <span class="text-sm leading-tight">{{ user.role_name }}</span>
             </div>
+
+            <img src="{% static 'users/img/angle-down.svg'%}" alt="" class="icon-sm">
           </button>
           <div class="dropdown_content bg-white shadow-md rounded-lg w-64">
             <div class="menu">
@@ -57,7 +58,7 @@
                 <small>{{ user.role_name }}</small>
               </div>
 
-              <hr class="border-dashed mt-2">
+              <hr class="border-dashed my-2">
 
               <a href="{% url 'users:profile' %}" class="menuItem">
                 <img src="{% static 'users/img/settings.svg' %}" alt="" class="icon-sm">
@@ -70,9 +71,9 @@
 
               {% if user.has_admin_permission %}
 
-              <hr class="border-dashed mt-2">
+              <hr class="border-dashed my-2">
 
-              <div class="flex justify-between p-2">
+              <div class="menuItem justify-between">
                 <h6>Other Accounts</h6>
                 <a href="{% url 'users:admin:manage' %}" class="button-image button-rounded">
                   <img src="{% static 'users/img/settings.svg' %}" alt="" class="icon-sm">
@@ -81,7 +82,7 @@
 
               {% if other_accounts %}
               {% for u in other_accounts %}
-              <div class="flex items-center p-2">
+              <div class="menuItem">
                 <img src="{{ u.profile.avatar_url }}" class="avatar-sm">
                 <p class="ml-2">{{ u.username }}</p>
               </div>
@@ -97,6 +98,8 @@
 
         {% endif %}
       </div>
+
+
     </div>
   </nav>
 

@@ -4,45 +4,74 @@
 
 {% block content %}
 
-<h1>Settings</h1>
-<hr>
+<div class="grid grid-cols-3 gap-6 items-center">
+    <div class="col-span-3 lg:col-span-1">
+        <h1>SETTINGS</h1>
+        <hr>
 
-<!-- Links -->
-<a href="{% url 'users:profile' %}" class="button-primary">Settings</a>
-<a href="{% url 'users:profile_change_password' %}" class="button-primary">Change Password</a>
+        <!-- Links -->
+        <div
+            class="flex flex-row lg:flex-col lg:p-10 lg:my-10 py-5 items-stretch justify-evenly gap-6 border-b lg:border-b-0 lg:border-r">
+            <a href="{% url 'users:profile' %}" class="button-primary">Settings</a>
+            <a href="{% url 'users:profile_change_password' %}" class="button-transparent-primary">Change Password</a>
+        </div>
+    </div>
 
-<!-- Avatar -->
-<img data-image-preview data-input-id="id_avatar" class="avatar" src="{{ user.profile.avatar_url }}">
+    <div class="col-span-3 lg:col-span-2">
+        <div class="card p-6 lg:p-12 lg:m-12">
+            <h1 class="mb-4">Account</h1>
 
-<form action="{% url 'users:profile' %}" method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    <input type="hidden" name="update_avatar">
+            <div class="grid grid-cols-2">
+                <div class="col-span-2 xl:col-span-1">
+                    <!-- Avatar -->
+                    <img data-image-preview data-input-id="id_avatar" src="{{ user.profile.avatar_url }}"
+                        class="avatar-lg m-auto">
 
-    <label for="id_avatar" class="button">Select New Image</label>
-    <input type="file" name="avatar" id="id_avatar" class="hidden" accept="image/*">
-    <button type="submit" class="button-primary">Apply</button>
-</form>
+                    <!-- User Details -->
+                    <div class="text-center">
+                        <h5 class="text-primary">@{{ user.username }}</h5>
+                        <p>{{ user.role_name }}</p>
+                        <p class="italic">{{ user.email }}</p>
+                    </div>
+                </div>
 
-<form action="{% url 'users:profile' %}" method="POST">
-    {% csrf_token %}
-    <input type="hidden" name="remove_avatar">
+                <!-- Avatar Options -->
+                <div class="col-span-2 xl:col-span-1 flex xl:flex-col justify-center">
+                    <!-- Select Form -->
+                    <form action="{% url 'users:profile' %}" method="POST" enctype="multipart/form-data" class="m-2">
+                        {% csrf_token %}
+                        <input type="hidden" name="update_avatar">
 
-    <button type="submit" class="button-danger">Remove</button>
-</form>
+                        <label for="id_avatar" class="button">Select New Image</label>
+                        <input type="file" name="avatar" id="id_avatar" class="hidden" accept="image/*">
 
-<hr />
+                        <button type="submit" class="button-primary ml-2">Apply</button>
+                    </form>
 
-<p>{{ user.email }}</p>
-<p>@{{ user.username }}</p>
-<p>{{ user.role_name }}</p>
+                    <!-- Remove Form -->
+                    <form action="{% url 'users:profile' %}" method="POST" class="m-2">
+                        {% csrf_token %}
+                        <input type="hidden" name="remove_avatar">
 
-<form action="{% url 'users:profile' %}" method="POST">
-    {% csrf_token %}
-    <input type="hidden" name="update_profile">
+                        <button type="submit" class="button-danger">Remove</button>
+                    </form>
+                </div>
+            </div>
 
-    {{ profile_form }}
+            <hr>
 
-    <button type="submit" class="button-primary">Save</button>
-</form>
+            <form action="{% url 'users:profile' %}" method="POST" class="grid grid-cols-2 gap-4">
+                {% csrf_token %}
+                <input type="hidden" name="update_profile">
+
+                {{ profile_form.as_p }}
+
+                <div class="col-span-2 text-right">
+                    <button type="submit" class="button-primary">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 {% endblock content %}
