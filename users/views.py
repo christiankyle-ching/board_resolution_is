@@ -3,7 +3,7 @@ from django.urls import reverse, reverse_lazy
 from django.contrib.auth.views import LoginView, LogoutView
 from django.views import View, generic
 from django.contrib.auth.mixins import LoginRequiredMixin
-from board_resolution_is_v2.utils import get_form_errors
+from board_resolution_is.utils import get_form_errors
 
 from users.mixins import HasAdminPermission
 
