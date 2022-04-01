@@ -179,10 +179,10 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = os.environ['BRIS_EMAIL_USERNAME']
-EMAIL_HOST_PASSWORD = os.environ['BRIS_EMAIL_PASSWORD']
+EMAIL_HOST_USER = os.environ.get('BRIS_EMAIL_USERNAME', '')
+EMAIL_HOST_PASSWORD = os.environ.get('BRIS_EMAIL_PASSWORD', '')
 
-DEFAULT_FROM_EMAIL = os.environ['BRIS_EMAIL_USERNAME']
+DEFAULT_FROM_EMAIL = os.environ.get('BRIS_EMAIL_USERNAME', '')
 
 # Default Redirects
 
