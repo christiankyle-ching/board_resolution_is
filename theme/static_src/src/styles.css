@@ -103,8 +103,8 @@ for button elements and .button classed elements
   @apply transition-colors transition-shadow;
 }
 
-.button > :not(:first-child) {
-  @apply ml-2;
+.button > * {
+  @apply mx-1;
 }
 
 .button-image {
@@ -140,6 +140,10 @@ for button elements and .button classed elements
   @apply ring-danger ring-1 text-danger hover:ring-danger hover:ring-2 !important;
 }
 
+.button > span {
+  @apply hidden lg:block;
+}
+
 /* #endregion */
 
 /* #region Card */
@@ -167,7 +171,7 @@ form .helptext {
 
 /* Input Container */
 form > p {
-  @apply col-span-1 flex flex-col;
+  @apply col-span-full md:col-span-1 flex flex-col;
 }
 
 form > p > label {

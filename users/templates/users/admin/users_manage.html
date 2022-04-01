@@ -20,10 +20,10 @@
     <table class="w-full table-dashed">
         <thead>
             <tr>
-                <th>Photo</th>
+                <th></th>
                 <th>Username</th>
-                <th>Full Name</th>
-                <th>Email</th>
+                <th class="hidden md:table-cell">Full Name</th>
+                <th class="hidden md:table-cell">Email</th>
                 <th>Can Export</th>
                 <th>Operation</th>
             </tr>
@@ -36,13 +36,13 @@
                         src="{% static 'users/img/user.png' %}" {% endif %}>
                 </td>
                 <td>{{ u.username }}</td>
-                <td>{{ u.profile.full_name }}</td>
-                <td>{{ u.email }}</td>
+                <td class="hidden md:table-cell">{{ u.profile.full_name }}</td>
+                <td class="hidden md:table-cell">{{ u.email }}</td>
                 <td>
                     <input type="checkbox" disabled {% if u.can_export %} checked {% endif %}>
                 </td>
                 <td>
-                    <div class="text-left py-2">
+                    <div class="my-2">
                         <a href="{% url 'users:admin:user_change_password' u.id %}" class="button button-sm m-1">
                             <img src="{% static 'users/img/edit.png' %}" alt="" class="icon-sm">
                             <span>Change Password</span>
