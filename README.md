@@ -15,7 +15,7 @@
    - `pip install pipenv`
 4. Clone this and `cd` to that directory. Create a virtual environment using:
    - `pipenv shell`
-5. Comment out `'mod_wsgi.server'` in `settings.py > INSTALLED_APPS`:
+5. Comment out `'mod_wsgi.server'` in [board_resolution_is/settings.py](board_resolution_is/settings.py):
 ```py
 INSTALLED_APPS = [
    'django.contrib.admin',
