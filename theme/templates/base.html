@@ -73,12 +73,12 @@
 
               <hr class="border-dashed my-2">
 
-              <div class="menuItem justify-between">
+              <a href="{% url 'users:admin:manage' %}" class="menuItem justify-between">
                 <h6>Other Accounts</h6>
-                <a href="{% url 'users:admin:manage' %}" class="button-image button-rounded">
+                <button class="button-image button-rounded">
                   <img src="{% static 'users/img/settings.svg' %}" alt="" class="icon-sm">
-                </a>
-              </div>
+                </button>
+              </a>
 
               {% if other_accounts %}
               {% for u in other_accounts %}

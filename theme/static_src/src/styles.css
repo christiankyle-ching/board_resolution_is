@@ -71,6 +71,7 @@ hr {
   @apply mb-6;
 }
 
+/* #region Icon Sizes */
 .icon-sm {
   @apply h-5 w-5;
 }
@@ -86,6 +87,7 @@ hr {
 .icon-lg {
   @apply h-20 w-20;
 }
+/* #endregion */
 
 /* -------------------- Components -------------------- */
 
@@ -151,6 +153,7 @@ for button elements and .button classed elements
 #errorMsg,
 .errorlist {
   @apply text-danger;
+  @apply col-span-full;
 }
 
 form .errorField,
@@ -299,4 +302,10 @@ textarea[data-filename-preview] {
   @apply ml-2;
 }
 
+/* #endregion */
+
+/* #region Table */
+table.table-dashed > tbody tr {
+  @apply border-b border-dashed border-gray;
+}
 /* #endregion */

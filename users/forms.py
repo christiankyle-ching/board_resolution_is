@@ -30,10 +30,12 @@ class UserChangePasswordForm(forms.Form):
         super(UserChangePasswordForm, self).__init__(*args, **kwargs)
 
     def clean(self):
-        new_password = self.cleaned_data['new_password']
-        confirm_new_password = self.cleaned_data['confirm_new_password']
+        cleaned_data = super(UserChangePasswordForm, self).clean()
 
-        if not self.user.check_password(self.cleaned_data['old_password']):
+        new_password = cleaned_data['new_password']
+        confirm_new_password = cleaned_data['confirm_new_password']
+
+        if not self.user.check_password(cleaned_data['old_password']):
             raise ValidationError(
                 _('Your old password is incorrect.'), code='old_password_incorrect')
 
@@ -41,7 +43,7 @@ class UserChangePasswordForm(forms.Form):
             raise ValidationError(
                 _('New Password does not match.'), code='password_does_not_match')
 
-        return super().clean()
+        return cleaned_data
 
 
 class UserCreateForm(forms.ModelForm):
@@ -51,9 +53,39 @@ class UserCreateForm(forms.ModelForm):
             'username',
             'email',
             'password',
-            'role',
+            # 'role',
             'can_export'
         ]
         help_texts = {
-            'can_export': _('Effective for Staff only.'),
+            # 'can_export': _('Effective for Staff only.'),
         }
+
+    def clean(self):
+        print('CLEAN!!')
+        cleaned_data = super(UserCreateForm, self).clean()
+
+        email = cleaned_data['email']
+        username = cleaned_data['username']
+
+        email_exists = _User.all_objects.filter(email=email).exists()
+        username_exists = _User.all_objects.filter(username=username).exists()
+
+        errors = []
+
+        if email_exists:
+            errors.append(ValidationError(
+                _('Email already exists "%(email)s".'), params={'email': email}))
+
+        if username_exists:
+            errors.append(ValidationError(
+                _('Username already exists "%(username)s".'), params={'username': username}))
+
+        if len(errors) > 0:
+            raise ValidationError(errors)
+
+        print(email)
+        print(username)
+        print(email_exists)
+        print(username_exists)
+
+        return cleaned_data

@@ -1,3 +1,4 @@
+from sqlite3 import IntegrityError
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth.views import LoginView, LogoutView
@@ -95,9 +96,13 @@ class AdminUserCreateView(LoginRequiredMixin, HasAdminPermission, View):
             username = request.POST.get('username')
             password = request.POST.get('password')
             email = request.POST.get('email')
-            role = request.POST.get('role')
+            # role = request.POST.get('role', role)
 
-            _User.objects.create_user(username, email, password, role=role)
+            _User.objects.create_user(username,
+                                      email,
+                                      password,
+                                      # role=role
+                                      )
 
             return redirect(reverse('users:admin:manage'))
 

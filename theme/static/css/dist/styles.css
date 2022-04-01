@@ -776,11 +776,6 @@ html {
   margin-bottom: 1rem;
 }
 
-.my-1{
-  margin-top: 0.25rem;
-  margin-bottom: 0.25rem;
-}
-
 .mr-2{
   margin-right: 0.5rem;
 }
@@ -974,14 +969,14 @@ html {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
-.bg-black{
-  --tw-bg-opacity: 1;
-  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
-}
-
 .bg-lightDanger{
   --tw-bg-opacity: 1;
   background-color: rgb(233 204 196 / var(--tw-bg-opacity));
+}
+
+.bg-black{
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
 }
 
 .object-contain{
@@ -1006,10 +1001,6 @@ html {
   padding: 3rem;
 }
 
-.p-4{
-  padding: 1rem;
-}
-
 .px-4{
   padding-left: 1rem;
   padding-right: 1rem;
@@ -1018,6 +1009,11 @@ html {
 .py-5{
   padding-top: 1.25rem;
   padding-bottom: 1.25rem;
+}
+
+.py-2{
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
 }
 
 .py-12{
@@ -1213,6 +1209,8 @@ hr{
   margin-bottom: 1.5rem;
 }
 
+/* #region Icon Sizes */
+
 .icon-sm{
   height: 1.25rem;
   width: 1.25rem;
@@ -1232,6 +1230,8 @@ hr{
   height: 5rem;
   width: 5rem;
 }
+
+/* #endregion */
 
 /* -------------------- Components -------------------- */
 
@@ -1658,6 +1658,7 @@ for button elements and .button classed elements
 #errorMsg, .errorlist{
   --tw-text-opacity: 1;
   color: rgb(178 0 0 / var(--tw-text-opacity));
+  grid-column: 1 / -1;
 }
 
 form .errorField, form .asteriskField{
@@ -1875,6 +1876,17 @@ textarea[data-filename-preview] {
 
 .menu > .menuItem > :not(:first-child){
   margin-left: 0.5rem;
+}
+
+/* #endregion */
+
+/* #region Table */
+
+table.table-dashed > tbody tr{
+  border-bottom-width: 1px;
+  border-style: dashed;
+  --tw-border-opacity: 1;
+  border-color: rgb(109 109 109 / var(--tw-border-opacity));
 }
 
 /* #endregion */

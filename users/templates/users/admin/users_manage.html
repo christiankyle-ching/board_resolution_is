@@ -15,12 +15,9 @@
     </div>
 </div>
 
-
-
-
 {% if users %}
 <div class="card p-12">
-    <table class="w-full">
+    <table class="w-full table-dashed">
         <thead>
             <tr>
                 <th>Photo</th>
@@ -41,17 +38,21 @@
                 <td>{{ u.username }}</td>
                 <td>{{ u.profile.full_name }}</td>
                 <td>{{ u.email }}</td>
-                <td>{{ u.can_export }}</td>
-                <td class="text-left">
-                    <a href="{% url 'users:admin:user_change_password' u.id %}" class="button button-sm m-1">
-                        <img src="{% static 'users/img/edit.png' %}" alt="" class="icon-sm">
-                        <span>Change Password</span>
-                    </a>
-                    <br>
-                    <a href="{% url 'users:admin:user_delete' u.id %}" class="button-danger button-sm m-1">
-                        <img src="{% static 'users/img/trash.png' %}" alt="" class="icon-sm">
-                        <span>Delete</span>
-                    </a>
+                <td>
+                    <input type="checkbox" disabled {% if u.can_export %} checked {% endif %}>
+                </td>
+                <td>
+                    <div class="text-left py-2">
+                        <a href="{% url 'users:admin:user_change_password' u.id %}" class="button button-sm m-1">
+                            <img src="{% static 'users/img/edit.png' %}" alt="" class="icon-sm">
+                            <span>Change Password</span>
+                        </a>
+                        <br>
+                        <a href="{% url 'users:admin:user_delete' u.id %}" class="button-danger button-sm m-1">
+                            <img src="{% static 'users/img/trash.png' %}" alt="" class="icon-sm">
+                            <span>Delete</span>
+                        </a>
+                    </div>
                 </td>
             </tr>
 
