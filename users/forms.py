@@ -61,7 +61,6 @@ class UserCreateForm(forms.ModelForm):
         }
 
     def clean(self):
-        print('CLEAN!!')
         cleaned_data = super(UserCreateForm, self).clean()
 
         email = cleaned_data['email']
@@ -82,10 +81,5 @@ class UserCreateForm(forms.ModelForm):
 
         if len(errors) > 0:
             raise ValidationError(errors)
-
-        print(email)
-        print(username)
-        print(email_exists)
-        print(username_exists)
 
         return cleaned_data

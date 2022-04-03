@@ -205,7 +205,7 @@ __pycache__/
 .vscode
 
 # Files uploaded by user
-media/
+/media/
 
 # Static files -> Use py manage.py collectstatic to generate a folder with all the static files
 /static/
@@ -213,3 +213,9 @@ media/
 # Database dumps
 /temp_dumps/
 /temp_imports/
+
+# nssm logs
+/logs/
+
+# Use Pipfile instead to generate requirements.txt
+/requirements.txt

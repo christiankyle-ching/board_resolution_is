@@ -21,7 +21,7 @@ class User(AbstractUser):
     email = models.EmailField(unique=True, null=False, blank=False)
     role = models.PositiveSmallIntegerField(
         null=False, blank=False, default=ROLE_STAFF, choices=ROLE_CHOICES)
-    can_export = models.BooleanField(default=False, null=False)
+    can_export = models.BooleanField(default=False)
 
     objects = ActiveUserManager()
     all_objects = UserManager()

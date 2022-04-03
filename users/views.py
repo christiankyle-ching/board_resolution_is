@@ -93,15 +93,17 @@ class AdminUserCreateView(LoginRequiredMixin, HasAdminPermission, View):
         form = UserCreateForm(request.POST)
 
         if form.is_valid():
-            username = request.POST.get('username')
-            password = request.POST.get('password')
-            email = request.POST.get('email')
-            # role = request.POST.get('role', role)
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            email = form.cleaned_data['email']
+            can_export = form.cleaned_data['can_export']
+            # role = form.cleaned_data['role']
 
             _User.objects.create_user(username,
                                       email,
                                       password,
                                       # role=role
+                                      can_export=can_export,
                                       )
 
             return redirect(reverse('users:admin:manage'))

@@ -7,9 +7,11 @@ name = "pypi"
 django = "*"
 psycopg2 = "*"
 django-tailwind = "*"
-mod-wsgi = "*"
 pillow = "*"
 fpdf2 = "*"
+whitenoise = "*"
+waitress = "*"
+mod-wsgi = "*"
 
 [dev-packages]
 autopep8 = "*"

@@ -1,5 +1,7 @@
 # Deployment on Windows using Apache24 and mod_wsgi
 
+**IMPORTANT! When deploying, remove the `BRIS_DEBUG` environment variable!**
+
 ## Installing and Compiling mod_wsgi
 
 ### Setup Apache
@@ -20,29 +22,17 @@ https://www.apachelounge.com/download/
 ### Installing mod_wsgi
 Run `pipenv install` again while in venv (`pipenv shell`).
 
-## Collect all Static Files:
-In the **venv** (`pipenv shell` to activate), run:
-```bat
-py manage.py tailwind build
-py manage.py collectstatic
-```
-
-## Update wsgi_windows.py
-Open the [board_resolution_is/wsgi_windows.py](board_resolution_is/wsgi_windows.py) and edit the following lines:
+## Update wsgi_apache.py
+Open the [board_resolution_is/wsgi_apache.py](board_resolution_is/wsgi_apache.py) and edit the following lines:
 ```py
 # TODO: Add the repo's directory to the PYTHONPATH
 # These 2 lines are needed on a Windows server
 # Root folder and django project folder
-sys.path.append('C:/...')
+sys.path.append('C:/.../')
 sys.path.append('C:/.../board_resolution_is')
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'board_resolution_is.settings')
 ```
-
-## Update requirements.txt and Installing Packages Globally
-1. Activate venv: `pipenv shell`
-2. Generate requirements.txt: `pipenv run pip freeze > requirements.txt`
-3. **Exit venv! (type `exit` in cmd)**. Use regular cmd on project folder. Install packages globally on server: `pip install -r requirements.txt`
 
 ## Update httpd.conf
 

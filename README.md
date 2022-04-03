@@ -53,6 +53,7 @@ Setup [environment variables](https://www.computerhope.com/issues/ch000549.htm) 
 - `PSQL_PASSWORD` = Your password set when installing PostgreSQL.
 - `PSQL_HOST` = `127.0.0.1` (localhost)
 - `PSQL_PORT` = `5432` (default)
+- `BRIS_DEBUG` = `True` (set this to True for local development only. **For deployment, you should remove this environment variable**)
 - `BRIS_SECRET` = Run this command in a `cmd` and get the value: `py -c "import secrets; print(secrets.token_hex(64))"`
 
 For password reset using email, you need to add a **Gmail Account with 2FA enabled**. [Add an App Password](https://support.google.com/accounts/answer/185833?hl=en), and take note of the password. Then assign the following environment variables:
@@ -123,6 +124,24 @@ When you're using `Alt + Shift + F` to automatically beautify / format the code,
 
 ## How to Deploy?
 
-### For Windows
+Prepare the packages and files first.
 
-Follow the [deployment guide using Apache HTTP Server and mod_wsgi](/docs/deploy_windows_apache.md).
+### Collect all Static Files:
+In the **venv** (`pipenv shell` to activate), run:
+```bat
+py manage.py tailwind build
+py manage.py collectstatic
+```
+
+### Update requirements.txt and Installing Packages Globally
+1. Activate venv: `pipenv shell`
+2. Generate requirements.txt: `pipenv run pip freeze > requirements.txt`
+3. **Exit venv! (type `exit` in cmd)**. Use regular cmd on project folder. Install packages globally on server: `pip install -r requirements.txt`
+
+### For Windows
+We have two options for Windows, a pure Python web server, or using mod_wsgi:
+1. [Deployment guide using Apache HTTP Server and mod_wsgi](/docs/deploy_windows_apache.md) (Recommended, Tested).
+2. [Deployment guide using waitress + whitenoise + nssm](/docs/deploy_windows_waitress.md)
+  - Pure Python
+  - Heroku compatible but cannot store user-uploaded files (see [this](https://help.heroku.com/K1PPS2WM/why-are-my-file-uploads-missing-deleted) for reason).
+  - **DO NOT USE this yet!** Serving media files is still a problem for internal use apps.

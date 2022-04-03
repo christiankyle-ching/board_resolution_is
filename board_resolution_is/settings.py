@@ -24,7 +24,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ['BRIS_SECRET']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# This will only turn to true if environment variable is equals to "True"
+DEBUG = os.environ.get('BRIS_DEBUG', 'False') == 'True'
 
 INTERNAL_IPS = [
     '127.0.0.1',
@@ -38,7 +39,10 @@ ALLOWED_HOSTS = [
     # TODO: Change based on IP in the environment. ex. 192.168.1.*
     # Consider also using * if port 80 and 443 will not be opened in firewall anyway
     # Local PCs
-    '*'
+    '*',
+
+    # TODO: FOR NGROK ONLY!
+    '0218-2001-4451-4405-aa00-2180-e4e8-84d0-475a.ngrok.io',
 ]
 
 
@@ -53,7 +57,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # Deployment
-    'mod_wsgi.server',
+    # 'mod_wsgi.server',
 
     # Packages
     'tailwind',
@@ -67,6 +71,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
