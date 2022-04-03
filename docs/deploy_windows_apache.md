@@ -19,6 +19,21 @@ https://www.apachelounge.com/download/
 4. Select the [mod-wsgi_compilers.vsconfig](mod-wsgi_compilers.vsconfig) file in this project.
 5. Wait for installation and done.
 
+#### Offline Installer
+
+You can **create an offline installer** instead. [Follow this guide](https://docs.microsoft.com/en-us/visualstudio/install/create-an-offline-installation-of-visual-studio?view=vs-2022) and use this command to generate a local layout:
+
+```bat
+vs_BuildTools.exe --layout c:\localVSlayout --add Microsoft.VisualStudio.Component.Roslyn.Compiler --add Microsoft.Component.MSBuild --add Microsoft.VisualStudio.Component.CoreBuildTools --add Microsoft.VisualStudio.Workload.MSBuildTools --add Microsoft.VisualStudio.Component.Windows10SDK --add Microsoft.VisualStudio.Component.VC.CoreBuildTools --add Microsoft.VisualStudio.Component.VC.Tools.x86.x64 --add Microsoft.VisualStudio.Component.VC.Redist.14.Latest --add Microsoft.VisualStudio.Component.VC.CMake.Project --add Microsoft.VisualStudio.Component.Windows10SDK.20348 --lang en-US
+```
+
+Then you can install this layout by:
+1. Copying the `localVSlayout` folder to **target PC's `C:\`** 
+2. Run the following command:
+```bat
+C:\localVSlayout\vs_BuildTools.exe --noweb --add Microsoft.VisualStudio.Component.Roslyn.Compiler --add Microsoft.Component.MSBuild --add Microsoft.VisualStudio.Component.CoreBuildTools --add Microsoft.VisualStudio.Workload.MSBuildTools --add Microsoft.VisualStudio.Component.Windows10SDK --add Microsoft.VisualStudio.Component.VC.CoreBuildTools --add Microsoft.VisualStudio.Component.VC.Tools.x86.x64 --add Microsoft.VisualStudio.Component.VC.Redist.14.Latest --add Microsoft.VisualStudio.Component.VC.CMake.Project --add Microsoft.VisualStudio.Component.Windows10SDK.20348 --lang en-US
+```
+
 ### Installing mod_wsgi
 Run `pipenv install` again while in venv (`pipenv shell`).
 
