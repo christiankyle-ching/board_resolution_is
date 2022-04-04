@@ -1,6 +1,6 @@
 # Using waitress + whitenoise + nssm
 
-**IMPORTANT! When deploying, remove the `BRIS_DEBUG` environment variable!**
+**IMPORTANT! This deployment method is not yet fully functional. WhiteNoise won't serve media files.**
 
 **IMPORTANT! When deploying, remove the `BRIS_DEBUG` environment variable!**
 
