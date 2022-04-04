@@ -42,7 +42,7 @@ ALLOWED_HOSTS = [
     '*',
 
     # TODO: FOR NGROK ONLY!
-    '0218-2001-4451-4405-aa00-2180-e4e8-84d0-475a.ngrok.io',
+    '*.ngrok.io',
 ]
 
 
