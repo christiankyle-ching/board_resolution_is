@@ -1,7 +1,57 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block content %}
 
-<h1>Index</h1>
+<a href="{% url 'resolutions:create' %}" class="button-primary">
+    <img src="{% static 'users/img/plus.svg' %}" alt="" class="icon-sm">
+    <span>Import</span>
+</a>
+
+<h1>Recently Uploads</h1>
+<hr>
+
+<!-- Resolutions Table -->
+{% if resolutions %}
+<table class="w-full table-dashed">
+    <thead>
+        <tr>
+            <th>Resolution No.</th>
+            <th>Title</th>
+            <th>Date Approved</th>
+            <th>
+                <!-- Operations -->
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for res in resolutions %}
+        <tr>
+            <td>{{ res.number }}</td>
+            <td>{{ res.title }}</td>
+            <td>{{ res.certificate.date_approved }}</td>
+            <td>
+                <a href="" class="button">
+                    <p>View More</p>
+                </a>
+
+                <!-- Edit -->
+                <a href="" class="button">
+                    <img src="{% static 'users/img/edit.png' %}" alt="Edit" class="icon-sm">
+                </a>
+
+                <!-- Delete -->
+                <a href="" class="button-danger">
+                    <img src="{% static 'users/img/trash.png' %}" alt="Edit" class="icon-sm">
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<h5 class="text-center">No resolutions found.</h5>
+{% endif %}
 
 {% endblock %}

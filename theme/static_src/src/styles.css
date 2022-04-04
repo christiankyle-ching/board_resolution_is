@@ -14,6 +14,10 @@
 
 /* -------------------- Globals -------------------- */
 
+*:disabled {
+  @apply opacity-50 pointer-events-none;
+}
+
 /* #region Headers */
 h1 {
   @apply text-4xl font-bold;
@@ -73,19 +77,19 @@ hr {
 
 /* #region Icon Sizes */
 .icon-sm {
-  @apply h-5 w-5;
+  @apply h-5 w-5 min-w-fit min-h-fit;
 }
 
 .icon {
-  @apply h-10 w-10;
+  @apply h-10 w-10 min-w-fit min-h-fit;
 }
 
 .icon-md {
-  @apply h-16 w-16;
+  @apply h-16 w-16 min-w-fit min-h-fit;
 }
 
 .icon-lg {
-  @apply h-20 w-20;
+  @apply h-20 w-20 min-w-fit min-h-fit;
 }
 /* #endregion */
 
@@ -178,7 +182,7 @@ form > p > label {
   @apply mb-2;
 }
 
-form > p.hiddenField {
+form .hiddenField {
   position: absolute !important;
   height: 0px !important;
   overflow: hidden !important;

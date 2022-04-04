@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<h1>Add New Certificate</h1>
+<hr>
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <div class="grid grid-cols-3 gap-6">
+        <div class="col-span-full lg:col-span-1">
+            <div class="h-48 lg:h-96">
+                {% include 'components/image_drag_drop.html' with input_id='id_images' %}
+            </div>
+
+            <p class="hiddenField">
+                <input id="id_images" type="file" name="images" multiple required accept="image/*">
+            </p>
+        </div>
+
+        <div class="col-span-full lg:col-span-2">
+            <p>
+                <label for="id_date_approved">Date Approved:</label>
+                <input id="id_date_approved" type="date" name="date_approved" required>
+            </p>
+
+            <p>
+                <h4 class="my-2">Resolutions</h4>
+
+                <div data-multi-input>
+                    <div class="multi-input-item flex gap-6 mb-2">
+                        <input name="resolution_numbers" type="text" maxlength="50" placeholder="Resolution No."
+                            required class="w-full">
+                        <input name="resolution_titles" type="text" placeholder="Title" required class="w-full">
+                        <button class="button-danger" disabled>
+                            <img src="{% static 'users/img/trash.png' %}" alt="Delete" class="icon-sm">
+                        </button>
+                    </div>
+
+                    <div class="extra-fields"></div>
+
+                    <button data-add type="button" class="button-primary w-full">Add New</button>
+                </div>
+            </p>
+        </div>
+    </div>
+
+    <div class="text-right pt-6">
+        <button type="submit" class="button-primary">Save</button>
+        <button type="submit" class="button-danger ml-2">Cancel</button>
+    </div>
+</form>
+
+{% endblock %}

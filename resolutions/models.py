@@ -11,6 +11,11 @@ class Certificate(abstract_models.NoDeleteModel):
     added_by = models.ForeignKey(_User, null=True, on_delete=models.SET_NULL)
     added_date = models.DateTimeField(null=False, default=timezone.now)
 
+    date_approved = models.DateField(blank=False, null=False)
+
+    class Meta:
+        ordering = ['-added_date']
+
     @property
     def resolutions(self):
         return Resolution.objects.filter(certificate=self)
@@ -25,6 +30,9 @@ class Resolution(abstract_models.NoDeleteModel):
 
     number = models.CharField(max_length=50, blank=False, null=False)
     title = models.TextField(blank=False, null=False)
+
+    class Meta:
+        ordering = ['-pk']
 
 
 class CertificateImage(abstract_models.NoDeleteModel):

@@ -74,7 +74,7 @@ document.querySelectorAll("label[data-drag-drop]").forEach((label) => {
     if (!!countEl && isMultiple) {
       countEl.innerText =
         hasFiles && !hasErrors ? `${srcEl.files.length} Selected Files` : "";
-      countEl.previousElementSibling.style.visibility =
+      label.firstElementChild.style.visibility =
         hasFiles && !hasErrors ? "hidden" : "visible";
     }
 
@@ -168,3 +168,37 @@ document.querySelectorAll(".dropdown").forEach((dropdown) => {
     dropdownContent.classList.remove("active");
   });
 });
+
+// Init Multiple Inputs
+// Init Dropdown Menus
+document.querySelectorAll("form [data-multi-input]").forEach((multiInput) => {
+  console.log("Init Multiple Input:");
+  console.log(multiInput);
+
+  var inputItem = multiInput.querySelector(".multi-input-item");
+  var extraFields = multiInput.querySelector(".extra-fields");
+  var addButton = multiInput.querySelector("button[data-add]");
+
+  function addNewItem() {
+    var newItem = inputItem.cloneNode(true);
+
+    var deleteButton = newItem.querySelector("button");
+    deleteButton.addEventListener("click", (e) => {
+      newItem.remove();
+    });
+    deleteButton.disabled = false;
+
+    newItem.querySelectorAll("input").forEach((input) => (input.value = ""));
+
+    newItem.appendChild(deleteButton);
+    extraFields.appendChild(newItem);
+  }
+
+  addButton.addEventListener("click", (e) => {
+    addNewItem();
+  });
+});
+
+function deleteParent(e) {
+  console.log(e.target);
+}
