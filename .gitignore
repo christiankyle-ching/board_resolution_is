@@ -53,7 +53,7 @@ dlldata.c
 *.tlb
 *.tli
 *.tlh
-
+*.tmp
 *.tmp_proj
 *.log
 *.vspscc
