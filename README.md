@@ -48,13 +48,20 @@ INSTALLED_APPS = [
 
 ### Set Environment Variables
 Setup [environment variables](https://www.computerhope.com/issues/ch000549.htm) in your PC / server:
-- `PSQL_BRIS_DBNAME` = `db_board_resolution_is`
-- `PSQL_USER` = `postgres` (default)
 - `PSQL_PASSWORD` = Your password set when installing PostgreSQL.
-- `PSQL_HOST` = `127.0.0.1` (localhost)
-- `PSQL_PORT` = `5432` (default)
-- `BRIS_DEBUG` = `True` (set this to True for local development only. **For deployment, you should remove this environment variable**)
-- `BRIS_SECRET` = Run this command in a `cmd` and get the value: `py -c "import secrets; print(secrets.token_hex(64))"`
+- `BRIS_SECRET` = Run this command in a `cmd` and get the value: 
+```py
+py -c "import secrets; print(secrets.token_hex(64))"
+```
+- `BRIS_DEBUG` = `True` (set this to `True` for local development only. **For deployment, you should remove this environment variable**)
+
+Optional environment variables:
+- `PSQL_BRIS_DBNAME` = Name of your DB in PostgreSQL (default: `db_board_resolution_is`)
+- `PSQL_USER` = User in psql (default: `postgres`)
+- `PSQL_HOST` = IP Address where database is located (default: `127.0.0.1`)
+- `PSQL_PORT` = Port that PostgreSQL runs on (default: `5432`)
+
+
 
 For password reset using email, you need to add a **Gmail Account with 2FA enabled**. [Add an App Password](https://support.google.com/accounts/answer/185833?hl=en), and take note of the password. Then assign the following environment variables:
 - `BRIS_EMAIL_USERNAME` - Your Gmail Account (email address).

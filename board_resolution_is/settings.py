@@ -117,11 +117,11 @@ NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ['PSQL_BRIS_DBNAME'],
-        'USER': os.environ['PSQL_USER'],
+        'NAME': os.environ.get('PSQL_BRIS_DBNAME', 'db_board_resolution_is'),
+        'USER': os.environ.get('PSQL_USER', 'postgres'),
         'PASSWORD': os.environ['PSQL_PASSWORD'],
-        'HOST': os.environ['PSQL_HOST'],
-        'PORT': os.environ['PSQL_PORT'],
+        'HOST': os.environ.get('PSQL_HOST', '127.0.0.1'),
+        'PORT': os.environ.get('PSQL_PORT', '5432'),
     }
 }
 
