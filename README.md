@@ -13,8 +13,10 @@
    6. Install and done.
 3. Install pipenv.
    - `pip install pipenv`
-4. Clone this and `cd` to that directory. Create a virtual environment using:
-   - `pipenv shell`
+4. Clone this repository and open the folder in **Visual Studio Code**. Using the terminal within `vscode` (`` CTRL + ` ``), run the following to install required packages:
+```bat
+pipenv install
+```
 5. Comment out `'mod_wsgi.server'` in [board_resolution_is/settings.py](board_resolution_is/settings.py):
 ```py
 INSTALLED_APPS = [
@@ -29,9 +31,8 @@ INSTALLED_APPS = [
    ...
 ]
 ```
-6. Install required packages in this project:
-   - `pipenv install`
-   - If **mod-wsgi** throws errors, ignore first (only for local development server).
+
+**NOTE:** To always activate the virtual environment created by `pipenv` in every terminal of `vscode`, **follow the instructions [here](#setup-python-interpreter-for-automatic-activation-of-virtual-environment)**.
 
 ### PostgreSQL Database
 **Database Name: `db_board_resolution_is`**
