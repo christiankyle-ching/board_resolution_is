@@ -73,8 +73,6 @@ class Profile(models.Model):
 
     @property
     def avatar_url(self):
-
-        print(self.avatar)
         if self.avatar:
             return self.avatar.url
 

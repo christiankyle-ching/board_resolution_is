@@ -4,6 +4,74 @@
 
 {% block content %}
 
-{{ certificate }}
+<div class="grid grid-cols-6 gap-6">
+    <div class="card p-6 col-span-full md:col-span-4 order-2 md:order-1">
+        <div class="relative">
+            <button onclick="history.back()"
+                class="button-danger button-rounded absolute top-4 right-4 invisible md:visible">X</button>
+
+            {% for img in certificate.images %}
+            <img id="img-{{ img.image.name }}" src="{{ img.image.url }}" alt="{{ img.image.name }}" class="w-full">
+            {% empty %}
+            <div class="flex h-full w-full">
+                <h4 class="m-auto py-32">
+                    No Images.
+                    <a href="{% url 'resolutions:cert_edit' certificate.pk %}" class="underline">Add one.</a>
+                </h4>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="bg-white col-span-full md:col-span-2 relative order-1 md:order-2">
+        <div class="sticky top-0 py-6">
+            <div class="flex justify-between items-center">
+                <h4>Includes:</h4>
+            </div>
+
+            <table class="w-full table-dashed">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>BRN</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for res in certificate.resolutions %}
+                    <tr>
+                        <td>{{ res.title }}</td>
+                        <td class="text-center">{{ res.number }}</td>
+                    </tr>
+                    {% empty %}
+                    <p class="text-center">No Resolutions.</p>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <p class="pt-10">
+                <strong>Date Approved:</strong>
+                <span>{{ certificate.date_approved }}</span>
+            </p>
+        </div>
+
+        <div class="fixed bottom-6 right-6">
+            <div class="flex flex-col gap-2">
+                <a href="" class="button-primary">
+                    <img src="{% static 'users/img/export.png' %}" alt="Edit" class="icon-sm">
+                    <span>Export to PDF</span>
+                </a>
+                <a href="{% url 'resolutions:cert_edit' certificate.pk %}" class="button">
+                    <img src="{% static 'users/img/edit.png' %}" alt="Edit" class="icon-sm">
+                    <span>Edit File</span>
+                </a>
+                <a href="{% url 'resolutions:cert_delete' certificate.pk %}" class="button-danger">
+                    <img src="{% static 'users/img/trash.png' %}" alt="Delete" class="icon-sm">
+                    <span>Delete File</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
 
 {% endblock %}

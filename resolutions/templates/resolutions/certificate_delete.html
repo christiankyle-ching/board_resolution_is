@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="card p-12">
+
+    <div class="text-center">
+        <h3>Delete Certificate?</h3>
+        <p>
+            Are you sure you want to delete this certificate?
+            <strong>
+                This will also delete all of its images and resolutions.
+            </strong>
+        </p>
+    </div>
+
+    {% if certificate.resolutions %}
+    <div class="mt-4">
+        <h4 class="text-center mb-2">Resolutions</h4>
+        <table class="w-full table-dashed">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>BRN</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for res in certificate.resolutions %}
+                <tr>
+                    <td>{{ res.title }}</td>
+                    <td class="text-center">{{ res.number }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endif %}
+
+    {% if certificate.images %}
+    <div class="mt-4">
+        <h4 class="text-center mb-2">Images</h4>
+        <ul>
+            {% for img in certificate.images %}
+            <li class="flex justify-between items-center">
+                <span>{{ img.image.name }}</span>
+                <span>{{ img.image.size|filesizeformat }}</span>
+                <div>
+                    <a href="{{ img.image.url }}" target="_blank" class="button">
+                        <img src="{% static 'users/img/eye.svg' %}" alt="View" class="icon-sm">
+                        <span>View</span>
+                    </a>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+    <div class="bg-lightDanger border-l-2 border-l-danger p-6 mb-4">
+        <div class="flex items-center mb-2">
+            <img src="{% static 'users/img/warning.png' %}" alt="" class="icon-sm">
+            <h3 class="ml-2">Warning!</h3>
+        </div>
+
+        <ul class="list-disc ml-4">
+            <li>By deleting this certificate, you will also delete all the resolutions and images included.</li>
+            <li>This operation cannot be undone.</li>
+        </ul>
+
+    </div>
+
+    <form method="POST" class="text-center pt-4">
+        {% csrf_token %}
+        <button type="button" onclick="history.back()" class="button-transparent-primary">Cancel</button>
+        <button type="submit" class="button-danger ml-2">Confirm</button>
+    </form>
+</div>
+
+{% endblock %}

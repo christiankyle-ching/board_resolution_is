@@ -13,13 +13,6 @@
         {% endif %}
         Certificate
     </h1>
-
-    {% if certificate %}
-    <a href="" class="button-danger">
-        <img src="{% static 'users/img/trash.png' %}" alt="Delete" class="icon-sm">
-        <span>Delete Certificate</span>
-    </a>
-    {% endif %}
 </div>
 <hr>
 
@@ -101,8 +94,8 @@
                             <a href="" class="button">
                                 <img src="{% static 'users/img/edit.png' %}" alt="Edit" class="icon-sm">
                             </a>
-                            <a href="" class="button-danger" {% if certificate.resolutions|length <= 1 %} disabled
-                                {% endif %}>
+                            <a href="{% url 'resolutions:res_delete' res.pk %}" class="button-danger"
+                                {% if certificate.resolutions|length <= 1 %} disabled {% endif %}>
                                 <img src="{% static 'users/img/trash.png' %}" alt="Delete" class="icon-sm">
                             </a>
                         </div>
@@ -116,7 +109,7 @@
 
     <div class="text-right pt-6">
         <button type="submit" class="button-primary">Save</button>
-        <button type="submit" class="button-danger ml-2">Cancel</button>
+        <button type="button" class="button-danger ml-2" onclick="history.back()">Cancel</button>
     </div>
 </form>
 

@@ -4,17 +4,19 @@
 
 {% block content %}
 
-<a href="{% url 'resolutions:create' %}" class="button-primary">
-    <img src="{% static 'users/img/plus.svg' %}" alt="" class="icon-sm">
-    <span>Import</span>
-</a>
+<div class="mb-4">
+    <a href="{% url 'resolutions:create' %}" class="button-primary">
+        <img src="{% static 'users/img/plus.svg' %}" alt="" class="icon-sm">
+        <span>Import</span>
+    </a>
+</div>
 
 <h1>Recently Uploads</h1>
 <hr>
 
 <!-- Resolutions Table -->
 {% if resolutions %}
-<table class="w-full table-dashed">
+<table class="w-full table-dashed text-center">
     <thead>
         <tr>
             <th>Resolution No.</th>
@@ -32,19 +34,21 @@
             <td>{{ res.title }}</td>
             <td>{{ res.certificate.date_approved }}</td>
             <td>
-                <a href="" class="button">
-                    <p>View More</p>
-                </a>
+                <div class="flex items-center justify-center py-1 gap-2">
+                    <a href="{% url 'resolutions:cert_detail' res.certificate.pk %}" class="button">
+                        <p>View More</p>
+                    </a>
 
-                <!-- Edit -->
-                <a href="{% url 'resolutions:edit' res.pk %}" class="button">
-                    <img src="{% static 'users/img/edit.png' %}" alt="Edit" class="icon-sm">
-                </a>
+                    <!-- Edit -->
+                    <a href="{% url 'resolutions:cert_edit' res.certificate.pk %}" class="button">
+                        <img src="{% static 'users/img/edit.png' %}" alt="Edit" class="icon-sm">
+                    </a>
 
-                <!-- Delete -->
-                <a href="" class="button-danger">
-                    <img src="{% static 'users/img/trash.png' %}" alt="Edit" class="icon-sm">
-                </a>
+                    <!-- Delete -->
+                    <a href="{% url 'resolutions:res_delete' res.pk %}" class="button-danger">
+                        <img src="{% static 'users/img/trash.png' %}" alt="Edit" class="icon-sm">
+                    </a>
+                </div>
             </td>
         </tr>
         {% endfor %}

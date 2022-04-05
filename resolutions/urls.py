@@ -7,6 +7,16 @@ urlpatterns = [
     path('', views.IndexView.as_view(), name='index'),
 
     path('create/', views.CertificateFormView.as_view(), name='create'),
-    path('<int:res_pk>/edit/', views.CertificateFormView.as_view(), name='edit'),
-    path('<int:res_pk>/', views.CertificateDetailView.as_view(), name='detail'),
+
+    # Certificate Views
+    path('certificate/<int:pk>/',
+         views.CertificateDetailView.as_view(), name='cert_detail'),
+    path('certificate/<int:pk>/edit/',
+         views.CertificateFormView.as_view(), name='cert_edit'),
+    path('certificate/<int:pk>/delete/',
+         views.CertificateDeleteView.as_view(), name='cert_delete'),
+
+    # Resolution Views
+    path('resolution/<int:pk>/delete/',
+         views.ResolutionDeleteView.as_view(), name='res_delete'),
 ]

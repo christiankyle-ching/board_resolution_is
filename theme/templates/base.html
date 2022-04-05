@@ -36,9 +36,9 @@
 
         <div class="dropdown right on-top">
           <button class="flex justify-center items-center" data-toggle>
-            <img class="avatar" src="{{ user.profile.avatar_url }}">
+            <img class="avatar mr-2" src="{{ user.profile.avatar_url }}">
 
-            <div class="mx-2 flex flex-col items-center justify-center">
+            <div class="flex-col items-center justify-center mr-2 hidden sm:flex">
               <span class="text-lg font-bold leading-tight">{{ user.username }}</span>
               <span class="text-sm leading-tight">{{ user.role_name }}</span>
             </div>
