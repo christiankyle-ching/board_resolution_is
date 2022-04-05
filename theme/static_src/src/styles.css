@@ -14,10 +14,6 @@
 
 /* -------------------- Globals -------------------- */
 
-*:disabled {
-  @apply opacity-50 pointer-events-none;
-}
-
 /* #region Headers */
 h1 {
   @apply text-4xl font-bold;
@@ -69,6 +65,10 @@ nav h6 {
 * {
   /* For Debug Only */
   /* outline:1px blue solid; */
+}
+
+*[disabled] {
+  @apply opacity-50 pointer-events-none !important;
 }
 
 hr {

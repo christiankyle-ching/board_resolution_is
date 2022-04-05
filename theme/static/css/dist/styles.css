@@ -796,12 +796,12 @@ html {
   margin-left: 0.5rem;
 }
 
-.mb-4{
-  margin-bottom: 1rem;
-}
-
 .mt-2{
   margin-top: 0.5rem;
+}
+
+.mb-4{
+  margin-bottom: 1rem;
 }
 
 .ml-4{
@@ -1134,11 +1134,6 @@ html {
 
 /* -------------------- Globals -------------------- */
 
-*:disabled{
-  pointer-events: none;
-  opacity: 0.5;
-}
-
 /* #region Headers */
 
 h1{
@@ -1207,6 +1202,11 @@ nav h6 {
 * {
   /* For Debug Only */
   /* outline:1px blue solid; */
+}
+
+*[disabled]{
+  pointer-events: none !important;
+  opacity: 0.5 !important;
 }
 
 hr{

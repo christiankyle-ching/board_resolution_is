@@ -4,7 +4,23 @@
 
 {% block content %}
 
-<h1>Add New Certificate</h1>
+<div class="flex justify-between">
+    <h1>
+        {% if certificate %}
+        Edit
+        {% else %}
+        Add New
+        {% endif %}
+        Certificate
+    </h1>
+
+    {% if certificate %}
+    <a href="" class="button-danger">
+        <img src="{% static 'users/img/trash.png' %}" alt="Delete" class="icon-sm">
+        <span>Delete Certificate</span>
+    </a>
+    {% endif %}
+</div>
 <hr>
 
 <form method="POST" enctype="multipart/form-data">
@@ -17,24 +33,26 @@
             </div>
 
             <p class="hiddenField">
-                <input id="id_images" type="file" name="images" multiple required accept="image/*">
+                <input id="id_images" type="file" name="images" multiple accept="image/*">
             </p>
         </div>
 
         <div class="col-span-full lg:col-span-2">
             <p>
                 <label for="id_date_approved">Date Approved:</label>
-                <input id="id_date_approved" type="date" name="date_approved" required>
+                <input id="id_date_approved" type="date" name="date_approved"
+                    value="{{ certificate.date_approved|date:"Y-m-d" }}" required>
             </p>
 
-            <p>
-                <h4 class="my-2">Resolutions</h4>
+            <p class="mt-2">
+                <h4 class="mb-2">Add New Resolutions</h4>
 
                 <div data-multi-input>
                     <div class="multi-input-item flex gap-6 mb-2">
                         <input name="resolution_numbers" type="text" maxlength="50" placeholder="Resolution No."
-                            required class="w-full">
-                        <input name="resolution_titles" type="text" placeholder="Title" required class="w-full">
+                            class="w-full" {% if not certificate.resolutions %} required {% endif %}>
+                        <input name="resolution_titles" type="text" placeholder="Title" class="w-full"
+                            {% if not certificate.resolutions %} required {% endif %}>
                         <button class="button-danger" disabled>
                             <img src="{% static 'users/img/trash.png' %}" alt="Delete" class="icon-sm">
                         </button>
@@ -45,6 +63,54 @@
                     <button data-add type="button" class="button-primary w-full">Add New</button>
                 </div>
             </p>
+
+            {% if certificate.images %}
+            <p class="mt-2">
+                <h4 class="mb-2">Current Images</h4>
+
+                <ul>
+                    {% for img in certificate.images %}
+                    <li class="flex justify-between items-center">
+                        <span>{{ img.image.name }}</span>
+                        <span>{{ img.image.size|filesizeformat }}</span>
+                        <div>
+                            <a href="{{ img.image.url }}" target="_blank" class="button">
+                                View Image
+                            </a>
+                            <a href="" class="button-danger">
+                                <img src="{% static 'users/img/trash.png' %}" alt="Delete" class="icon-sm">
+                            </a>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </p>
+            {% endif %}
+
+            {% if certificate.resolutions %}
+            <p class="mt-2">
+                <h4 class="mb-2">Current Resolutions</h4>
+
+                <ul>
+                    {% for res in certificate.resolutions %}
+                    <li class="flex justify-between items-center">
+                        <span>
+                            Res. No. {{ res.number }} - {{ res.title }}
+                        </span>
+                        <div>
+                            <a href="" class="button">
+                                <img src="{% static 'users/img/edit.png' %}" alt="Edit" class="icon-sm">
+                            </a>
+                            <a href="" class="button-danger" {% if certificate.resolutions|length <= 1 %} disabled
+                                {% endif %}>
+                                <img src="{% static 'users/img/trash.png' %}" alt="Delete" class="icon-sm">
+                            </a>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </p>
+            {% endif %}
         </div>
     </div>
 

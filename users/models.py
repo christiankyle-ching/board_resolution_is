@@ -49,6 +49,10 @@ class User(AbstractUser):
     def has_staff_permission(self):
         return self.role in [ROLE_ADMIN, ROLE_STAFF]
 
+    @property
+    def has_export_permissions(self):
+        return self.has_admin_permission or self.can_export
+
 
 class Profile(models.Model):
     def avatar_path(instance, filename):
