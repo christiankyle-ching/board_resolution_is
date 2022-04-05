@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="card p-12">
+    <h4>Edit Resolution No. {{ resolution.number }}</h4>
+    <h5>
+        <b>Title:</b>
+        {{ resolution.title }}
+    </h5>
+    <hr>
+
+    <form method="POST" class="">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <div class="text-right pt-4">
+            <button type="button" onclick="history.back()" class="button-transparent-primary">Cancel</button>
+            <button type="submit" class="button-danger ml-2">Confirm</button>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

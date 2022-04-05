@@ -1,3 +1,4 @@
+from time import strftime, strptime
 from django.urls import reverse
 from django.utils import timezone
 from django.db import models
@@ -26,7 +27,10 @@ class Certificate(abstract_models.NoDeleteModel):
         return CertificateImage.objects.filter(certificate=self)
 
     def __str__(self):
-        return f"Certificate of {self.date_approved}"
+        return f"Certificate approved at {self.date_approved.strftime('%B %d, %Y')}"
+
+    def get_absolute_url(self):
+        return reverse("resolutions:cert_detail", kwargs={'pk': self.pk})
 
 
 class Resolution(abstract_models.NoDeleteModel):
@@ -41,8 +45,8 @@ class Resolution(abstract_models.NoDeleteModel):
     def __str__(self):
         return f"Res. No. {self.number} - {self.title}"
 
-    def get_certificate_absolute_url(self):
-        return reverse('resolutions:cert_detail', kwargs={'pk': self.certificate.pk})
+    def get_absolute_url(self):
+        return reverse("resolutions:cert_detail", kwargs={'pk': self.certificate.pk})
 
 
 class CertificateImage(abstract_models.NoDeleteModel):
@@ -56,5 +60,5 @@ class CertificateImage(abstract_models.NoDeleteModel):
     class Meta:
         ordering = ['pk']
 
-    def get_certificate_absolute_url(self):
+    def get_absolute_url(self):
         return reverse('resolutions:cert_detail', kwargs={'pk': self.certificate.pk})

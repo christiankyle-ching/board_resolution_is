@@ -70,7 +70,7 @@
                             <a href="{{ img.image.url }}" target="_blank" class="button">
                                 View Image
                             </a>
-                            <a href="" class="button-danger">
+                            <a href="{% url 'resolutions:cert_image_delete' img.pk %}" class="button-danger">
                                 <img src="{% static 'users/img/trash.png' %}" alt="Delete" class="icon-sm">
                             </a>
                         </div>
@@ -86,15 +86,13 @@
 
                 <ul>
                     {% for res in certificate.resolutions %}
-                    <li class="flex justify-between items-center">
-                        <span>
-                            Res. No. {{ res.number }} - {{ res.title }}
-                        </span>
-                        <div>
-                            <a href="" class="button">
+                    <li class="grid grid-cols-2 py-1">
+                        <p class="col-span-1 break-words">{{ res }}</p>
+                        <div class="col-span-1 text-right">
+                            <a href="{% url 'resolutions:res_edit' res.pk %}" class="button">
                                 <img src="{% static 'users/img/edit.png' %}" alt="Edit" class="icon-sm">
                             </a>
-                            <a href="{% url 'resolutions:res_delete' res.pk %}" class="button-danger"
+                            <a href="{% url 'resolutions:res_delete' res.pk %}" class="button-danger ml-2"
                                 {% if certificate.resolutions|length <= 1 %} disabled {% endif %}>
                                 <img src="{% static 'users/img/trash.png' %}" alt="Delete" class="icon-sm">
                             </a>

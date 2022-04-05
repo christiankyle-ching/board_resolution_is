@@ -32,52 +32,54 @@ class CertificateFormView(LoginRequiredMixin, View):
         })
 
     def post(self, request, pk=None):
-        # Get Form Values
-        date_approved = request.POST.get('date_approved')
-        res_nums = request.POST.getlist('resolution_numbers')
-        res_titles = request.POST.getlist('resolution_titles')
+        try:
+            # Get Form Values
+            date_approved = request.POST.get('date_approved')
+            res_nums = request.POST.getlist('resolution_numbers')
+            res_titles = request.POST.getlist('resolution_titles')
 
-        # Get existing cert, else create a new one
-        cert = None
-        if pk is not None:
-            cert = get_object_or_404(Certificate, pk=pk)
-        else:
-            cert = Certificate()
-            cert.added_by = request.user
+            # Get existing cert, else create a new one
+            cert = None
+            if pk is not None:
+                cert = get_object_or_404(Certificate, pk=pk)
+            else:
+                cert = Certificate()
+                cert.added_by = request.user
 
-        # Update other fields
-        cert.date_approved = dateparse.parse_date(date_approved)
+            # Update other fields
+            cert.date_approved = dateparse.parse_date(date_approved)
 
-        cert_images = []
-        resolutions = []
+            cert_images = []
+            resolutions = []
 
-        # Add New Resolutions
-        for num, title in zip(res_nums, res_titles):
-            num_stripped = num.strip()
-            title_stripped = title.strip()
-            if num_stripped != "" and title_stripped != "":
-                res = Resolution(number=num_stripped,
-                                 title=title_stripped, certificate=cert)
-                resolutions.append(res)
+            # Add New Resolutions
+            for num, title in zip(res_nums, res_titles):
+                num_stripped = num.strip()
+                title_stripped = title.strip()
+                if num_stripped != "" and title_stripped != "":
+                    res = Resolution(number=num_stripped,
+                                     title=title_stripped, certificate=cert)
+                    resolutions.append(res)
 
-        # Add New Files
-        for f in request.FILES.getlist('images'):
-            cert_image = CertificateImage(
-                image=compress_image(f), certificate=cert)
-            cert_images.append(cert_image)
+            # Add New Files
+            for f in request.FILES.getlist('images'):
+                cert_image = CertificateImage(
+                    image=compress_image(f), certificate=cert)
+                cert_images.append(cert_image)
 
-        with transaction.atomic():
-            cert.save()
-            for r in resolutions:
-                r.save()
-            for ci in cert_images:
-                ci.save()
+            with transaction.atomic():
+                cert.save()
+                for r in resolutions:
+                    r.save()
+                for ci in cert_images:
+                    ci.save()
 
-        return redirect('resolutions:cert_detail', pk=cert.pk)
-
-        return render(request, 'resolutions/certificate_form.html', {
-            'certificate': cert,
-        })
+            return redirect('resolutions:cert_detail', pk=cert.pk)
+        except Exception as e:
+            print(e)
+            return render(request, 'resolutions/certificate_form.html', {
+                'certificate': cert,
+            })
 
 
 class CertificateDetailView(LoginRequiredMixin, View):
@@ -98,16 +100,36 @@ class CertificateDeleteView(LoginRequiredMixin, generic.DeleteView):
     success_url = reverse_lazy("resolutions:index")
 
 
+# -------------------- Resolution Views --------------------
 class ResolutionDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Resolution
     template_name = "resolutions/resolution_delete.html"
 
     def get_success_url(self):
-        url = self.get_object().get_certificate_absolute_url()
-        return url
+        return self.get_object().get_absolute_url()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['is_last_resolution'] = self.get_object(
         ).certificate.resolutions.count() <= 1
         return context
+
+
+class ResolutionEditView(LoginRequiredMixin, generic.UpdateView):
+    model = Resolution
+    template_name = 'resolutions/resolution_edit.html'
+    fields = ['number', 'title']
+
+    def get_success_url(self):
+        return self.get_object().get_absolute_url()
+
+# -------------------- Image Views --------------------
+
+
+class CertificateImageDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = CertificateImage
+    template_name = "resolutions/certificate_image_delete.html"
+    context_object_name = 'certificate_image'
+
+    def get_success_url(self):
+        return self.get_object().get_absolute_url()

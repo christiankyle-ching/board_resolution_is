@@ -1,4 +1,3 @@
-from sqlite3 import IntegrityError
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth.views import LoginView, LogoutView
@@ -146,5 +145,13 @@ class AdminUserDeleteView(LoginRequiredMixin, HasAdminPermission, generic.Delete
     template_name = 'users/admin/user_delete.html'
     success_url = reverse_lazy('users:admin:manage')
     context_object_name = 'selected_user'
+
+
+class AdminUserEditView(LoginRequiredMixin, HasAdminPermission, generic.UpdateView):
+    model = _User
+    fields = ['email', 'can_export']
+    template_name = 'users/admin/user_edit.html'
+    context_object_name = 'selected_user'
+    success_url = reverse_lazy('users:admin:manage')
 
 # endregion

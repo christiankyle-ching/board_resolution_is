@@ -9,6 +9,7 @@ app_name = "users"
 admin_urlpatterns = ([
     path('manage/', views.AdminManageView.as_view(), name='manage'),
     path('create/', views.AdminUserCreateView.as_view(), name='user_create'),
+    path('<int:pk>/edit/', views.AdminUserEditView.as_view(), name='user_edit'),
     path('<int:pk>/delete/', views.AdminUserDeleteView.as_view(), name='user_delete'),
     path('<int:pk>/change_password/', views.AdminUserChangePasswordView.as_view(),
          name='user_change_password'),

@@ -57,14 +57,19 @@
 
         <div class="fixed bottom-6 right-6">
             <div class="flex flex-col gap-2">
+
+                {% if user.has_export_permissions %}
                 <a href="" class="button-primary">
                     <img src="{% static 'users/img/export.png' %}" alt="Edit" class="icon-sm">
                     <span>Export to PDF</span>
                 </a>
+                {% endif %}
+
                 <a href="{% url 'resolutions:cert_edit' certificate.pk %}" class="button">
                     <img src="{% static 'users/img/edit.png' %}" alt="Edit" class="icon-sm">
                     <span>Edit File</span>
                 </a>
+
                 <a href="{% url 'resolutions:cert_delete' certificate.pk %}" class="button-danger">
                     <img src="{% static 'users/img/trash.png' %}" alt="Delete" class="icon-sm">
                     <span>Delete File</span>

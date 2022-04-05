@@ -309,11 +309,11 @@ textarea[data-filename-preview] {
   @apply visible !important;
 }
 
-.menu > .menuItem {
+.menuItem {
   @apply flex flex-row items-center px-4 py-2;
 }
 
-.menu > .menuItem > :not(:first-child) {
+.menuItem > :not(:first-child) {
   @apply ml-2;
 }
 

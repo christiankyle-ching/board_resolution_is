@@ -43,9 +43,9 @@
                 </td>
                 <td>
                     <div class="my-2">
-                        <a href="{% url 'users:admin:user_change_password' u.id %}" class="button button-sm m-1">
+                        <a href="{% url 'users:admin:user_edit' u.id %}" class="button button-sm m-1">
                             <img src="{% static 'users/img/edit.png' %}" alt="" class="icon-sm">
-                            <span>Change Password</span>
+                            <span>Edit</span>
                         </a>
                         <br>
                         <a href="{% url 'users:admin:user_delete' u.id %}" class="button-danger button-sm m-1">
@@ -55,7 +55,6 @@
                     </div>
                 </td>
             </tr>
-
             {% endfor %}
         </tbody>
 

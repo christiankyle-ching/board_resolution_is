@@ -17,6 +17,12 @@ urlpatterns = [
          views.CertificateDeleteView.as_view(), name='cert_delete'),
 
     # Resolution Views
+    path('resolution/<int:pk>/edit/',
+         views.ResolutionEditView.as_view(), name='res_edit'),
     path('resolution/<int:pk>/delete/',
          views.ResolutionDeleteView.as_view(), name='res_delete'),
+
+    # Certificate Image Views
+    path('certificate-image/<int:pk>/delete/',
+         views.CertificateImageDeleteView.as_view(), name='cert_image_delete'),
 ]

@@ -73,25 +73,25 @@
 
               <hr class="border-dashed my-2">
 
-              <a href="{% url 'users:admin:manage' %}" class="menuItem justify-between">
-                <h6>Other Accounts</h6>
-                <button class="button-image button-rounded">
-                  <img src="{% static 'users/img/settings.svg' %}" alt="" class="icon-sm">
-                </button>
+              <a href="{% url 'users:admin:manage' %}">
+                <div class="flex menuItem justify-between">
+                  <h6>Other Accounts</h6>
+                  <button class="button-image button-rounded">
+                    <img src="{% static 'users/img/settings.svg' %}" alt="" class="icon-sm">
+                  </button>
+                </div>
+
+                {% for u in other_accounts %}
+                <div class="menuItem">
+                  <img src="{{ u.profile.avatar_url }}" class="avatar-sm">
+                  <p class="ml-2">{{ u.username }}</p>
+                </div>
+                {% empty %}
+                <p class="p-2 text-center">No Accounts</p>
+                {% endfor %}
+
+                {% endif %}
               </a>
-
-              {% if other_accounts %}
-              {% for u in other_accounts %}
-              <div class="menuItem">
-                <img src="{{ u.profile.avatar_url }}" class="avatar-sm">
-                <p class="ml-2">{{ u.username }}</p>
-              </div>
-              {% endfor %}
-              {% else %}
-              <p class="p-2 text-center">No Accounts</p>
-              {% endif %}
-
-              {% endif %}
             </div>
           </div>
         </div>
