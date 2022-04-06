@@ -219,3 +219,6 @@ __pycache__/
 
 # Use Pipfile instead to generate requirements.txt
 /requirements.txt
+
+# Ignore compiled CSS. Let host machine compile themselves
+/theme/static/
