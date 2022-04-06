@@ -109,7 +109,7 @@ TAILWIND_APP_NAME = 'theme'
 
 # TODO: Replace with where your nodejs/npm is located
 # Use `where npm` in cmd to know the location, assuming you have nodejs installed
-NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"
+NPM_BIN_PATH = os.environ.get('NPM_BIN_PATH', '')
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases

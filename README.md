@@ -55,14 +55,13 @@ Setup [environment variables](https://www.computerhope.com/issues/ch000549.htm) 
 py -c "import secrets; print(secrets.token_hex(64))"
 ```
 - `BRIS_DEBUG` = `True` (set this to `True` for local development only. **For deployment, you should remove this environment variable**)
+- `NPM_BIN_PATH` = See this
 
 Optional environment variables:
 - `PSQL_BRIS_DBNAME` = Name of your DB in PostgreSQL (default: `db_board_resolution_is`)
 - `PSQL_USER` = User in psql (default: `postgres`)
 - `PSQL_HOST` = IP Address where database is located (default: `127.0.0.1`)
 - `PSQL_PORT` = Port that PostgreSQL runs on (default: `5432`)
-
-
 
 For password reset using email, you need to add a **Gmail Account with 2FA enabled**. [Add an App Password](https://support.google.com/accounts/answer/185833?hl=en), and take note of the password. Then assign the following environment variables:
 - `BRIS_EMAIL_USERNAME` - Your Gmail Account (email address).
@@ -83,12 +82,8 @@ Note: If you changed your password on Google, all App Passwords are revoked and 
 where npm
 ```
 
-**Copy the full file path** with the `npm.cmd`: then replace the variable value in the [settings.py](board_resolution_is/settings.py) like so:
-
-```py
-# Replace with the file path you got from `where npm`
-NPM_BIN_PATH = r"C:\...\nodejs\npm.cmd"
-```
+**Copy the full file path with the `npm.cmd`**. Then add it to an **environment variable** with the name:
+`NPM_BIN_PATH` = `C:\...\nodejs\npm.cmd`
 
 3. `py manage.py tailwind install`
 
