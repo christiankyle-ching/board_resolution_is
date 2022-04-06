@@ -207,19 +207,15 @@ document.querySelectorAll(".dropdown").forEach((dropdown) => {
   console.log("Init Dropdown:");
   console.log(dropdown);
 
-  var toggle = dropdown.querySelector("[data-toggle]");
+  var toggles = dropdown.querySelectorAll("[data-toggle]");
   var dropdownContent = dropdown.querySelector(".dropdown_content");
 
-  if (!!toggle) {
+  toggles.forEach((toggle) => {
     toggle.addEventListener("click", (e) => {
       if (!!dropdownContent) {
         dropdownContent.classList.toggle("active");
       }
     });
-  }
-
-  dropdownContent.addEventListener("click", (e) => {
-    dropdownContent.classList.remove("active");
   });
 });
 

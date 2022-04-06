@@ -4,14 +4,40 @@
 
 {% block content %}
 
-<div class="mb-4">
+<div class="mb-4 flex gap-2">
+    <!-- Filter -->
+    <div class="dropdown">
+        <button data-toggle class="button-secondary">
+            <span>Filter</span>
+            <img src="{% static 'users/img/filter.svg' %}" alt="Filter" class="icon-sm">
+        </button>
+        <div class="dropdown_content bg-white shadow-md rounded-lg p-6 w-64">
+            <form method="POST" class="flex flex-col gap-2">
+                {% csrf_token %}
+
+                {{ search_form.as_p }}
+
+                <div class="text-right">
+                    <a href="{% url 'resolutions:index' %}" class="button-danger" data-toggle>Reset</a>
+                    <button type="submit" class="button-primary" name="search">Search</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <a href="{% url 'resolutions:create' %}" class="button-primary">
         <img src="{% static 'users/img/plus.svg' %}" alt="" class="icon-sm">
         <span>Import</span>
     </a>
 </div>
 
-<h1>Recently Uploads</h1>
+<h1>
+    {% if has_searched %}
+    Search Results
+    {% else %}
+    Recently Uploads
+    {% endif %}
+</h1>
 <hr>
 
 <!-- Resolutions Table -->

@@ -5,7 +5,9 @@ from django.db import transaction
 from django.utils import dateparse
 from django.views import generic
 from django.urls import reverse_lazy, reverse
+from django.db.models.query import Q
 
+from resolutions.forms import ResolutionSearchForm
 from resolutions.models import Certificate, CertificateImage, Resolution
 from resolutions.utils import compress_image
 
@@ -16,8 +18,33 @@ class IndexView(LoginRequiredMixin, View):
     def get(self, request):
         res = Resolution.objects.all()[:RESOLUTION_PER_PAGE]
 
+        search_form = ResolutionSearchForm()
+
         return render(request, 'resolutions/index.html', {
             'resolutions': res,
+            'search_form': search_form,
+        })
+
+    def post(self, request):
+        res = Resolution.objects.all()[:RESOLUTION_PER_PAGE]
+
+        search_form = ResolutionSearchForm(request.POST)
+
+        has_searched = 'search' in request.POST
+
+        if has_searched and search_form.has_changed() and search_form.is_valid():
+            print(search_form.cleaned_data['title'])
+
+            res = Resolution.objects.filter(
+                Q(title__icontains=search_form.cleaned_data['title']) |
+                Q(number__icontains=search_form.cleaned_data['number']) |
+                Q(certificate__date_approved=search_form.cleaned_data['date_approved'])
+            )
+
+        return render(request, 'resolutions/index.html', {
+            'resolutions': res,
+            'search_form': search_form,
+            'has_searched': has_searched,
         })
 
 
