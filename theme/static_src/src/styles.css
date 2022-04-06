@@ -211,26 +211,17 @@ label[data-drag-drop] {
 
   @apply bg-lightGray border-gray border-2 border-dashed;
 
-  display: grid;
+  display: block;
   height: 100%;
   width: 100%;
+
+  min-height: 16rem;
 
   position: relative;
 }
 
-label[data-drag-drop] > * {
-  /* Stacks all elements on top of each other */
-  grid-column: 1;
-  grid-row: 1;
-  margin: auto;
-}
-
 label[data-drag-drop] > img.preview {
   @apply absolute top-0 left-0 w-full h-full object-contain;
-}
-
-label[data-drag-drop] > .counter {
-  @apply w-full h-full z-10 flex items-center justify-center;
 }
 
 label[data-drag-drop] ul.errors {

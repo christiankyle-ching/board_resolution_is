@@ -7,6 +7,15 @@ function getFilenameWithoutExtension(filename) {
   return filename.substr(0, filename.length - (extLength + 1));
 }
 
+function shortenString(str, max_length, substitute_string = "...") {
+  if (str.length > max_length) {
+    startIndex = str.length - max_length;
+    return substitute_string + str.substring(startIndex);
+  } else {
+    return str;
+  }
+}
+
 // Init Custom Drag Drop
 document.querySelectorAll("label[data-drag-drop]").forEach((label) => {
   console.log("Init Drag Drop:");
@@ -16,8 +25,15 @@ document.querySelectorAll("label[data-drag-drop]").forEach((label) => {
   var isMultiple = srcEl.multiple;
 
   var imgEl = label.querySelector("img.preview");
-  var countEl = label.querySelector(".counter");
   var errorList = label.querySelector("ul.errors");
+
+  // Details
+  var detailsEl = label.querySelector(".details");
+  var detailsHeaderEl = detailsEl.querySelector("h4");
+  var listOfFilesEl = detailsEl.querySelector("ul");
+
+  // Hide details on load
+  detailsEl.style.visibility = "hidden";
 
   if (!isMultiple && !!imgEl) {
     imgEl.dataset.imagePreview = "";
@@ -54,10 +70,28 @@ document.querySelectorAll("label[data-drag-drop]").forEach((label) => {
       );
     }
 
+    // Parse Accepted File Types from <input [accept]>
+    var acceptedFileTypes = srcEl.accept
+      .split(",")
+      .map((type) => type.trim().replace("*", ""));
+
+    // For each file selected
     for (var f of srcEl.files) {
-      if (!f.type.startsWith("image/")) {
+      var isFileValid = false;
+
+      // Check the file against each accepted file types
+      for (var type of acceptedFileTypes) {
+        if (f.type.includes(type) || f.name.includes(type)) {
+          isFileValid = true;
+          break;
+        }
+      }
+
+      if (!isFileValid) {
         errors.push(
-          `Only images are accepted. Detected a "${f.type}" file (${f.name}).`
+          `Only accepts ${acceptedFileTypes.join(", ")}. Detected a "${
+            f.type
+          }" file (${f.name}).`
         );
         break;
       }
@@ -67,15 +101,35 @@ document.querySelectorAll("label[data-drag-drop]").forEach((label) => {
 
     // #endregion
 
+    // Show Details of selected files
     var hasFiles = srcEl.files.length > 0;
     var hasErrors = errors.length > 0;
 
-    // If there's a counter element (use only on multiple)
-    if (!!countEl && isMultiple) {
-      countEl.innerText =
-        hasFiles && !hasErrors ? `${srcEl.files.length} Selected Files` : "";
-      label.firstElementChild.style.visibility =
-        hasFiles && !hasErrors ? "hidden" : "visible";
+    if (!!detailsEl && isMultiple) {
+      var showDetails = hasFiles && !hasErrors;
+
+      if (showDetails) {
+        // Set File Count in Header
+        detailsHeaderEl.innerText = ` ${srcEl.files.length} Selected Files`;
+
+        // Clear first
+        listOfFilesEl.innerHTML = "";
+
+        for (var f of srcEl.files) {
+          var listItem = document.createElement("li");
+          var shortenedName = shortenString(f.name, 30);
+
+          listItem.innerText = shortenedName;
+
+          listOfFilesEl.appendChild(listItem);
+        }
+      }
+
+      label.firstElementChild.style.visibility = showDetails
+        ? "hidden"
+        : "visible";
+
+      detailsEl.style.visibility = showDetails ? "visible" : "hidden";
     }
 
     // If there's a <select> for list of filenames
