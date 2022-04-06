@@ -50,9 +50,12 @@ class Resolution(abstract_models.NoDeleteModel):
 
 
 class CertificateImage(abstract_models.NoDeleteModel):
+    def certificate_image_path(instance, filename):
+        return f"certificates/cert-{instance.certificate.id}/{filename}"
+
     certificate = models.ForeignKey(Certificate, on_delete=models.CASCADE)
 
-    image = models.ImageField(upload_to="certificates/")
+    image = models.ImageField(upload_to=certificate_image_path)
 
     def __str__(self):
         return self.image.name

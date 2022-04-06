@@ -7,8 +7,8 @@
 <div class="grid grid-cols-6 gap-6">
     <div class="card p-6 col-span-full md:col-span-4 order-2 md:order-1">
         <div class="relative">
-            <button onclick="history.back()"
-                class="button-danger button-rounded absolute top-4 right-4 invisible md:visible">X</button>
+            <a href="{% url 'resolutions:index' %}"
+                class="button-danger button-rounded absolute top-4 right-4 invisible md:visible">X</a>
 
             {% for img in certificate.images %}
             <img id="img-{{ img.image.name }}" src="{{ img.image.url }}" alt="{{ img.image.name }}" class="w-full">

@@ -64,7 +64,7 @@ class CertificateFormView(LoginRequiredMixin, View):
             # Add New Files
             for f in request.FILES.getlist('images'):
                 cert_image = CertificateImage(
-                    image=compress_image(f), certificate=cert)
+                    image=compress_image(f, image_format='PNG'), certificate=cert)
                 cert_images.append(cert_image)
 
             with transaction.atomic():

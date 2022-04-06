@@ -4,6 +4,7 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.views import View, generic
 from django.contrib.auth.mixins import LoginRequiredMixin
 from board_resolution_is.utils import get_form_errors
+from resolutions.utils import compress_image
 
 from users.mixins import HasAdminPermission
 
@@ -32,7 +33,8 @@ class UserProfileView(LoginRequiredMixin, View):
         elif 'update_avatar' in request.POST:
             avatar = request.FILES.get('avatar', '')
             if avatar != '':
-                request.user.profile.avatar = avatar
+                request.user.profile.avatar = compress_image(
+                    avatar, max_resolution=512, quality=50, image_format='PNG')
                 request.user.profile.save()
         elif 'remove_avatar' in request.POST:
             request.user.profile.avatar = None
