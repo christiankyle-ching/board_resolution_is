@@ -84,4 +84,39 @@
 <h5 class="text-center">No resolutions found.</h5>
 {% endif %}
 
+<!-- Pagination -->
+{% if resolutions and not has_searched %}
+<div class="flex items-center justify-center pt-12 gap-6">
+
+    {% if resolutions.has_previous %}
+    <a href="?page={{ resolutions.previous_page_number }}" class="button">
+        <img src="{% static 'users/img/chevron-left.svg' %}" alt="Prev" class="icon-sm">
+        <span>Prev</span>
+    </a>
+    {% else %}
+    <a class="button" disabled>
+        <img src="{% static 'users/img/chevron-left.svg' %}" alt="Prev" class="icon-sm">
+        <span>Prev</span>
+    </a>
+    {% endif %}
+
+    <span>
+        Page {{ resolutions.number }} of {{ resolutions.paginator.num_pages }}
+    </span>
+
+    {% if resolutions.has_next %}
+    <a href="?page={{ resolutions.next_page_number }}" class="button float-right">
+        <span>Next</span>
+        <img src="{% static 'users/img/chevron-right.svg' %}" alt="Next" class="icon-sm">
+    </a>
+    {% else %}
+    <a class="button" disabled>
+        <span>Next</span>
+        <img src="{% static 'users/img/chevron-right.svg' %}" alt="Next" class="icon-sm">
+    </a>
+    {% endif %}
+
+</div>
+{% endif %}
+
 {% endblock %}

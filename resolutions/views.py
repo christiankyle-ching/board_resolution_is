@@ -6,6 +6,7 @@ from django.utils import dateparse
 from django.views import generic
 from django.urls import reverse_lazy, reverse
 from django.db.models.query import Q
+from django.core.paginator import Paginator
 
 from resolutions.forms import ResolutionSearchForm
 from resolutions.models import Certificate, CertificateImage, Resolution
@@ -16,30 +17,36 @@ RESOLUTION_PER_PAGE = 10
 
 class IndexView(LoginRequiredMixin, View):
     def get(self, request):
-        res = Resolution.objects.all()[:RESOLUTION_PER_PAGE]
+        res = Resolution.objects.all()
+
+        res_paginator = Paginator(res, RESOLUTION_PER_PAGE)
+        page = request.GET.get('page')
+        res_page_obj = res_paginator.get_page(page)
 
         search_form = ResolutionSearchForm()
 
         return render(request, 'resolutions/index.html', {
-            'resolutions': res,
+            'resolutions': res_page_obj,
             'search_form': search_form,
         })
 
     def post(self, request):
-        res = Resolution.objects.all()[:RESOLUTION_PER_PAGE]
+        res = Resolution.objects.all()
 
         search_form = ResolutionSearchForm(request.POST)
+        has_searched = 'search' in request.POST and search_form.has_changed()
 
-        has_searched = 'search' in request.POST
-
-        if has_searched and search_form.has_changed() and search_form.is_valid():
-            print(search_form.cleaned_data['title'])
-
+        if has_searched and search_form.is_valid():
             res = Resolution.objects.filter(
-                Q(title__icontains=search_form.cleaned_data['title']) |
-                Q(number__icontains=search_form.cleaned_data['number']) |
+                (
+                    Q(title__icontains=search_form.cleaned_data['title']) &
+                    Q(number__icontains=search_form.cleaned_data['number'])
+                ) |
                 Q(certificate__date_approved=search_form.cleaned_data['date_approved'])
             )
+        else:
+            
+            return redirect('resolutions:index')
 
         return render(request, 'resolutions/index.html', {
             'resolutions': res,
