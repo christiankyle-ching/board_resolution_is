@@ -1,4 +1,3 @@
-from time import strftime, strptime
 from django.urls import reverse
 from django.utils import timezone
 from django.db import models
@@ -13,6 +12,7 @@ class Certificate(abstract_models.NoDeleteModel):
     added_by = models.ForeignKey(_User, null=True, on_delete=models.SET_NULL)
     added_date = models.DateTimeField(null=False, default=timezone.now)
 
+    is_minutes_of_meeting = models.BooleanField(default=False)
     date_approved = models.DateField(blank=False, null=False)
 
     class Meta:
@@ -26,8 +26,13 @@ class Certificate(abstract_models.NoDeleteModel):
     def images(self):
         return CertificateImage.objects.filter(certificate=self)
 
+    @property
+    def label(self):
+        return "Minutes of Meeting" if self.is_minutes_of_meeting else "Certificate"
+
     def __str__(self):
-        return f"Certificate approved at {self.date_approved.strftime('%B %d, %Y')}"
+        return f"{self.label} #{self.pk}"
+        # return f"Certificate approved at {self.date_approved.strftime('%B %d, %Y')}"
 
     def get_absolute_url(self):
         return reverse("resolutions:cert_detail", kwargs={'pk': self.pk})

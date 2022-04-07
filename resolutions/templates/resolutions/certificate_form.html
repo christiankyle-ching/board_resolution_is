@@ -7,11 +7,10 @@
 <div class="flex justify-between">
     <h1>
         {% if certificate %}
-        Edit
+        Edit {{ certificate }}
         {% else %}
-        Add New
+        Add New Certificate
         {% endif %}
-        Certificate
     </h1>
 </div>
 <hr>
@@ -31,13 +30,20 @@
         </div>
 
         <div class="col-span-full lg:col-span-2">
-            <p>
-                <label for="id_date_approved">Date Approved:</label>
-                <input id="id_date_approved" type="date" name="date_approved"
-                    value="{{ certificate.date_approved|date:"Y-m-d" }}" required>
-            </p>
+            <div class="grid grid-cols-2 items-center">
+                <div class="col-span-1">
+                    <label for="id_date_approved">Date Approved:</label>
+                    <input id="id_date_approved" type="date" name="date_approved"
+                        value="{{ certificate.date_approved|date:"Y-m-d" }}" required>
+                </div>
+                <div class="col-span-1">
+                    <input id="id_is_minutes_of_meeting" type="checkbox" name="is_minutes_of_meeting"
+                        {% if certificate.is_minutes_of_meeting %} checked {% endif %}">
+                    <label for="id_is_minutes_of_meeting" class="ml-2">Is Minutes of Meeting</label>
+                </div>
+            </div>
 
-            <p class="mt-2">
+            <p class="mt-   2">
                 <h4 class="mb-2">Add New Resolutions</h4>
 
                 <div data-multi-input>

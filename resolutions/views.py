@@ -45,7 +45,7 @@ class IndexView(LoginRequiredMixin, View):
                 Q(certificate__date_approved=search_form.cleaned_data['date_approved'])
             )
         else:
-            
+
             return redirect('resolutions:index')
 
         return render(request, 'resolutions/index.html', {
@@ -69,6 +69,8 @@ class CertificateFormView(LoginRequiredMixin, View):
         try:
             # Get Form Values
             date_approved = request.POST.get('date_approved')
+            is_minutes_of_meeting = request.POST.get(
+                'is_minutes_of_meeting') is not None
             res_nums = request.POST.getlist('resolution_numbers')
             res_titles = request.POST.getlist('resolution_titles')
 
@@ -82,6 +84,7 @@ class CertificateFormView(LoginRequiredMixin, View):
 
             # Update other fields
             cert.date_approved = dateparse.parse_date(date_approved)
+            cert.is_minutes_of_meeting = is_minutes_of_meeting
 
             cert_images = []
             resolutions = []
