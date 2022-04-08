@@ -41,9 +41,12 @@ class IndexView(LoginRequiredMixin, View):
                 (
                     Q(title__icontains=search_form.cleaned_data['title']) &
                     Q(number__icontains=search_form.cleaned_data['number'])
-                ) |
-                Q(certificate__date_approved=search_form.cleaned_data['date_approved'])
+                )
             )
+
+            if search_form.cleaned_data['date_approved'] is not None:
+                res = res.filter(
+                    certificate__date_approved=search_form.cleaned_data['date_approved'])
         else:
 
             return redirect('resolutions:index')
