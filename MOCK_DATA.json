@@ -1,0 +1,948 @@
+[
+  {
+    "model": "resolutions.certificate",
+    "pk": 1,
+    "fields": { "is_minutes_of_meeting": false, "date_approved": "2021-07-31" }
+  },
+  {
+    "model": "resolutions.certificate",
+    "pk": 2,
+    "fields": { "is_minutes_of_meeting": true, "date_approved": "2021-08-29" }
+  },
+  {
+    "model": "resolutions.certificate",
+    "pk": 3,
+    "fields": { "is_minutes_of_meeting": false, "date_approved": "2021-06-22" }
+  },
+  {
+    "model": "resolutions.certificate",
+    "pk": 4,
+    "fields": { "is_minutes_of_meeting": false, "date_approved": "2021-11-17" }
+  },
+  {
+    "model": "resolutions.certificate",
+    "pk": 5,
+    "fields": { "is_minutes_of_meeting": false, "date_approved": "2021-09-28" }
+  },
+  {
+    "model": "resolutions.certificate",
+    "pk": 6,
+    "fields": { "is_minutes_of_meeting": true, "date_approved": "2021-08-15" }
+  },
+  {
+    "model": "resolutions.certificate",
+    "pk": 7,
+    "fields": { "is_minutes_of_meeting": false, "date_approved": "2021-08-29" }
+  },
+  {
+    "model": "resolutions.certificate",
+    "pk": 8,
+    "fields": { "is_minutes_of_meeting": true, "date_approved": "2021-09-24" }
+  },
+  {
+    "model": "resolutions.certificate",
+    "pk": 9,
+    "fields": { "is_minutes_of_meeting": false, "date_approved": "2021-07-12" }
+  },
+  {
+    "model": "resolutions.certificate",
+    "pk": 10,
+    "fields": { "is_minutes_of_meeting": true, "date_approved": "2021-05-13" }
+  },
+  {
+    "model": "resolutions.certificate",
+    "pk": 11,
+    "fields": { "is_minutes_of_meeting": false, "date_approved": "2022-03-26" }
+  },
+  {
+    "model": "resolutions.certificate",
+    "pk": 12,
+    "fields": { "is_minutes_of_meeting": false, "date_approved": "2022-04-01" }
+  },
+  {
+    "model": "resolutions.certificate",
+    "pk": 13,
+    "fields": { "is_minutes_of_meeting": false, "date_approved": "2021-10-30" }
+  },
+  {
+    "model": "resolutions.certificate",
+    "pk": 14,
+    "fields": { "is_minutes_of_meeting": false, "date_approved": "2022-01-24" }
+  },
+  {
+    "model": "resolutions.certificate",
+    "pk": 15,
+    "fields": { "is_minutes_of_meeting": false, "date_approved": "2021-05-29" }
+  },
+  {
+    "model": "resolutions.certificate",
+    "pk": 16,
+    "fields": { "is_minutes_of_meeting": true, "date_approved": "2021-04-17" }
+  },
+  {
+    "model": "resolutions.certificate",
+    "pk": 17,
+    "fields": { "is_minutes_of_meeting": true, "date_approved": "2021-04-13" }
+  },
+  {
+    "model": "resolutions.certificate",
+    "pk": 18,
+    "fields": { "is_minutes_of_meeting": true, "date_approved": "2022-02-12" }
+  },
+  {
+    "model": "resolutions.certificate",
+    "pk": 19,
+    "fields": { "is_minutes_of_meeting": true, "date_approved": "2021-08-01" }
+  },
+  {
+    "model": "resolutions.certificate",
+    "pk": 20,
+    "fields": { "is_minutes_of_meeting": false, "date_approved": "2022-02-25" }
+  },
+  {
+    "model": "resolutions.certificate",
+    "pk": 21,
+    "fields": { "is_minutes_of_meeting": true, "date_approved": "2021-11-27" }
+  },
+  {
+    "model": "resolutions.certificate",
+    "pk": 22,
+    "fields": { "is_minutes_of_meeting": true, "date_approved": "2021-11-18" }
+  },
+  {
+    "model": "resolutions.certificate",
+    "pk": 23,
+    "fields": { "is_minutes_of_meeting": true, "date_approved": "2021-04-23" }
+  },
+  {
+    "model": "resolutions.certificate",
+    "pk": 24,
+    "fields": { "is_minutes_of_meeting": true, "date_approved": "2022-01-01" }
+  },
+  {
+    "model": "resolutions.certificate",
+    "pk": 25,
+    "fields": { "is_minutes_of_meeting": false, "date_approved": "2021-05-09" }
+  },
+  {
+    "model": "resolutions.certificate",
+    "pk": 26,
+    "fields": { "is_minutes_of_meeting": false, "date_approved": "2022-03-24" }
+  },
+  {
+    "model": "resolutions.certificate",
+    "pk": 27,
+    "fields": { "is_minutes_of_meeting": false, "date_approved": "2021-05-23" }
+  },
+  {
+    "model": "resolutions.certificate",
+    "pk": 28,
+    "fields": { "is_minutes_of_meeting": false, "date_approved": "2021-08-04" }
+  },
+  {
+    "model": "resolutions.certificate",
+    "pk": 29,
+    "fields": { "is_minutes_of_meeting": false, "date_approved": "2021-09-07" }
+  },
+  {
+    "model": "resolutions.certificate",
+    "pk": 30,
+    "fields": { "is_minutes_of_meeting": true, "date_approved": "2022-02-13" }
+  },
+  {
+    "model": "resolutions.certificate",
+    "pk": 31,
+    "fields": { "is_minutes_of_meeting": false, "date_approved": "2021-09-23" }
+  },
+  {
+    "model": "resolutions.certificate",
+    "pk": 32,
+    "fields": { "is_minutes_of_meeting": true, "date_approved": "2021-04-26" }
+  },
+  {
+    "model": "resolutions.certificate",
+    "pk": 33,
+    "fields": { "is_minutes_of_meeting": false, "date_approved": "2021-06-10" }
+  },
+  {
+    "model": "resolutions.certificate",
+    "pk": 34,
+    "fields": { "is_minutes_of_meeting": false, "date_approved": "2021-06-03" }
+  },
+  {
+    "model": "resolutions.certificate",
+    "pk": 35,
+    "fields": { "is_minutes_of_meeting": false, "date_approved": "2021-04-14" }
+  },
+  {
+    "model": "resolutions.certificate",
+    "pk": 36,
+    "fields": { "is_minutes_of_meeting": true, "date_approved": "2022-01-23" }
+  },
+  {
+    "model": "resolutions.certificate",
+    "pk": 37,
+    "fields": { "is_minutes_of_meeting": false, "date_approved": "2021-10-06" }
+  },
+  {
+    "model": "resolutions.certificate",
+    "pk": 38,
+    "fields": { "is_minutes_of_meeting": true, "date_approved": "2021-08-10" }
+  },
+  {
+    "model": "resolutions.certificate",
+    "pk": 39,
+    "fields": { "is_minutes_of_meeting": true, "date_approved": "2021-12-13" }
+  },
+  {
+    "model": "resolutions.certificate",
+    "pk": 40,
+    "fields": { "is_minutes_of_meeting": false, "date_approved": "2021-10-24" }
+  },
+  {
+    "model": "resolutions.certificate",
+    "pk": 41,
+    "fields": { "is_minutes_of_meeting": false, "date_approved": "2021-06-01" }
+  },
+  {
+    "model": "resolutions.certificate",
+    "pk": 42,
+    "fields": { "is_minutes_of_meeting": true, "date_approved": "2022-02-20" }
+  },
+  {
+    "model": "resolutions.certificate",
+    "pk": 43,
+    "fields": { "is_minutes_of_meeting": false, "date_approved": "2021-10-03" }
+  },
+  {
+    "model": "resolutions.certificate",
+    "pk": 44,
+    "fields": { "is_minutes_of_meeting": false, "date_approved": "2022-04-07" }
+  },
+  {
+    "model": "resolutions.certificate",
+    "pk": 45,
+    "fields": { "is_minutes_of_meeting": false, "date_approved": "2022-03-04" }
+  },
+  {
+    "model": "resolutions.certificate",
+    "pk": 46,
+    "fields": { "is_minutes_of_meeting": false, "date_approved": "2021-12-02" }
+  },
+  {
+    "model": "resolutions.certificate",
+    "pk": 47,
+    "fields": { "is_minutes_of_meeting": true, "date_approved": "2022-02-10" }
+  },
+  {
+    "model": "resolutions.certificate",
+    "pk": 48,
+    "fields": { "is_minutes_of_meeting": true, "date_approved": "2022-03-19" }
+  },
+  {
+    "model": "resolutions.certificate",
+    "pk": 49,
+    "fields": { "is_minutes_of_meeting": true, "date_approved": "2021-05-17" }
+  },
+  {
+    "model": "resolutions.certificate",
+    "pk": 50,
+    "fields": { "is_minutes_of_meeting": false, "date_approved": "2021-05-23" }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": {
+      "certificate": 26,
+      "number": 63,
+      "title": "Aspen Insurance Holdings Limited"
+    }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": { "certificate": 1, "number": 79, "title": "Liberty Global plc" }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": {
+      "certificate": 40,
+      "number": 47,
+      "title": "National American University Holdings, Inc."
+    }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": {
+      "certificate": 3,
+      "number": 25,
+      "title": "Camping World Holdings, Inc."
+    }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": {
+      "certificate": 21,
+      "number": 59,
+      "title": "First Data Corporation"
+    }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": { "certificate": 35, "number": 5, "title": "NeuroMetrix, Inc." }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": { "certificate": 33, "number": 15, "title": "QAD Inc." }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": {
+      "certificate": 40,
+      "number": 21,
+      "title": "GlycoMimetics, Inc."
+    }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": {
+      "certificate": 5,
+      "number": 8,
+      "title": "Nuveen Tax-Advantaged Total Return Strategy Fund"
+    }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": { "certificate": 18, "number": 1, "title": "Textron Inc." }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": {
+      "certificate": 13,
+      "number": 52,
+      "title": "Strata Skin Sciences, Inc."
+    }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": {
+      "certificate": 45,
+      "number": 48,
+      "title": "Navigator Holdings Ltd."
+    }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": {
+      "certificate": 30,
+      "number": 45,
+      "title": "Conifer Holdings, Inc."
+    }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": {
+      "certificate": 22,
+      "number": 58,
+      "title": "ProShares Ultra Nasdaq Biotechnology"
+    }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": {
+      "certificate": 44,
+      "number": 41,
+      "title": "Ocean Bio-Chem, Inc."
+    }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": {
+      "certificate": 7,
+      "number": 50,
+      "title": "Consolidated Communications Holdings, Inc."
+    }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": { "certificate": 30, "number": 86, "title": "DexCom, Inc." }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": {
+      "certificate": 31,
+      "number": 47,
+      "title": "Town Sports International Holdings, Inc."
+    }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": {
+      "certificate": 47,
+      "number": 90,
+      "title": "New Ireland Fund, Inc. (The)"
+    }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": {
+      "certificate": 13,
+      "number": 84,
+      "title": "Perma-Fix Environmental Services, Inc."
+    }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": {
+      "certificate": 29,
+      "number": 64,
+      "title": "Global Partner Acquisition Corp."
+    }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": {
+      "certificate": 46,
+      "number": 66,
+      "title": "Telecom Italia S.P.A."
+    }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": {
+      "certificate": 15,
+      "number": 89,
+      "title": "San Juan Basin Royalty Trust"
+    }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": {
+      "certificate": 24,
+      "number": 13,
+      "title": "J. Alexander's Holdings, Inc."
+    }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": {
+      "certificate": 7,
+      "number": 83,
+      "title": "RPM International Inc."
+    }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": {
+      "certificate": 28,
+      "number": 69,
+      "title": "Entergy New Orleans, Inc."
+    }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": {
+      "certificate": 13,
+      "number": 19,
+      "title": "Honeywell International Inc."
+    }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": {
+      "certificate": 16,
+      "number": 8,
+      "title": "Advanced Emissions Solutions, Inc."
+    }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": {
+      "certificate": 28,
+      "number": 45,
+      "title": "SP Plus Corporation"
+    }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": {
+      "certificate": 43,
+      "number": 83,
+      "title": "Franco-Nevada Corporation"
+    }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": { "certificate": 14, "number": 9, "title": "CDW Corporation" }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": {
+      "certificate": 5,
+      "number": 18,
+      "title": "iPath US Treasury Steepener ETN"
+    }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": {
+      "certificate": 29,
+      "number": 23,
+      "title": "Macatawa Bank Corporation"
+    }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": {
+      "certificate": 31,
+      "number": 53,
+      "title": "Ruth's Hospitality Group, Inc."
+    }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": {
+      "certificate": 28,
+      "number": 42,
+      "title": "Medical Properties Trust, Inc."
+    }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": { "certificate": 7, "number": 99, "title": "Lear Corporation" }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": { "certificate": 17, "number": 51, "title": "Sterling Bancorp" }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": {
+      "certificate": 23,
+      "number": 34,
+      "title": "People's United Financial, Inc."
+    }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": {
+      "certificate": 15,
+      "number": 71,
+      "title": "Marcus Corporation (The)"
+    }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": {
+      "certificate": 16,
+      "number": 21,
+      "title": "ADDvantage Technologies Group, Inc."
+    }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": { "certificate": 45, "number": 20, "title": "The ExOne Company" }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": {
+      "certificate": 41,
+      "number": 87,
+      "title": "Stewardship Financial Corp"
+    }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": { "certificate": 6, "number": 55, "title": "PJT Partners Inc." }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": {
+      "certificate": 46,
+      "number": 17,
+      "title": "Halliburton Company"
+    }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": {
+      "certificate": 23,
+      "number": 32,
+      "title": "Carrizo Oil & Gas, Inc."
+    }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": {
+      "certificate": 13,
+      "number": 64,
+      "title": "China Biologic Products, Inc."
+    }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": {
+      "certificate": 22,
+      "number": 72,
+      "title": "Diamondrock Hospitality Company"
+    }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": { "certificate": 10, "number": 82, "title": "Popular, Inc." }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": {
+      "certificate": 32,
+      "number": 17,
+      "title": "GP Strategies Corporation"
+    }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": {
+      "certificate": 46,
+      "number": 91,
+      "title": "Simpson Manufacturing Company, Inc."
+    }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": {
+      "certificate": 8,
+      "number": 61,
+      "title": "Robert Half International Inc."
+    }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": { "certificate": 2, "number": 93, "title": "Stoneridge, Inc." }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": {
+      "certificate": 33,
+      "number": 86,
+      "title": "General Cable Corporation"
+    }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": { "certificate": 25, "number": 40, "title": "Nutanix, Inc." }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": {
+      "certificate": 49,
+      "number": 73,
+      "title": "Mercury Systems Inc"
+    }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": { "certificate": 27, "number": 89, "title": "Fortinet, Inc." }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": {
+      "certificate": 41,
+      "number": 64,
+      "title": "Star Bulk Carriers Corp."
+    }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": {
+      "certificate": 8,
+      "number": 40,
+      "title": "PRA Health Sciences, Inc."
+    }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": { "certificate": 45, "number": 15, "title": "Shopify Inc." }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": {
+      "certificate": 3,
+      "number": 3,
+      "title": "Halcon Resources Corporation"
+    }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": {
+      "certificate": 4,
+      "number": 1,
+      "title": "Gladstone Investment Corporation"
+    }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": {
+      "certificate": 14,
+      "number": 42,
+      "title": "Delta Technology Holdings Limited"
+    }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": {
+      "certificate": 41,
+      "number": 3,
+      "title": "Western Gas Partners, LP"
+    }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": {
+      "certificate": 29,
+      "number": 98,
+      "title": "Aspen Aerogels, Inc."
+    }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": {
+      "certificate": 46,
+      "number": 57,
+      "title": "Toronto Dominion Bank (The)"
+    }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": { "certificate": 45, "number": 82, "title": "Ita? CorpBanca" }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": {
+      "certificate": 18,
+      "number": 29,
+      "title": "Eaton Vance NextShares Trust"
+    }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": { "certificate": 21, "number": 59, "title": "Citigroup Inc." }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": {
+      "certificate": 35,
+      "number": 92,
+      "title": "CorEnergy Infrastructure Trust, Inc."
+    }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": {
+      "certificate": 2,
+      "number": 47,
+      "title": "Schneider National, Inc."
+    }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": { "certificate": 34, "number": 69, "title": "Mobileye N.V." }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": {
+      "certificate": 28,
+      "number": 24,
+      "title": "Acceleron Pharma Inc."
+    }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": {
+      "certificate": 45,
+      "number": 13,
+      "title": "Wheeler Real Estate Investment Trust, Inc."
+    }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": {
+      "certificate": 41,
+      "number": 65,
+      "title": "Immune Pharmaceuticals Inc."
+    }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": {
+      "certificate": 38,
+      "number": 27,
+      "title": "Valley National Bancorp"
+    }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": {
+      "certificate": 42,
+      "number": 27,
+      "title": "Turtle Beach Corporation"
+    }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": { "certificate": 6, "number": 19, "title": "Chico's FAS, Inc." }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": {
+      "certificate": 39,
+      "number": 9,
+      "title": "GP Investments Acquisition Corp."
+    }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": {
+      "certificate": 47,
+      "number": 78,
+      "title": "Adamis Pharmaceuticals Corporation"
+    }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": { "certificate": 34, "number": 57, "title": "Cimarex Energy Co" }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": {
+      "certificate": 50,
+      "number": 75,
+      "title": "Customers Bancorp, Inc"
+    }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": { "certificate": 15, "number": 97, "title": "ITUS Corporation" }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": {
+      "certificate": 43,
+      "number": 86,
+      "title": "IPG Photonics Corporation"
+    }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": {
+      "certificate": 4,
+      "number": 61,
+      "title": "WisdomTree Middle East Dividend Fund"
+    }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": {
+      "certificate": 1,
+      "number": 11,
+      "title": "Merck & Company, Inc."
+    }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": {
+      "certificate": 8,
+      "number": 72,
+      "title": "Targa Resources Partners LP"
+    }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": { "certificate": 12, "number": 24, "title": "Otelco Inc." }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": { "certificate": 36, "number": 81, "title": "Kennametal Inc." }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": {
+      "certificate": 23,
+      "number": 4,
+      "title": "Invesco California Value Municipal Income Trust"
+    }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": {
+      "certificate": 36,
+      "number": 96,
+      "title": "Community Trust Bancorp, Inc."
+    }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": { "certificate": 30, "number": 21, "title": "VBI Vaccines, Inc." }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": { "certificate": 12, "number": 15, "title": "trivago N.V." }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": {
+      "certificate": 21,
+      "number": 40,
+      "title": "Cadence Design Systems, Inc."
+    }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": { "certificate": 4, "number": 38, "title": "Shineco, Inc." }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": {
+      "certificate": 44,
+      "number": 5,
+      "title": "J P Morgan Chase & Co"
+    }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": {
+      "certificate": 7,
+      "number": 11,
+      "title": "Pointer Telocation Ltd."
+    }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": {
+      "certificate": 18,
+      "number": 80,
+      "title": "ECA Marcellus Trust I"
+    }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": {
+      "certificate": 4,
+      "number": 12,
+      "title": "Boingo Wireless, Inc."
+    }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": {
+      "certificate": 9,
+      "number": 76,
+      "title": "Tailored Brands, Inc."
+    }
+  },
+  {
+    "model": "resolutions.resolution",
+    "fields": {
+      "certificate": 10,
+      "number": 77,
+      "title": "Virco Manufacturing Corporation"
+    }
+  }
+]

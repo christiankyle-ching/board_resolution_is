@@ -113,6 +113,12 @@ This will run a local server and setup TailwindCSS hot-reload. Open the web app 
 
 **NOTE**: If `os.environ` throws a KeyError, and you already made sure you set the environment variables, restart the cmd (or vscode) because this variables are not loaded on old console sessions.
 
+### Load Mock Data
+To install mock data (resolutions and certificates only, no images), run the following:
+```py
+py manage.py loaddata MOCK_DATA.json
+```
+
 ## Important Contribution Notes
 
 ### Auto-formatting in VSCode
