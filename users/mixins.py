@@ -1,18 +1,16 @@
 from django.contrib.auth.mixins import UserPassesTestMixin
 
-from users.models import ROLE_ADMIN, ROLE_STAFF
-
 
 class HasAdminPermission(UserPassesTestMixin):
     def test_func(self):
-        return self.request.user.role in [ROLE_ADMIN]
+        return self.request.user.has_admin_permission
 
 
-class CanExportPermission(UserPassesTestMixin):
+class HasExportPermission(UserPassesTestMixin):
     def test_func(self):
-        return self.request.user.role in [ROLE_ADMIN] or self.request.user.can_export
+        return self.request.user.has_export_permission
 
 
 class HasStaffPermission(UserPassesTestMixin):
     def test_func(self):
-        return self.request.user.role in [ROLE_ADMIN, ROLE_STAFF]
+        return self.request.user.has_staff_permission

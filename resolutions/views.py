@@ -1,3 +1,4 @@
+from io import BytesIO
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -7,10 +8,12 @@ from django.views import generic
 from django.urls import reverse_lazy, reverse
 from django.db.models.query import Q
 from django.core.paginator import Paginator
+from django.http import FileResponse
 
 from resolutions.forms import ResolutionSearchForm
 from resolutions.models import Certificate, CertificateImage, Resolution
-from resolutions.utils import compress_image
+from resolutions.utils import PDFWithImageAndLabel, compress_image
+from users.mixins import HasAdminPermission
 
 RESOLUTION_PER_PAGE = 10
 
@@ -140,7 +143,43 @@ class CertificateDeleteView(LoginRequiredMixin, generic.DeleteView):
     success_url = reverse_lazy("resolutions:index")
 
 
+class CertificateExportView(LoginRequiredMixin, HasAdminPermission, View):
+    def get(self, request, pk):
+        cert = get_object_or_404(Certificate, pk=pk)
+
+        res_numbers = []
+        for r in cert.resolutions:
+            res_numbers.append(r.number)
+
+        # Generate PDF
+        pdf = PDFWithImageAndLabel(
+            orientation="P", unit="in", format=(8.5, 13))
+        pdf.set_margin(0)
+        pdf.oversized_images = "DOWNSCALE"
+        pdf.allow_images_transparency = False  # To prevent black background on print
+        pdf.set_auto_page_break(False)
+
+        for img in cert.images:
+            pdf.add_page()
+            pdf.add_image(img.image.path)
+            pdf.add_lines_of_text([
+                "Resolutions Included:",
+                *map(
+                    lambda r: f"Resolution No. {r.number} - {r.title}",
+                    cert.resolutions),
+                "",
+                "Date Approved:",
+                cert.date_approved.strftime('%B %d, %Y'),
+            ])
+
+        byte_str = pdf.output(dest='S')
+        stream = BytesIO(byte_str)
+
+        return FileResponse(stream, as_attachment=True, filename=f'resolution_{"_".join(map(lambda r: r.number, cert.resolutions))}_export.PDF')
+
 # -------------------- Resolution Views --------------------
+
+
 class ResolutionDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Resolution
     template_name = "resolutions/resolution_delete.html"

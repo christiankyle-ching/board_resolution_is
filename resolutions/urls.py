@@ -25,4 +25,8 @@ urlpatterns = [
     # Certificate Image Views
     path('certificate-image/<int:pk>/delete/',
          views.CertificateImageDeleteView.as_view(), name='cert_image_delete'),
+
+    # Export Views
+    path('certificate/<int:pk>/export',
+         views.CertificateExportView.as_view(), name="cert_export"),
 ]
