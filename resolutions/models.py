@@ -20,7 +20,7 @@ class Certificate(abstract_models.NoDeleteModel):
 
     @property
     def resolutions(self):
-        return Resolution.objects.filter(certificate=self)
+        return Resolution.objects.filter(certificate=self).order_by('number')
 
     @property
     def images(self):
@@ -39,13 +39,15 @@ class Certificate(abstract_models.NoDeleteModel):
 
 
 class Resolution(abstract_models.NoDeleteModel):
+    added_date = models.DateTimeField(null=False, default=timezone.now)
+
     certificate = models.ForeignKey(Certificate, on_delete=models.CASCADE)
 
     number = models.CharField(max_length=50, blank=False, null=False)
     title = models.TextField(blank=False, null=False)
 
     class Meta:
-        ordering = ['number']
+        ordering = ['-added_date']
 
     def __str__(self):
         return f"Res. No. {self.number} - {self.title}"
