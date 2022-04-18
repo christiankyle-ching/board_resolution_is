@@ -162,15 +162,16 @@ class CertificateExportView(LoginRequiredMixin, HasAdminPermission, View):
         for img in cert.images:
             pdf.add_page()
             pdf.add_image(img.image.path)
-            pdf.add_lines_of_text([
-                "Resolutions Included:",
-                *map(
-                    lambda r: f"Resolution No. {r.number} - {r.title}",
-                    cert.resolutions),
-                "",
-                "Date Approved:",
-                cert.date_approved.strftime('%B %d, %Y'),
-            ])
+
+            # pdf.add_lines_of_text([
+            #     "Resolutions Included:",
+            #     *map(
+            #         lambda r: f"Resolution No. {r.number} - {r.title}",
+            #         cert.resolutions),
+            #     "",
+            #     "Date Approved:",
+            #     cert.date_approved.strftime('%B %d, %Y'),
+            # ])
 
         byte_str = pdf.output(dest='S')
         stream = BytesIO(byte_str)
