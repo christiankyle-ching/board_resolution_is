@@ -21,7 +21,7 @@ def compress_image(img, filename="image", image_format=FORMAT, quality=QUALITY, 
         (max_resolution, max_resolution), resample=Image.ANTIALIAS)
 
     # If JPEG, we can't handle Alpha (RGBA)
-    if image_format in ['JPEG']:
+    if image_format in ['JPEG', 'JPG']:
         compressed_img = compressed_img.convert('RGB')
 
     compressed_img.save(compressed_io, format=image_format, quality=quality)
@@ -45,11 +45,6 @@ class PDFWithImageAndLabel(FPDF):
         img = Image.open(path)
         width, height = img.size
 
-        # Set background of image to white
-        img_with_bg = Image.new("RGBA", img.size, "WHITE")
-        img_with_bg.paste(img, (0, 0), img)
-        img_with_bg = img_with_bg.convert('RGB')
-
         # Assuming ppi is 96
         # 96 pixels in 1 inch
         # 1 px = 0.0104166...
@@ -62,9 +57,9 @@ class PDFWithImageAndLabel(FPDF):
 
         # If converted height is still taller than eph, then fit height, else fit width
         if height_in > self.eph:
-            self.image(img_with_bg, h=self.eph)
+            self.image(img, h=self.eph)
         else:
-            self.image(img_with_bg, w=self.epw)
+            self.image(img, w=self.epw)
 
     def add_lines_of_text(self, lines, font_size=11, line_height=1.5, font_family="helvetica", font_style="B", text_color=(255,), pos=(1, -2), bg_color=(0,), padding=6):
         self.set_font(font_family, font_style, font_size)
