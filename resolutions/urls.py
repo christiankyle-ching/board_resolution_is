@@ -29,4 +29,9 @@ urlpatterns = [
     # Export Views
     path('certificate/<int:pk>/export',
          views.CertificateExportView.as_view(), name="cert_export"),
+
+    path('db_dump/resolutions/import/',
+         views.ResolutionDumpImportView.as_view(), name="db_res_import"),
+    path('db_dump/resolutions/export/',
+         views.ResolutionDumpExportView.as_view(), name="db_res_export"),
 ]

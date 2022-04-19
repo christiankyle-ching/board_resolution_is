@@ -60,10 +60,21 @@
 
               <hr class="border-dashed my-2">
 
+              <!-- Settings -->
               <a href="{% url 'users:profile' %}" class="menuItem">
                 <img src="{% static 'users/img/settings.svg' %}" alt="" class="icon-sm">
                 <span>Settings</span>
               </a>
+
+              <!-- Logout -->
+              {% if user.has_admin_permission %}
+              <a href="{% url 'resolutions:db_res_import' %}" class="menuItem">
+                <img src="{% static 'users/img/rotate.svg' %}" alt="" class="icon-sm">
+                <span>Backup & Restore</span>
+              </a>
+              {% endif %}
+
+              <!-- Logout -->
               <a href="{% url 'users:auth:logout' %}" class="menuItem">
                 <img src="{% static 'users/img/signout.svg' %}" alt="" class="icon-sm">
                 <span>Logout</span>

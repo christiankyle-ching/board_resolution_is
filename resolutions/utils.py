@@ -1,7 +1,15 @@
+from django.utils import timezone
+from django.core.management import call_command
+from django.core.files.uploadedfile import InMemoryUploadedFile
+
 from io import BytesIO
 from PIL import Image
-from django.core.files.uploadedfile import InMemoryUploadedFile
+
 from fpdf import FPDF
+
+import os
+import shutil
+import zipfile
 
 # Default values
 MAX_RESOLUTION_PX = 2048
@@ -83,3 +91,73 @@ class PDFWithImageAndLabel(FPDF):
 
         # For padding only
         self.cell(width, height / 2, "", 0, ln=2, fill=True)
+
+
+DUMPS_FOLDER = 'temp_dumps'
+DUMPS_IMPORTS_FOLDER = 'temp_imports'
+
+
+def app_db_export(app_name, media_path=None, format='json'):
+    dump_id = f'dump-{timezone.now().timestamp()}'
+    dump_folder = f'{DUMPS_FOLDER}/{dump_id}'
+
+    os.makedirs(dump_folder, exist_ok=True)
+
+    dump_zip_filepath = f'{dump_folder}/{dump_id}.zip'
+    json_filename = 'db.json'
+    json_filepath = f'{dump_folder}/{json_filename}'
+
+    # Generate DB Dump from PSQL
+    output = open(json_filepath, 'w')
+    call_command('dumpdata', app_name,
+                 format='json', indent=3, stdout=output)
+    output.close()
+
+    with zipfile.ZipFile(dump_zip_filepath, 'w', zipfile.ZIP_DEFLATED) as zipObj:
+        # Write JSON
+        zipObj.write(json_filepath, json_filename)
+
+        # Write media/resolutions
+        if media_path is not None:
+            for folder, _, files in os.walk(media_path):
+                for f in files:
+                    filepath = os.path.join(folder, f)
+                    zipObj.write(filepath, filepath)
+
+    return dump_zip_filepath
+
+
+def app_db_import(uploaded_zip, media_path=None):
+    try:
+        dump_id = f'import-{timezone.now().timestamp()}'
+        dump_folder = f'{DUMPS_IMPORTS_FOLDER}/{dump_id}'
+        json_filepath = f'{dump_folder}/db.json'
+
+        os.makedirs(dump_folder, exist_ok=True)
+
+        # Get uploaded file and write to system
+        dump_zip_filepath = f'{dump_folder}/{uploaded_zip.name}'
+        with open(dump_zip_filepath, 'wb+') as dest:
+            for chunk in uploaded_zip.chunks():
+                dest.write(chunk)
+
+        # Extract ZIP
+        with zipfile.ZipFile(dump_zip_filepath, 'r') as zipObj:
+            zipObj.extractall(dump_folder)
+
+        # WARN: Delete first to avoid unique constraints
+        # Resolution.objects.delete()
+
+        # Import rows to database first
+        call_command('loaddata', json_filepath)
+
+        # Then copy images if loaddata succeeded
+        if media_path is not None:
+            shutil.rmtree(media_path, ignore_errors=True)
+            shutil.move(f'{dump_folder}/{media_path}',
+                        media_path)
+
+        # Clean by removing the folder
+        shutil.rmtree(dump_folder)
+    except Exception as e:
+        raise e

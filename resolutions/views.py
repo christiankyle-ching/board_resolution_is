@@ -12,7 +12,7 @@ from django.http import FileResponse
 
 from resolutions.forms import ResolutionSearchForm
 from resolutions.models import Certificate, CertificateImage, Resolution
-from resolutions.utils import PDFWithImageAndLabel, compress_image
+from resolutions.utils import PDFWithImageAndLabel, app_db_import, compress_image, app_db_export
 from users.mixins import HasAdminPermission
 
 RESOLUTION_PER_PAGE = 10
@@ -213,3 +213,21 @@ class CertificateImageDeleteView(LoginRequiredMixin, generic.DeleteView):
 
     def get_success_url(self):
         return self.get_object().get_absolute_url()
+
+# -------------------- Export Views --------------------
+
+
+class ResolutionDumpExportView(LoginRequiredMixin, HasAdminPermission, View):
+    def get(self, request):
+        dump_zip_filepath = app_db_export('resolutions', 'media/certificates')
+        return FileResponse(open(dump_zip_filepath, 'rb'), as_attachment=True)
+
+
+class ResolutionDumpImportView(LoginRequiredMixin, HasAdminPermission, View):
+    def get(self, request):
+        return render(request, 'resolutions/resolutions_dump.html')
+
+    def post(self, request):
+        uploaded_zip = request.FILES['dump_zip']
+        app_db_import(uploaded_zip, media_path='media/certificates')
+        return redirect(reverse('resolutions:index'))
