@@ -197,6 +197,9 @@ FakesAssemblies/
 
 # --------------- CUSTOM RULES ---------------
 
+git-shift
+git-redate
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
