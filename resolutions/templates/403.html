@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="h-screen-with-nav flex">
+    <div class="m-auto text-center">
+        <h1 class="mb-2">Permission Denied</h1>
+        <p>
+            You are not allowed to access this resource.
+            <br><br>
+            <button onclick="history.back()" class="underline">Go Back</button> |
+            <a href="{% url 'resolutions:index' %}" class="underline">Go to Home Page</a>
+        </p>
+
+    </div>
+</div>
+
+{% endblock %}

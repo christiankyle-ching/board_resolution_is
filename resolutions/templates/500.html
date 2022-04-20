@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="h-screen-with-nav flex">
+    <div class="m-auto text-center">
+        <h1 class="mb-2">Internal Server Error</h1>
+        <p>
+            The server encountered an error. Contact the administrator.
+            <br><br>
+            <button onclick="history.back()" class="underline">Go Back</button> |
+            <a href="{% url 'resolutions:index' %}" class="underline">Go to Home Page</a>
+        </p>
+
+    </div>
+</div>
+
+{% endblock %}
