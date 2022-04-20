@@ -69,7 +69,7 @@ class CertificateImage(abstract_models.NoDeleteModel):
         return self.image.name
 
     class Meta:
-        ordering = ['pk']
+        ordering = ['image']
 
     def get_absolute_url(self):
         return reverse('resolutions:cert_detail', kwargs={'pk': self.certificate.pk})

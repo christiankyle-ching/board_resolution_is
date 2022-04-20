@@ -71,12 +71,17 @@ nav h6 {
   @apply opacity-50 pointer-events-none !important;
 }
 
-.reset-disabled {
-  @apply opacity-100 !important;
+hr {
+  @apply mb-6 mt-2;
 }
 
-hr {
-  @apply mb-6;
+/* Fix large helptext */
+#form_reset_password_confirm ul li {
+  @apply text-sm;
+}
+
+form:not(.grid) > p {
+  @apply mt-2;
 }
 
 /* #region Icon Sizes */

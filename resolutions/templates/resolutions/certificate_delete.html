@@ -43,17 +43,6 @@
         <h4 class="text-center mb-2">Images</h4>
         <ul>
             {% for img in certificate.images %}
-            <!-- <li class="flex justify-between items-center">
-                <span>{{ img.image.name }}</span>
-                <span>{{ img.image.size|filesizeformat }}</span>
-                <div>
-                    <a href="{{ img.image.url }}" target="_blank" class="button">
-                        <img src="{% static 'users/img/eye.svg' %}" alt="View" class="icon-sm">
-                        <span>View</span>
-                    </a>
-                </div>
-            </li> -->
-
             <li class="grid grid-cols-5 border-b border-dashed border-black items-center">
                 <span class="col-span-3 text-left">{{ img.image.name }}</span>
                 <span class="col-span-1 text-center">{{ img.image.size|filesizeformat }}</span>

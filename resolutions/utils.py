@@ -17,7 +17,7 @@ FORMAT = "JPEG"
 
 
 def compress_image(img, filename="image", max_resolution=None, force_jpeg=True, quality=QUALITY):
-    filename = f"{filename}.{FORMAT}"
+    filename = img.name or f"image.{FORMAT}"
 
     # Containers
     img = Image.open(img)

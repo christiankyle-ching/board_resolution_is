@@ -20,8 +20,14 @@
 
   <div class="h-screen w-screen grid grid-cols-2">
     <!-- Left Column -->
-    <div class="col-span-2 flex relative md:col-span-1">
+    <div class="col-span-2 flex relative lg:col-span-1">
       <div class="m-auto w-3/4">
+        <div class="text-center mb-4 lg:hidden">
+          <img src="{% static 'client-logo.png' %}" alt="{% get_settings_val 'CLIENT_NAME' %} Logo"
+            class="icon-md m-auto mb-2">
+          <h1>{% get_settings_val 'CLIENT_NAME' %}</h1>
+        </div>
+
         <h1 class="font-bold">LOGIN</h1>
         <hr>
         <form method="post" class="mx-6">
@@ -46,20 +52,20 @@
     </div>
 
     <!-- Right Column -->
-    <div class="col-span-1 relative hidden md:flex">
-
-      <!-- Dark color background -->
-      <div class="bg-black absolute left-0 top-0 w-full h-full -z-20"></div>
+    <div class="col-span-1 relative hidden lg:flex">
 
       <!-- Background Image -->
-      <img src="{% static 'users/img/client-login-bg.jpg' %}"
-        class="absolute top-0 left-0 w-full h-full object-cover -z-10 opacity-30">
+      <div class="absolute left-0 top-0 w-full h-full bg-black -z-20">
+        <img src="{% static 'users/img/client-login-bg.jpg' %}"
+          class="absolute top-0 left-0 w-full h-full object-cover opacity-30">
+      </div>
 
       <!-- Top Left -->
       <img src="{% static 'users/img/login-top-left.png' %}" class="absolute top-0 left-0 w-1/4 object-contain -z-10">
 
       <!-- Bottom Right -->
-      <img src="{% static 'users/img/login-bottom-right.png' %}" class="absolute bottom-0 right-0 w-1/4 object-contain -z-10">
+      <img src="{% static 'users/img/login-bottom-right.png' %}"
+        class="absolute bottom-0 right-0 w-1/4 object-contain -z-10">
 
       <!-- Center Brush -->
       <img src="{% static 'users/img/brush.png' %}"
@@ -72,7 +78,8 @@
         <br>
         <h1>{% get_settings_val 'CLIENT_NAME' %}</h1>
         <br>
-        <img src="{% static 'client-logo.png' %}" alt="PLV Logo" class="icon-md m-auto">
+        <img src="{% static 'client-logo.png' %}" alt="{% get_settings_val 'CLIENT_NAME' %} Logo"
+          class="icon-md m-auto">
       </div>
     </div>
 

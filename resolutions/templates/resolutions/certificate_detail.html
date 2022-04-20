@@ -14,7 +14,9 @@
                 class="button-danger button-rounded absolute top-4 right-4 invisible md:visible">X</a>
 
             {% for img in certificate.images %}
-            <img id="img-{{ img.image.name }}" src="{{ img.image.url }}" alt="{{ img.image.name }}" class="w-full">
+            <a href="{{ img.image.url }}" target="_blank">
+                <img id="img-{{ img.image.name }}" src="{{ img.image.url }}" alt="{{ img.image.name }}" class="w-full">
+            </a>
             {% empty %}
             <div class="flex h-full w-full">
                 <h4 class="m-auto py-32">
@@ -59,8 +61,8 @@
 
             <p class="pt-10">
                 <label for="id_remarks" class="block mb-2">Remarks:</label>
-                <textarea id="id_remarks" cols="30" rows="7" class="w-full reset-disabled"
-                    disabled>{{ certificate.remarks }}</textarea>
+                <textarea id="id_remarks" cols="30" rows="7" class="w-full"
+                    readonly>{{ certificate.remarks }}</textarea>
             </p>
         </div>
 
