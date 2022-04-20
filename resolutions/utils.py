@@ -1,6 +1,7 @@
 from django.utils import timezone
 from django.core.management import call_command
 from django.core.files.uploadedfile import InMemoryUploadedFile
+from django.conf import settings
 
 from io import BytesIO
 from PIL import Image
@@ -100,7 +101,7 @@ DUMPS_IMPORTS_FOLDER = 'temp_imports'
 
 
 def app_db_export(app_name, media_path=None, format='json'):
-    dump_id = f'dump-{timezone.now().timestamp()}'
+    dump_id = f'{settings.CLIENT_NAME}-dump-{timezone.now().timestamp()}'
     dump_folder = f'{DUMPS_FOLDER}/{dump_id}'
 
     os.makedirs(dump_folder, exist_ok=True)

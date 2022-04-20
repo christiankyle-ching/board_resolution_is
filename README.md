@@ -116,7 +116,7 @@ This will run a local server and setup TailwindCSS hot-reload. Open the web app 
 ### Load Mock Data
 To install mock data (resolutions and certificates only, no images), run the following:
 ```py
-py manage.py loaddata MOCK_DATA.json
+py manage.py loaddata .\etc\MOCK_DATA.json
 ```
 
 ## Important Contribution Notes

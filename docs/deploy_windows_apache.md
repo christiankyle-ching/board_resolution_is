@@ -16,7 +16,7 @@ https://www.apachelounge.com/download/
 2. Run the installer, then click **Install**.
 3. After installation, click **More > Import Config**
 ![import_config](/docs/images/import_config.png)
-4. Select the [mod-wsgi_compilers.vsconfig](mod-wsgi_compilers.vsconfig) file in this project.
+4. Select the [mod-wsgi_compilers.vsconfig](/etc/mod-wsgi_compilers.vsconfig) file in this project.
 5. Wait for installation and done.
 
 #### Offline Installer
@@ -42,9 +42,8 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'board_resolution_is.settings')
 
 1. Copy the template, and paste on the end of httpd.conf (Default Location: `C:\Apache24\conf\httpd.conf`).
 2. In the httpd.conf (`C:\Apache24\conf\httpd.conf`) file (NOT THE TEMPLATE), change the following values:
-   1. Run `mod_wsgi-express module-config` **(not on venv)**. Copy the three lines and replace in .
-   <!-- 2. Replace SetEnv values for the actual server (see these [environment variables](README.md#postgresql-database)). -->
-   3. Replace paths with "..." to point to the project folder (static, media, and wsgi). **NOTE**: Use forward slashes `/`.
+   1. Run `mod_wsgi-express module-config` **(not on venv)**. Copy the three lines and replace in the `httpd.conf`.
+   2. Replace paths with "..." to point to the project folder (static, media, and wsgi). **NOTE**: Use forward slashes `/`.
 
 ## Install httpd service
 `httpd -k install`
