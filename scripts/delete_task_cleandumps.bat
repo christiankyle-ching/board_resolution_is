@@ -1,0 +1,1 @@
+SCHTASKS /DELETE /F /TN "BRIS_CleanDumps"
