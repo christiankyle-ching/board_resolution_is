@@ -1,4 +1,5 @@
 from io import BytesIO
+from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -51,7 +52,6 @@ class IndexView(LoginRequiredMixin, View):
                 res = res.filter(
                     certificate__date_approved=search_form.cleaned_data['date_approved'])
         else:
-
             return redirect('resolutions:index')
 
         return render(request, 'resolutions/index.html', {
@@ -88,6 +88,8 @@ class CertificateFormView(LoginRequiredMixin, View):
                 cert = Certificate()
                 cert.added_by = request.user
 
+            is_editing = pk is not None
+
             # Update other fields
             cert.date_approved = dateparse.parse_date(date_approved)
             cert.is_minutes_of_meeting = is_minutes_of_meeting
@@ -107,7 +109,7 @@ class CertificateFormView(LoginRequiredMixin, View):
             # Add New Files
             for f in request.FILES.getlist('images'):
                 cert_image = CertificateImage(
-                    image=compress_image(f, image_format='JPEG'), certificate=cert)
+                    image=compress_image(f), certificate=cert)
                 cert_images.append(cert_image)
 
             with transaction.atomic():
@@ -117,9 +119,12 @@ class CertificateFormView(LoginRequiredMixin, View):
                 for ci in cert_images:
                     ci.save()
 
+            messages.success(
+                request, f"Successfully {'edited' if is_editing else 'created'} {cert}.")
+
             return redirect('resolutions:cert_detail', pk=cert.pk)
         except Exception as e:
-            print(e)
+            messages.error(request, e)
             return render(request, 'resolutions/certificate_form.html', {
                 'certificate': cert,
             })
@@ -141,6 +146,11 @@ class CertificateDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Certificate
     template_name = "resolutions/certificate_delete.html"
     success_url = reverse_lazy("resolutions:index")
+
+    def get_success_url(self):
+        messages.error(self.request, f'Deleted {self.get_object()}.')
+
+        return super().get_success_url()
 
 
 class CertificateExportView(LoginRequiredMixin, HasAdminPermission, View):
@@ -176,6 +186,9 @@ class CertificateExportView(LoginRequiredMixin, HasAdminPermission, View):
         byte_str = pdf.output(dest='S')
         stream = BytesIO(byte_str)
 
+        messages.success(
+            request, f'Exported {cert} ({cert.images.count()} images).')
+
         return FileResponse(stream, as_attachment=True, filename=f'resolution_{"_".join(map(lambda r: r.number, cert.resolutions))}_export.PDF')
 
 # -------------------- Resolution Views --------------------
@@ -186,6 +199,8 @@ class ResolutionDeleteView(LoginRequiredMixin, generic.DeleteView):
     template_name = "resolutions/resolution_delete.html"
 
     def get_success_url(self):
+        messages.error(self.request, f"Deleted {self.get_object()}.")
+
         return self.get_object().get_absolute_url()
 
     def get_context_data(self, **kwargs):
@@ -201,6 +216,9 @@ class ResolutionEditView(LoginRequiredMixin, generic.UpdateView):
     fields = ['number', 'title']
 
     def get_success_url(self):
+        messages.success(
+            self.request, f"Successfully edited {self.get_object()}.")
+
         return self.get_object().get_absolute_url()
 
 # -------------------- Image Views --------------------
@@ -212,6 +230,8 @@ class CertificateImageDeleteView(LoginRequiredMixin, generic.DeleteView):
     context_object_name = 'certificate_image'
 
     def get_success_url(self):
+        messages.error(self.request, f"Deleted: {self.get_object()}.")
+
         return self.get_object().get_absolute_url()
 
 # -------------------- Export Views --------------------
@@ -220,6 +240,9 @@ class CertificateImageDeleteView(LoginRequiredMixin, generic.DeleteView):
 class ResolutionDumpExportView(LoginRequiredMixin, HasAdminPermission, View):
     def get(self, request):
         dump_zip_filepath = app_db_export('resolutions', 'media/certificates')
+
+        messages.success(request, f"Exported Resolutions in ZIP.")
+
         return FileResponse(open(dump_zip_filepath, 'rb'), as_attachment=True)
 
 
@@ -230,4 +253,7 @@ class ResolutionDumpImportView(LoginRequiredMixin, HasAdminPermission, View):
     def post(self, request):
         uploaded_zip = request.FILES['dump_zip']
         app_db_import(uploaded_zip, media_path='media/certificates')
+
+        messages.success(request, f"Imported Resolutions from ZIP.")
+
         return redirect(reverse('resolutions:index'))

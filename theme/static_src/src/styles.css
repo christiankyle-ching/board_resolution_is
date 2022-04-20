@@ -76,6 +76,10 @@ hr {
 }
 
 /* #region Icon Sizes */
+.icon-xs {
+  @apply h-3 w-3 min-w-fit min-h-fit;
+}
+
 .icon-sm {
   @apply h-5 w-5 min-w-fit min-h-fit;
 }
@@ -314,4 +318,40 @@ textarea[data-filename-preview] {
 table.table-dashed > tbody tr {
   @apply border-b border-dashed border-gray;
 }
+/* #endregion */
+
+/* #region Alerts / Messages */
+.alerts {
+  @apply flex flex-col gap-3;
+}
+
+.alert {
+  @apply p-2 rounded-lg ring-2;
+  @apply ring-primary text-primary bg-lightPrimary;
+}
+
+.alert-info {
+  @apply alert;
+}
+
+.alert-debug {
+  @apply alert;
+  @apply ring-yellow-800 text-yellow-800 bg-yellow-300;
+}
+
+.alert-success {
+  @apply alert;
+  @apply ring-green-800 text-green-800 bg-green-300;
+}
+
+.alert-warning {
+  @apply alert;
+  @apply ring-yellow-800 text-yellow-800 bg-yellow-300;
+}
+
+.alert-error {
+  @apply alert;
+  @apply ring-red-800 text-red-800 bg-red-300;
+}
+
 /* #endregion */

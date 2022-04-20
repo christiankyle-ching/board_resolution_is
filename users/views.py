@@ -5,6 +5,9 @@ from django.views import View, generic
 from django.contrib.auth.mixins import LoginRequiredMixin
 from board_resolution_is.utils import get_form_errors
 from resolutions.utils import compress_image
+from django.contrib import messages
+
+from os import linesep
 
 from users.mixins import HasAdminPermission
 
@@ -30,15 +33,21 @@ class UserProfileView(LoginRequiredMixin, View):
             profile_form = UserProfileForm(
                 request.POST, instance=request.user.profile)
             profile_form.save()
+
+            messages.success(request, 'Successfully updated profile.')
         elif 'update_avatar' in request.POST:
             avatar = request.FILES.get('avatar', '')
             if avatar != '':
                 request.user.profile.avatar = compress_image(
                     avatar, max_resolution=512, quality=50, image_format='PNG')
                 request.user.profile.save()
+
+                messages.success(request, 'Successfully updated avatar.')
         elif 'remove_avatar' in request.POST:
             request.user.profile.avatar = None
             request.user.profile.save()
+
+            messages.error(request, 'Removed avatar.')
 
         return render(request, 'users/profile.html', {
             'profile_form': profile_form,
@@ -62,6 +71,8 @@ class UserChangePasswordView(LoginRequiredMixin, View):
                 password_form.cleaned_data['new_password'])
 
             request.user.save()
+
+            messages.success(request, 'Successfully changed password.')
 
             return redirect(reverse('users:profile_change_password'))
 
@@ -107,6 +118,9 @@ class AdminUserCreateView(LoginRequiredMixin, HasAdminPermission, View):
                                       can_export=can_export,
                                       )
 
+            messages.success(
+                request, f'Successfully created user: {username}.')
+
             return redirect(reverse('users:admin:manage'))
 
         return render(request, 'users/admin/user_create.html', {
@@ -137,7 +151,13 @@ class AdminUserChangePasswordView(LoginRequiredMixin, HasAdminPermission, View):
             user.set_password(password)
             user.save()
 
+            messages.success(
+                request, f'Successfully changed password for user: {user.username}.')
+
             return redirect(reverse('users:admin:manage'))
+        else:
+            messages.error(
+                request, f'Errors found:{linesep}{linesep.join(errors)}')
 
         return render(request, 'users/admin/user_change_password.html', {'selected_user': user, 'errors': errors})
 
@@ -148,6 +168,12 @@ class AdminUserDeleteView(LoginRequiredMixin, HasAdminPermission, generic.Delete
     success_url = reverse_lazy('users:admin:manage')
     context_object_name = 'selected_user'
 
+    def get_success_url(self):
+        messages.error(
+            self.request, f"Deleted user: {self.get_object().username}.")
+
+        return super().get_success_url()
+
 
 class AdminUserEditView(LoginRequiredMixin, HasAdminPermission, generic.UpdateView):
     model = _User
@@ -155,5 +181,11 @@ class AdminUserEditView(LoginRequiredMixin, HasAdminPermission, generic.UpdateVi
     template_name = 'users/admin/user_edit.html'
     context_object_name = 'selected_user'
     success_url = reverse_lazy('users:admin:manage')
+
+    def get_success_url(self):
+        messages.success(
+            self.request, f"Successfully edited user: {self.get_object().username}.")
+
+        return super().get_success_url()
 
 # endregion

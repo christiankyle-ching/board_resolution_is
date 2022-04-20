@@ -17,25 +17,20 @@ QUALITY = 85
 FORMAT = "JPEG"
 
 
-def compress_image(img, filename="image", image_format=FORMAT, quality=QUALITY, max_resolution=MAX_RESOLUTION_PX):
-    filename = f"{filename}.{image_format}"
+def compress_image(img, filename="image"):
+    filename = f"{filename}.{FORMAT}"
 
     # Containers
-    compressed_img = Image.open(img)
-    compressed_io = BytesIO()
+    img = Image.open(img)
 
-    # Resize using thumbnail
-    compressed_img.thumbnail(
-        (max_resolution, max_resolution), resample=Image.ANTIALIAS)
+    img_io = BytesIO()
 
-    # If JPEG, we can't handle Alpha (RGBA)
-    if image_format in ['JPEG', 'JPG']:
-        compressed_img = compressed_img.convert('RGB')
+    converted_img = Image.new(mode="RGB", size=img.size, color=(255, 255, 255))
+    converted_img.paste(img)
+    converted_img.save(img_io, format=FORMAT, quality=QUALITY)
 
-    compressed_img.save(compressed_io, format=image_format, quality=quality)
-
-    return InMemoryUploadedFile(compressed_io, None, filename,
-                                f'image/{image_format.lower()}', compressed_io.tell(), None)
+    return InMemoryUploadedFile(img_io, None, filename,
+                                f'image/{FORMAT.lower()}', img_io.tell(), None)
 
 
 def get_highest_length_in_list(arr):

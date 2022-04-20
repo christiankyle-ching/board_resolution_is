@@ -58,6 +58,8 @@ module.exports = {
       dirtyWhite: "#f5f5f5",
       yellow: colors.yellow,
       blue: colors.blue,
+      green: colors.green,
+      red: colors.red,
     },
     extend: {},
   },

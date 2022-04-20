@@ -249,6 +249,16 @@ document.querySelectorAll("form [data-multi-input]").forEach((multiInput) => {
   });
 });
 
+// Init Alert close button
+document.querySelectorAll(".alert").forEach((alert) => {
+  console.log("Init Alert:");
+  console.log(alert);
+
+  alert.querySelector("[data-close]").addEventListener("click", (e) => {
+    alert.remove();
+  });
+});
+
 function deleteParent(e) {
   console.log(e.target);
 }

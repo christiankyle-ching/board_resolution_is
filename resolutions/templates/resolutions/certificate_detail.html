@@ -58,7 +58,7 @@
         <div class="fixed bottom-6 right-6">
             <div class="flex flex-col gap-2">
 
-                {% if user.has_export_permissions %}
+                {% if user.has_export_permissions and certificate.images %}
                 <a href="{% url 'resolutions:cert_export' certificate.pk %}" class="button-primary">
                     <img src="{% static 'users/img/export.png' %}" alt="Edit" class="icon-sm">
                     <span>Export to PDF</span>
