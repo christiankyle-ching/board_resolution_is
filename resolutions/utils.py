@@ -13,27 +13,28 @@ import zipfile
 
 # Default values
 QUALITY = 85
-FORMAT = "JPEG"
 
 
-def compress_image(img, filename="image", max_resolution=None, force_jpeg=True, quality=QUALITY):
-    filename = img.name or f"image.{FORMAT}"
+def compress_image(img, custom_filename=None, max_px=None, force_jpeg=False, quality=QUALITY):
+    orig_filename = os.path.splitext(img.name)
+    fname = custom_filename or orig_filename
 
     # Containers
     img = Image.open(img)
 
     # Values
-    mode = "RGB" if force_jpeg else "RGBA"
     image_format = "JPEG" if force_jpeg else img.format
+    filename = f"{fname}.{image_format}"
 
     img_io = BytesIO()
 
-    converted_img = Image.new(mode=mode, size=img.size, color=(255, 255, 255))
-    converted_img.paste(img)
-    if max_resolution is not None:
+    converted_img = Image.new(mode="RGBA", size=img.size, color="WHITE")
+    converted_img.paste(img, (0, 0), img.convert("RGBA"))
+    if max_px is not None:
         converted_img.thumbnail(
-            (max_resolution, max_resolution), Image.ANTIALIAS)
-    converted_img.save(img_io, format=image_format, quality=quality)
+            (max_px, max_px), Image.ANTIALIAS)
+    converted_img.convert("RGB").save(
+        img_io, format=image_format, quality=quality)
 
     return InMemoryUploadedFile(img_io, None, filename,
                                 f'image/{image_format.lower()}', img_io.tell(), None)
