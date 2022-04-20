@@ -12,25 +12,31 @@ import shutil
 import zipfile
 
 # Default values
-MAX_RESOLUTION_PX = 2048
 QUALITY = 85
 FORMAT = "JPEG"
 
 
-def compress_image(img, filename="image"):
+def compress_image(img, filename="image", max_resolution=None, force_jpeg=True, quality=QUALITY):
     filename = f"{filename}.{FORMAT}"
 
     # Containers
     img = Image.open(img)
 
+    # Values
+    mode = "RGB" if force_jpeg else "RGBA"
+    image_format = "JPEG" if force_jpeg else img.format
+
     img_io = BytesIO()
 
-    converted_img = Image.new(mode="RGB", size=img.size, color=(255, 255, 255))
+    converted_img = Image.new(mode=mode, size=img.size, color=(255, 255, 255))
     converted_img.paste(img)
-    converted_img.save(img_io, format=FORMAT, quality=QUALITY)
+    if max_resolution is not None:
+        converted_img.thumbnail(
+            (max_resolution, max_resolution), Image.ANTIALIAS)
+    converted_img.save(img_io, format=image_format, quality=quality)
 
     return InMemoryUploadedFile(img_io, None, filename,
-                                f'image/{FORMAT.lower()}', img_io.tell(), None)
+                                f'image/{image_format.lower()}', img_io.tell(), None)
 
 
 def get_highest_length_in_list(arr):

@@ -39,7 +39,7 @@ class UserProfileView(LoginRequiredMixin, View):
             avatar = request.FILES.get('avatar', '')
             if avatar != '':
                 request.user.profile.avatar = compress_image(
-                    avatar, max_resolution=512, quality=50, image_format='PNG')
+                    avatar, max_resolution=512, force_jpeg=False)
                 request.user.profile.save()
 
                 messages.success(request, 'Successfully updated avatar.')
