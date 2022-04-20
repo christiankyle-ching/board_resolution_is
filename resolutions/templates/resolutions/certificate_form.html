@@ -43,7 +43,7 @@
                 </div>
             </div>
 
-            <p class="mt-   2">
+            <p class="mt-4">
                 <h4 class="mb-2">Add New Resolutions</h4>
 
                 <div data-multi-input>
@@ -64,21 +64,23 @@
             </p>
 
             {% if certificate.images %}
-            <p class="mt-2">
+            <p class="mt-4">
                 <h4 class="mb-2">Current Images</h4>
 
                 <ul>
                     {% for img in certificate.images %}
-                    <li class="flex justify-between items-center">
-                        <span>{{ img.image.name }}</span>
-                        <span>{{ img.image.size|filesizeformat }}</span>
-                        <div>
-                            <a href="{{ img.image.url }}" target="_blank" class="button">
-                                View Image
-                            </a>
-                            <a href="{% url 'resolutions:cert_image_delete' img.pk %}" class="button-danger">
-                                <img src="{% static 'users/img/trash.png' %}" alt="Delete" class="icon-sm">
-                            </a>
+                    <li class="grid grid-cols-5 border-b border-dashed border-black items-center">
+                        <span class="col-span-2 text-left">{{ img.image.name }}</span>
+                        <span class="col-span-1 text-center">{{ img.image.size|filesizeformat }}</span>
+                        <div class="col-span-2 text-right">
+                            <div class="flex justify-end items-center">
+                                <a href="{{ img.image.url }}" target="_blank" class="button">
+                                    View Image
+                                </a>
+                                <a href="{% url 'resolutions:cert_image_delete' img.pk %}" class="button-danger">
+                                    <img src="{% static 'users/img/trash.png' %}" alt="Delete" class="icon-sm">
+                                </a>
+                            </div>
                         </div>
                     </li>
                     {% endfor %}
@@ -87,7 +89,7 @@
             {% endif %}
 
             {% if certificate.resolutions %}
-            <p class="mt-2">
+            <p class="mt-4">
                 <h4 class="mb-2">Current Resolutions</h4>
 
                 <ul>
@@ -108,6 +110,11 @@
                 </ul>
             </p>
             {% endif %}
+
+            <p class="mt-4">
+                <label for="id_remarks">Remarks:</label>
+                <textarea name="remarks" id="id_remarks" rows="5" class="w-full">{{ certificate.remarks }}</textarea>
+            </p>
         </div>
     </div>
 

@@ -71,6 +71,10 @@ nav h6 {
   @apply opacity-50 pointer-events-none !important;
 }
 
+.reset-disabled {
+  @apply opacity-100 !important;
+}
+
 hr {
   @apply mb-6;
 }

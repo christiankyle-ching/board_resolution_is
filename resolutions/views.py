@@ -77,6 +77,7 @@ class CertificateFormView(LoginRequiredMixin, View):
             date_approved = request.POST.get('date_approved')
             is_minutes_of_meeting = request.POST.get(
                 'is_minutes_of_meeting') is not None
+            remarks = request.POST.get('remarks', '')
             res_nums = request.POST.getlist('resolution_numbers')
             res_titles = request.POST.getlist('resolution_titles')
 
@@ -93,6 +94,7 @@ class CertificateFormView(LoginRequiredMixin, View):
             # Update other fields
             cert.date_approved = dateparse.parse_date(date_approved)
             cert.is_minutes_of_meeting = is_minutes_of_meeting
+            cert.remarks = remarks
 
             cert_images = []
             resolutions = []

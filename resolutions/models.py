@@ -14,6 +14,7 @@ class Certificate(abstract_models.NoDeleteModel):
 
     is_minutes_of_meeting = models.BooleanField(default=False)
     date_approved = models.DateField(blank=False, null=False)
+    remarks = models.TextField(blank=True)
 
     class Meta:
         ordering = ['-added_date']
