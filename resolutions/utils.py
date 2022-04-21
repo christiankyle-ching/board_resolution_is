@@ -101,7 +101,7 @@ DUMPS_IMPORTS_FOLDER = 'temp_imports'
 
 
 def app_db_export(app_name, media_path=None, format='json'):
-    dump_id = f'{settings.CLIENT_NAME}-dump-{timezone.now().timestamp()}'
+    dump_id = f'{settings.CLIENT_NAME} Dump - {timezone.now().strftime("%a %Y-%m-%d - %I-%M-%S %p")}'
     dump_folder = f'{DUMPS_FOLDER}/{dump_id}'
 
     os.makedirs(dump_folder, exist_ok=True)
