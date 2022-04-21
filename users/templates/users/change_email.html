@@ -6,20 +6,20 @@
 
 <div class="grid grid-cols-3 gap-6 items-center">
     <div class="col-span-3 lg:col-span-1">
-        {% include 'users/components/settings_sidebar.html' with active='change_password' %}
+        {% include 'users/components/settings_sidebar.html' with active='change_email' %}
     </div>
 
     <div class="col-span-3 lg:col-span-2">
         <div class="card p-6 lg:p-12 lg:m-12">
-            <h1 class="mb-4">Change Password</h1>
+            <h1 class="mb-4">Change Email</h1>
 
             <form method="POST" class="grid grid-cols-1 gap-2">
                 {% csrf_token %}
 
-                {{ password_form.as_p }}
+                {{ change_email_form.as_p }}
 
                 <div class="col-span-1 text-right mt-2">
-                    <button type="submit" value="change_password" class="button-primary">Save Changes</button>
+                    <button type="submit" class="button-primary">Save Changes</button>
                 </div>
             </form>
         </div>

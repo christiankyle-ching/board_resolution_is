@@ -11,7 +11,7 @@ from os import linesep
 
 from users.mixins import HasAdminPermission
 
-from .forms import UserChangePasswordForm, UserCreateForm, UserProfileForm
+from .forms import UserChangeEmailForm, UserChangePasswordForm, UserCreateForm, UserProfileForm
 
 from django.contrib.auth import get_user_model
 
@@ -74,10 +74,35 @@ class UserChangePasswordView(LoginRequiredMixin, View):
 
             messages.success(request, 'Successfully changed password.')
 
-            return redirect(reverse('users:profile_change_password'))
+            return redirect(reverse('users:settings_change_password'))
 
         return render(request, 'users/change_password.html', {
             'password_form': password_form,
+        })
+
+
+class UserChangeEmailView(LoginRequiredMixin, View):
+    def get(self, request):
+        change_email_form = UserChangeEmailForm(user_id=request.user.id)
+
+        return render(request, 'users/change_email.html', {
+            'change_email_form': change_email_form,
+        })
+
+    def post(self, request):
+        change_email_form = UserChangeEmailForm(
+            request.POST, user_id=request.user.id)
+
+        if change_email_form.is_valid():
+            request.user.email = change_email_form.cleaned_data['new_email']
+            request.user.save()
+
+            messages.success(request, 'Successfully updated email.')
+
+            return redirect(reverse('users:settings_change_email'))
+
+        return render(request, 'users/change_email.html', {
+            'change_email_form': change_email_form,
         })
 
 

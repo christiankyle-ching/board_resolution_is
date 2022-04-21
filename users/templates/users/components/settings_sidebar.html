@@ -1,0 +1,19 @@
+<h1>SETTINGS</h1>
+<hr>
+
+<!-- Links -->
+<div
+    class="flex flex-row lg:flex-col lg:p-10 lg:my-10 py-5 items-stretch justify-evenly gap-6 border-b lg:border-b-0 lg:border-r">
+    <a href="{% url 'users:settings_profile' %}"
+        class="{% if active == 'profile' %} button-primary {% else %} button-transparent-primary {% endif %}">
+        Profile
+    </a>
+    <a href="{% url 'users:settings_change_password' %}"
+        class="{% if active == 'change_password' %} button-primary {% else %} button-transparent-primary {% endif %}">
+        Change Password
+    </a>
+    <a href="{% url 'users:settings_change_email' %}"
+        class="{% if active == 'change_email' %} button-primary {% else %} button-transparent-primary {% endif %}">
+        Change Email
+    </a>
+</div>

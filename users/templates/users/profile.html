@@ -6,15 +6,7 @@
 
 <div class="grid grid-cols-3 gap-6 items-center">
     <div class="col-span-3 lg:col-span-1">
-        <h1>SETTINGS</h1>
-        <hr>
-
-        <!-- Links -->
-        <div
-            class="flex flex-row lg:flex-col lg:p-10 lg:my-10 py-5 items-stretch justify-evenly gap-6 border-b lg:border-b-0 lg:border-r">
-            <a href="{% url 'users:profile' %}" class="button-primary">Settings</a>
-            <a href="{% url 'users:profile_change_password' %}" class="button-transparent-primary">Change Password</a>
-        </div>
+        {% include 'users/components/settings_sidebar.html' with active='profile' %}
     </div>
 
     <div class="col-span-3 lg:col-span-2">
@@ -38,7 +30,8 @@
                 <!-- Avatar Options -->
                 <div class="col-span-2 xl:col-span-1 flex flex-col items-center xl:items-start">
                     <!-- Select Form -->
-                    <form action="{% url 'users:profile' %}" method="POST" enctype="multipart/form-data" class="m-2">
+                    <form action="{% url 'users:settings_profile' %}" method="POST" enctype="multipart/form-data"
+                        class="m-2">
                         {% csrf_token %}
                         <input type="hidden" name="update_avatar">
 
@@ -49,7 +42,7 @@
                     </form>
 
                     <!-- Remove Form -->
-                    <form action="{% url 'users:profile' %}" method="POST" class="m-2">
+                    <form action="{% url 'users:settings_profile' %}" method="POST" class="m-2">
                         {% csrf_token %}
                         <input type="hidden" name="remove_avatar">
 
@@ -60,7 +53,7 @@
 
             <hr>
 
-            <form action="{% url 'users:profile' %}" method="POST" class="grid grid-cols-2 gap-4">
+            <form action="{% url 'users:settings_profile' %}" method="POST" class="grid grid-cols-2 gap-4">
                 {% csrf_token %}
                 <input type="hidden" name="update_profile">
 

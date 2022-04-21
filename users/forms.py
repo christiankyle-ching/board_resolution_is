@@ -32,16 +32,49 @@ class UserChangePasswordForm(forms.Form):
     def clean(self):
         cleaned_data = super(UserChangePasswordForm, self).clean()
 
-        new_password = cleaned_data['new_password']
-        confirm_new_password = cleaned_data['confirm_new_password']
+        old_password = cleaned_data.get('old_password', '')
+        new_password = cleaned_data.get('new_password', '')
+        confirm_new_password = cleaned_data.get('confirm_new_password', '')
 
-        if not self.user.check_password(cleaned_data['old_password']):
+        if not self.user.check_password(old_password):
             raise ValidationError(
                 _('Your old password is incorrect.'), code='old_password_incorrect')
 
         if new_password != confirm_new_password:
             raise ValidationError(
                 _('New Password does not match.'), code='password_does_not_match')
+
+        return cleaned_data
+
+
+class UserChangeEmailForm(forms.Form):
+    password = forms.CharField(required=True, widget=forms.PasswordInput)
+    new_email = forms.EmailField(required=True)
+    confirm_new_email = forms.EmailField(required=True)
+
+    def __init__(self, *args, **kwargs):
+        uid = kwargs.pop('user_id', None)
+        self.user = _User.objects.get(pk=uid)
+        super(UserChangeEmailForm, self).__init__(*args, **kwargs)
+
+    def clean(self):
+        cleaned_data = super(UserChangeEmailForm, self).clean()
+
+        password = cleaned_data.get('password', '')
+        new_email = cleaned_data.get('new_email', '')
+        confirm_new_email = cleaned_data.get('confirm_new_email')
+
+        if not self.user.check_password(password):
+            raise ValidationError(
+                _('Your password is incorrect.'), code='password_incorrect')
+
+        if new_email != confirm_new_email:
+            raise ValidationError(
+                _('New Email does not match.'), code='password_does_not_match')
+
+        if _User.objects.filter(email=new_email).exclude(pk=self.user.pk).exists():
+            raise ValidationError(
+                _('Email is already used by another user.'), code='email_not_unique')
 
         return cleaned_data
 

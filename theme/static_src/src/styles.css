@@ -86,23 +86,23 @@ form:not(.grid) > p {
 
 /* #region Icon Sizes */
 .icon-xs {
-  @apply h-3 w-3 min-w-fit min-h-fit;
+  @apply h-3 w-3 object-contain;
 }
 
 .icon-sm {
-  @apply h-5 w-5 min-w-fit min-h-fit;
+  @apply h-5 w-5 object-contain;
 }
 
 .icon {
-  @apply h-10 w-10 min-w-fit min-h-fit;
+  @apply h-10 w-10 object-contain;
 }
 
 .icon-md {
-  @apply h-16 w-16 min-w-fit min-h-fit;
+  @apply h-16 w-16 object-contain;
 }
 
 .icon-lg {
-  @apply h-20 w-20 min-w-fit min-h-fit;
+  @apply h-20 w-20 object-contain;
 }
 /* #endregion */
 
@@ -251,8 +251,9 @@ label[data-drag-drop] ul.errors {
 }
 
 .avatar {
-  @apply object-cover rounded-full object-top bg-white;
+  @apply rounded-full object-top bg-white;
   @apply icon;
+  @apply object-cover !important;
 }
 
 .avatar-md {
