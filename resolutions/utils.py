@@ -155,10 +155,15 @@ def app_db_import(uploaded_zip, media_path=None):
         call_command('loaddata', json_filepath)
 
         # Then copy images if loaddata succeeded
+        src_media_path = f'{dump_folder}/{media_path}'
         if media_path is not None:
-            shutil.rmtree(media_path, ignore_errors=True)
-            shutil.move(f'{dump_folder}/{media_path}',
-                        media_path)
+            for root, _, files in os.walk(src_media_path):
+                for f in files:
+                    src_file = os.path.join(root, f)
+                    rel_path = os.path.relpath(src_file, src_media_path)
+                    dest_path = f'{media_path}/{rel_path}'
+
+                    shutil.move(src_file, dest_path)
 
         # Clean by removing the folder
         shutil.rmtree(dump_folder)
