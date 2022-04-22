@@ -1,7 +1,5 @@
 # Deployment on Windows using Apache24 and mod_wsgi
 
-**IMPORTANT! When deploying, remove the `BRIS_DEBUG` environment variable!**
-
 ## Installing and Compiling mod_wsgi
 
 ### Setup Apache
@@ -27,7 +25,9 @@ You can **create an offline installer** instead. Follow the [README](/vs_BuildTo
 Run `pipenv install` again while in venv (`pipenv shell`).
 
 ## Update wsgi_apache.py
+
 Open the [board_resolution_is/wsgi_apache.py](board_resolution_is/wsgi_apache.py) and edit the following lines:
+
 ```py
 # TODO: Add the repo's directory to the PYTHONPATH
 # These 2 lines are needed on a Windows server

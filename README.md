@@ -144,8 +144,12 @@ py manage.py collectstatic
 
 ### Update requirements.txt and Installing Packages Globally
 1. Activate venv: `pipenv shell`
-2. Generate requirements.txt: `pipenv run pip freeze > requirements.txt`
+2. Generate requirements.txt: `pipenv requirements > requirements.txt`
 3. **Exit venv! (type `exit` in cmd)**. Use regular cmd on project folder. Install packages globally on server: `pip install -r requirements.txt`
+
+### Update settings.py
+
+When deploying, **remove the `BRIS_DEBUG` environment variable!**
 
 ### For Windows
 We have two options for Windows, a pure Python web server, or using mod_wsgi:

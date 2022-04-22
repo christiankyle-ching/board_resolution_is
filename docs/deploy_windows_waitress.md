@@ -2,8 +2,6 @@
 
 **IMPORTANT! This deployment method is not yet fully functional. WhiteNoise won't serve media files.**
 
-**IMPORTANT! When deploying, remove the `BRIS_DEBUG` environment variable!**
-
 This method uses three components:
 1. `waitress` - A pure python WSGI web server that works on Windows (alternative to gunicorn). [Docs here](https://docs.pylonsproject.org/projects/waitress/en/latest/).
 2. `whitenoise` - A package to serve static files on Python. [Docs here](http://whitenoise.evans.io/en/stable/).
