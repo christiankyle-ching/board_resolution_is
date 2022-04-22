@@ -31,19 +31,21 @@ INTERNAL_IPS = [
     '127.0.0.1',
 ]
 
+DEBUG_ALLOWED_HOSTS = [
+    # For ngrok
+    '*.ngrok.io',
+]
+
 ALLOWED_HOSTS = [
-    # Local server
+    # This server
     '127.0.0.1',
     'localhost',
 
     # TODO: Change based on IP in the environment. ex. 192.168.1.*
     # Consider also using * if port 80 and 443 will not be opened in firewall anyway
-    # Local PCs
+    # PCs in the local network
     '*',
-
-    # TODO: FOR NGROK ONLY!
-    '*.ngrok.io',
-]
+] + (DEBUG_ALLOWED_HOSTS if DEBUG else [])
 
 
 # Application definition
@@ -56,9 +58,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    # Deployment
-    # 'mod_wsgi.server',
-
     # Packages
     'tailwind',
     'theme',
@@ -67,6 +66,9 @@ INSTALLED_APPS = [
     # Custom Apps
     'resolutions.apps.ResolutionsConfig',
     'users.apps.UsersConfig'
+
+    # Deployment
+    # 'mod_wsgi.server',
 ]
 
 MIDDLEWARE = [
@@ -194,3 +196,8 @@ DEFAULT_FROM_EMAIL = os.environ.get('BRIS_EMAIL_USERNAME', '')
 LOGIN_URL = 'users:auth:login'
 LOGIN_REDIRECT_URL = 'resolutions:index'
 LOGOUT_REDIRECT_URL = 'users:auth:login'
+
+print(f"----- Starting {CLIENT_NAME} -----")
+print(f"DEBUG: {DEBUG} {'!!!WARNING!!!' if DEBUG else ''}")
+print(f"ALLOWED_HOSTS: {ALLOWED_HOSTS}")
+print(f"EMAIL_HOST_USER: {EMAIL_HOST_USER}")
