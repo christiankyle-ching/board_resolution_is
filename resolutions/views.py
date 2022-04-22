@@ -203,12 +203,21 @@ class ResolutionDeleteView(LoginRequiredMixin, generic.DeleteView):
     def get_success_url(self):
         messages.error(self.request, f"Deleted {self.get_object()}.")
 
+        # For redirect
+        redirect_url = self.request.POST.get('next', '')
+        if redirect_url:
+            return redirect_url
+
         return self.get_object().get_absolute_url()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['is_last_resolution'] = self.get_object(
         ).certificate.resolutions.count() <= 1
+
+        # For redirect
+        context['next'] = self.request.META.get('HTTP_REFERER', '')
+
         return context
 
 
@@ -221,7 +230,19 @@ class ResolutionEditView(LoginRequiredMixin, generic.UpdateView):
         messages.success(
             self.request, f"Successfully edited {self.get_object()}.")
 
+        redirect_url = self.request.POST.get('next', '')
+        if redirect_url:
+            return redirect_url
+
         return self.get_object().get_absolute_url()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        # For redirect
+        context['next'] = self.request.META.get('HTTP_REFERER', '')
+
+        return context
 
 # -------------------- Image Views --------------------
 

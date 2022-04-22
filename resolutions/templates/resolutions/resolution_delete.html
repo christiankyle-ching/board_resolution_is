@@ -43,6 +43,9 @@
 
     <form method="POST" class="text-center pt-4">
         {% csrf_token %}
+
+        <input type="hidden" name="next" value="{{ next }}">
+
         <button type="button" onclick="history.back()" class="button-transparent-primary">Cancel</button>
         <button type="submit" class="button-danger ml-2">Confirm</button>
     </form>

@@ -17,6 +17,8 @@
 
         {{ form.as_p }}
 
+        <input type="hidden" name="next" value="{{ next }}">
+
         <div class="text-right pt-4">
             <button type="button" onclick="history.back()" class="button-transparent-primary">Cancel</button>
             <button type="submit" class="button-primary ml-2">Confirm</button>
