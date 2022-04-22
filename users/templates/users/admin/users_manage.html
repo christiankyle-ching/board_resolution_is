@@ -35,7 +35,7 @@
                     <img class="avatar m-auto" {% if u.profile.avatar %} src="{{ u.profile.avatar.url }}" {% else %}
                         src="{% static 'users/img/user.png' %}" {% endif %}>
                 </td>
-                <td>{{ u.username }}</td>
+                <td>{{ u.str_username }}</td>
                 <td class="hidden md:table-cell">{{ u.profile.full_name }}</td>
                 <td class="hidden md:table-cell">{{ u.email }}</td>
                 <td>

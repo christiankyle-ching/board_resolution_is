@@ -63,7 +63,7 @@
             <img class="avatar mr-2" src="{{ user.profile.avatar_url }}">
 
             <div class="flex-col items-center justify-center mr-2 hidden sm:flex">
-              <span class="text-lg font-bold leading-tight">{{ user.username }}</span>
+              <span class="text-lg font-bold leading-tight">{{ user.str_username }}</span>
               <span class="text-sm leading-tight">{{ user.role_name }}</span>
             </div>
 
@@ -78,8 +78,8 @@
               </div>
 
               <div class="text-center mb-2">
-                <h5>{{ user.username }}</h5>
-                <small>{{ user.role_name }}</small>
+                <h5>{{ user.str_username }}</h5>
+                <small>{{ user.profile.full_name }}</small>
               </div>
 
               <hr class="border-dashed my-2">
@@ -119,7 +119,7 @@
                 {% for u in other_accounts %}
                 <div class="menuItem">
                   <img src="{{ u.profile.avatar_url }}" class="avatar-sm">
-                  <p class="ml-2">{{ u.username }}</p>
+                  <p class="ml-2">{{ u.str_username }}</p>
                 </div>
                 {% empty %}
                 <p class="p-2 text-center">No Accounts</p>

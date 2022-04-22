@@ -53,6 +53,10 @@ class User(AbstractUser):
     def has_export_permissions(self):
         return self.has_admin_permission or self.can_export
 
+    @property
+    def str_username(self):
+        return f"@{self.username}"
+
 
 class Profile(models.Model):
     def avatar_path(instance, filename):

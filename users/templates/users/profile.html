@@ -21,9 +21,9 @@
 
                     <!-- User Details -->
                     <div class="text-center">
-                        <h5 class="text-primary">@{{ user.username }}</h5>
-                        <p>{{ user.role_name }}</p>
+                        <h5 class="text-primary">{{ user.str_username }}</h5>
                         <p class="italic">{{ user.email }}</p>
+                        <small>Role: {{ user.role_name }}</small>
                     </div>
                 </div>
 
@@ -51,7 +51,9 @@
                 </div>
             </div>
 
-            <hr>
+            <hr class="my-4">
+
+            <h5 class="mb-2">Current Name: {{ user.profile.full_name }}</h5>
 
             <form action="{% url 'users:settings_profile' %}" method="POST" class="grid grid-cols-2 gap-4">
                 {% csrf_token %}
