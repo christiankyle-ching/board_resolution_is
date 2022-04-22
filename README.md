@@ -155,6 +155,6 @@ When deploying, **remove the `BRIS_DEBUG` environment variable!**
 We have two options for Windows, a pure Python web server, or using mod_wsgi:
 1. [Deployment guide using Apache HTTP Server and mod_wsgi](/docs/deploy_windows_apache.md) (Recommended, Tested).
 2. [Deployment guide using waitress + whitenoise + nssm](/docs/deploy_windows_waitress.md)
-  - Pure Python
-  - Heroku compatible but cannot store user-uploaded files (see [this](https://help.heroku.com/K1PPS2WM/why-are-my-file-uploads-missing-deleted) for reason).
-  - **DO NOT USE this yet!** Serving media files is still a problem for internal use apps.
+   - Pure Python
+   - Heroku compatible but cannot store user-uploaded files (see [this](https://help.heroku.com/K1PPS2WM/why-are-my-file-uploads-missing-deleted) for reason).
+   - **DO NOT USE this yet!** Serving media files is still a problem for internal use apps.
