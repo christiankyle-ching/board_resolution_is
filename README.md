@@ -55,7 +55,7 @@ Setup [environment variables](https://www.computerhope.com/issues/ch000549.htm) 
 py -c "import secrets; print(secrets.token_hex(64))"
 ```
 - `BRIS_DEBUG` = `True` (set this to `True` for local development only. **For deployment, you should remove this environment variable**)
-- `NPM_BIN_PATH` = See this
+- `NPM_BIN_PATH` = [See this](#tailwindcss-front-end-css-framework)
 
 Optional environment variables:
 - `PSQL_BRIS_DBNAME` = Name of your DB in PostgreSQL (default: `db_board_resolution_is`)
