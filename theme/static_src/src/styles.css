@@ -75,6 +75,11 @@ hr {
   @apply mb-6 mt-2;
 }
 
+::selection {
+  @apply bg-primary !important;
+  @apply text-white !important;
+}
+
 /* Fix large helptext */
 #form_reset_password_confirm ul li {
   @apply text-sm;
@@ -86,24 +91,36 @@ form:not(.grid) > p {
 
 /* #region Icon Sizes */
 .icon-xs {
-  @apply h-3 w-3 object-contain;
+  @apply icon;
+  @apply h-3 w-3 !important;
 }
 
 .icon-sm {
-  @apply h-5 w-5 object-contain;
+  @apply icon;
+  @apply h-5 w-5 !important;
 }
 
 .icon {
-  @apply h-10 w-10 object-contain;
+  @apply min-h-fit min-w-fit;
+  @apply h-10 w-10;
+  @apply scale-75 md:scale-100;
 }
 
 .icon-md {
-  @apply h-16 w-16 object-contain;
+  @apply icon;
+  @apply h-16 w-16 !important;
 }
 
 .icon-lg {
-  @apply h-20 w-20 object-contain;
+  @apply icon;
+  @apply h-20 w-20 !important;
 }
+
+.icon-xl {
+  @apply icon;
+  @apply h-24 w-24 !important;
+}
+
 /* #endregion */
 
 /* -------------------- Utils -------------------- */
@@ -253,7 +270,8 @@ label[data-drag-drop] ul.errors {
 .avatar {
   @apply rounded-full object-top bg-white;
   @apply icon;
-  @apply object-cover !important;
+  @apply object-cover min-h-0 min-w-0 !important;
+  @apply scale-100 md:scale-100 !important;
 }
 
 .avatar-md {
@@ -264,6 +282,11 @@ label[data-drag-drop] ul.errors {
 .avatar-lg {
   @apply avatar;
   @apply icon-lg !important;
+}
+
+.avatar-xl {
+  @apply avatar;
+  @apply icon-xl !important;
 }
 
 /* #endregion */

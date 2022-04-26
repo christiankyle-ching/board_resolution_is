@@ -6,20 +6,12 @@
 
 
 
-<div class="card p-12">
-    <div class="flex justify-between items-center">
-        <div>
-            <h1>Edit Staff</h1>
-            <h4>{{ selected_user.str_username }}</h4>
-        </div>
+<div class="card p-6 lg:p-12">
 
-        <div>
-            <a href="{% url 'users:admin:user_change_password' selected_user.id %}" class="button button-sm m-1">
-                Change Password
-            </a>
-        </div>
+    <div>
+        <h1>Edit Staff</h1>
+        <h4>{{ selected_user.str_username }}</h4>
     </div>
-
 
     <hr>
 
@@ -29,7 +21,12 @@
 
         {{ form.as_p }}
 
-        <div class="col-span-2 text-right">
+        <div class="col-span-2 flex items-baseline justify-end gap-2">
+
+            <a href="{% url 'users:admin:user_change_password' selected_user.id %}" class="underline text-sm">
+                Change Password?
+            </a>
+
             <button type="submit" class="button-primary">Confirm</button>
             <a href="{% url 'users:admin:manage' %}" class="button-danger ml-2">Cancel</a>
         </div>

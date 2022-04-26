@@ -17,9 +17,9 @@
 
                 {{ search_form.as_p }}
 
-                <div class="text-right">
-                    <a href="{% url 'resolutions:index' %}" class="button-danger" data-toggle>Reset</a>
-                    <button type="submit" class="button-primary" name="search">Search</button>
+                <div class="pt-2 flex gap-2 justify-end">
+                    <a href="{% url 'resolutions:index' %}" class="button-danger button-sm" data-toggle>Reset</a>
+                    <button type="submit" class="button-primary button-sm" name="search">Search</button>
                 </div>
             </form>
         </div>
@@ -47,7 +47,7 @@
         <tr>
             <th>Resolution No.</th>
             <th>Title</th>
-            <th>Date Approved</th>
+            <th class="hidden md:table-cell">Date Approved</th>
             <th>
                 <!-- Operations -->
             </th>
@@ -58,11 +58,12 @@
         <tr>
             <td>{{ res.number }}</td>
             <td>{{ res.title }}</td>
-            <td>{{ res.certificate.date_approved }}</td>
+            <td class="hidden md:table-cell">{{ res.certificate.date_approved }}</td>
             <td>
                 <div class="flex items-center justify-center py-1 gap-2">
                     <a href="{% url 'resolutions:cert_detail' res.certificate.pk %}" class="button">
-                        <p>View More</p>
+                        <img src="{% static 'resolutions/img/open.svg' %}" alt="" class="icon-sm">
+                        <span>View More</span>
                     </a>
 
                     <!-- Edit -->
@@ -101,7 +102,11 @@
     {% endif %}
 
     <span>
-        Page {{ resolutions.number }} of {{ resolutions.paginator.num_pages }}
+        Page
+        <form method="GET" class="inline">
+            <input type="text" name="page" value="{{ resolutions.number }}" class="w-12 text-center">
+        </form>
+        of {{ resolutions.paginator.num_pages }}
     </span>
 
     {% if resolutions.has_next %}

@@ -47,12 +47,12 @@
                 <h4 class="mb-2">Add New Resolutions</h4>
 
                 <div data-multi-input>
-                    <div class="multi-input-item flex gap-6 mb-2">
-                        <input name="resolution_numbers" type="text" maxlength="50" placeholder="Resolution No."
-                            class="w-full" {% if not certificate.resolutions %} required {% endif %}>
-                        <input name="resolution_titles" type="text" placeholder="Title" class="w-full"
+                    <div class="multi-input-item grid grid-cols-10 gap-2 mb-2">
+                        <input name="resolution_numbers" type="text" maxlength="50" placeholder="Res. No."
+                            class="w-full col-span-2" {% if not certificate.resolutions %} required {% endif %}>
+                        <input name="resolution_titles" type="text" placeholder="Title" class="w-full col-span-7"
                             {% if not certificate.resolutions %} required {% endif %}>
-                        <button class="button-danger" disabled>
+                        <button class="button-danger col-span-1" disabled>
                             <img src="{% static 'users/img/trash.png' %}" alt="Delete" class="icon-sm">
                         </button>
                     </div>
@@ -72,7 +72,7 @@
                     <li class="grid grid-cols-5 border-b border-dashed border-black items-center">
                         <span class="col-span-3 text-left">{{ img.image.name }}</span>
                         <div class="col-span-2 text-right">
-                            <div class="flex justify-end items-center">
+                            <div class="flex justify-end items-center my-2 gap-2">
                                 <a href="{{ img.image.url }}" target="_blank" class="button">
                                     View Image
                                 </a>

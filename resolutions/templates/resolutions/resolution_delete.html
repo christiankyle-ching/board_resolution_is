@@ -4,7 +4,7 @@
 
 {% block content %}
 
-<div class="card p-12">
+<div class="card p-6 lg:p-12">
 
     <div class="text-center">
         <h3>Delete Resolution No. {{ resolution.number }}?</h3>
@@ -23,7 +23,7 @@
     </ul>
 
     {% if is_last_resolution %}
-    <div class="bg-lightDanger border-l-2 border-l-danger p-6 mb-4">
+    <div class="bg-lightDanger border-l-2 border-l-danger p-6 my-4">
         <div class="flex items-center mb-2">
             <img src="{% static 'users/img/warning.png' %}" alt="" class="icon-sm">
             <h3 class="ml-2">Warning!</h3>
@@ -31,8 +31,11 @@
 
         <ul class="list-disc ml-4">
             <li>
-                This is the <strong>last resolution</strong> within this Certificate
-                (Approved on: {{ resolution.certificate.date_approved }})
+                This is the <strong>last resolution</strong> within
+                <a href="{% url 'resolutions:cert_detail' resolution.certificate.pk %}" class="underline font-bold">
+                    {{ resolution.certificate }}
+                    (Approved on: {{ resolution.certificate.date_approved }})
+                </a>
             </li>
             <li>By deleting this resolution, the certificate will also be deleted (along with its images).</li>
             <li>This operation cannot be undone.</li>
