@@ -259,6 +259,15 @@ document.querySelectorAll(".alert").forEach((alert) => {
   });
 });
 
+// ESC - Close all dropdowns
+document.addEventListener("keyup", (e) => {
+  if (e.code === "Escape") {
+    document.querySelectorAll(".dropdown").forEach((dropdown) => {
+      dropdown.querySelector(".dropdown_content").classList.remove("active");
+    });
+  }
+});
+
 function deleteParent(e) {
   console.log(e.target);
 }
