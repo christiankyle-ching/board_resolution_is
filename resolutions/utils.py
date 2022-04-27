@@ -148,9 +148,6 @@ def app_db_import(uploaded_zip, media_path=None):
         with zipfile.ZipFile(dump_zip_filepath, 'r') as zipObj:
             zipObj.extractall(dump_folder)
 
-        # WARN: Delete first to avoid unique constraints
-        # Resolution.objects.delete()
-
         # Import rows to database first
         call_command('loaddata', json_filepath)
 
@@ -159,11 +156,18 @@ def app_db_import(uploaded_zip, media_path=None):
         if media_path is not None:
             for root, _, files in os.walk(src_media_path):
                 for f in files:
-                    src_file = os.path.join(root, f)
-                    rel_path = os.path.relpath(src_file, src_media_path)
+                    src_path = os.path.join(root, f)
+                    rel_path = os.path.relpath(src_path, src_media_path)
+                    rel_folder = os.path.dirname(rel_path)
                     dest_path = f'{media_path}/{rel_path}'
+                    dest_folder = f'{media_path}/{rel_folder}/'
 
-                    shutil.move(src_file, dest_path)
+                    os.makedirs(dest_folder, exist_ok=True)
+
+                    file_exists = os.path.exists(dest_path)
+                    if not file_exists:
+                        shutil.move(os.path.abspath(src_path),
+                                    os.path.abspath(dest_folder))
 
         # Clean by removing the folder
         shutil.rmtree(dump_folder)
