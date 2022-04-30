@@ -91,9 +91,6 @@ class UserCreateForm(forms.ModelForm):
             # 'role',
             'can_export'
         ]
-        help_texts = {
-            # 'can_export': _('Effective for Staff only.'),
-        }
 
     def clean(self):
         cleaned_data = super(UserCreateForm, self).clean()

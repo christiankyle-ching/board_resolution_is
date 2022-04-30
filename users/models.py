@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, UserManager
 from django.templatetags.static import static
+from django.utils.translation import gettext as _
 
 # AVOID CHANGING THESE
 ROLE_ADMIN = 0
@@ -21,7 +22,8 @@ class User(AbstractUser):
     email = models.EmailField(unique=True, null=False, blank=False)
     role = models.PositiveSmallIntegerField(
         null=False, blank=False, default=ROLE_STAFF, choices=ROLE_CHOICES)
-    can_export = models.BooleanField(default=False)
+    can_export = models.BooleanField(default=False, help_text=_(
+        'Enables PDF exporting for this user.'))
 
     objects = ActiveUserManager()
     all_objects = UserManager()
