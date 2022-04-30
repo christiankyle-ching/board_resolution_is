@@ -17,9 +17,11 @@
 
                 {{ search_form.as_p }}
 
+                <input type="hidden" name="search">
+
                 <div class="pt-2 flex gap-2 justify-end">
                     <a href="{% url 'resolutions:index' %}" class="button-danger button-sm" data-toggle>Reset</a>
-                    <button type="submit" class="button-primary button-sm" name="search">Search</button>
+                    <button type="submit" class="button-primary button-sm">Search</button>
                 </div>
             </form>
         </div>
