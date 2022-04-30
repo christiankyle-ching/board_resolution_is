@@ -11,6 +11,7 @@ from fpdf import FPDF
 import os
 import shutil
 import zipfile
+import uuid
 
 # Default values
 QUALITY = 85
@@ -101,38 +102,42 @@ DUMPS_IMPORTS_FOLDER = 'temp_imports'
 
 
 def app_db_export(app_name, media_path=None, format='json'):
-    dump_id = f'{settings.CLIENT_NAME} Dump - {timezone.now().strftime("%a %Y-%m-%d - %I-%M-%S %p")}'
-    dump_folder = f'{DUMPS_FOLDER}/{dump_id}'
+    try:
+        zip_filename = f'{settings.CLIENT_NAME} Dump - {timezone.now().strftime("%a %Y-%m-%d - %I-%M-%S %p")}'
+        dump_id = str(uuid.uuid4())
+        dump_folder = f'{DUMPS_FOLDER}/{dump_id}'
 
-    os.makedirs(dump_folder, exist_ok=True)
+        os.makedirs(dump_folder, exist_ok=True)
 
-    dump_zip_filepath = f'{dump_folder}/{dump_id}.zip'
-    json_filename = 'db.json'
-    json_filepath = f'{dump_folder}/{json_filename}'
+        dump_zip_filepath = f'{dump_folder}/{zip_filename}.zip'
+        json_filename = 'db.json'
+        json_filepath = f'{dump_folder}/{json_filename}'
 
-    # Generate DB Dump from PSQL
-    output = open(json_filepath, 'w')
-    call_command('dumpdata', app_name,
-                 format='json', indent=3, stdout=output)
-    output.close()
+        # Generate DB Dump from PSQL
+        output = open(json_filepath, 'w')
+        call_command('dumpdata', app_name,
+                     format='json', indent=3, stdout=output)
+        output.close()
 
-    with zipfile.ZipFile(dump_zip_filepath, 'w', zipfile.ZIP_DEFLATED) as zipObj:
-        # Write JSON
-        zipObj.write(json_filepath, json_filename)
+        with zipfile.ZipFile(dump_zip_filepath, 'w', zipfile.ZIP_DEFLATED) as zipObj:
+            # Write JSON
+            zipObj.write(json_filepath, json_filename)
 
-        # Write media/resolutions
-        if media_path is not None:
-            for folder, _, files in os.walk(media_path):
-                for f in files:
-                    filepath = os.path.join(folder, f)
-                    zipObj.write(filepath, filepath)
+            # Write media/resolutions
+            if media_path is not None:
+                for folder, _, files in os.walk(media_path):
+                    for f in files:
+                        filepath = os.path.join(folder, f)
+                        zipObj.write(filepath, filepath)
 
-    return dump_zip_filepath
+        return dump_zip_filepath
+    except Exception as e:
+        raise e
 
 
 def app_db_import(uploaded_zip, media_path=None):
     try:
-        dump_id = f'import-{timezone.now().timestamp()}'
+        dump_id = f'import-{uuid.uuid4()}'
         dump_folder = f'{DUMPS_IMPORTS_FOLDER}/{dump_id}'
         json_filepath = f'{dump_folder}/db.json'
 

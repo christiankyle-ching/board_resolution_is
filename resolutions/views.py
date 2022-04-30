@@ -173,7 +173,11 @@ class CertificateExportView(LoginRequiredMixin, HasAdminPermission, View):
 
         for img in cert.images:
             pdf.add_page()
-            pdf.add_image(img.image.path)
+            try:
+                pdf.add_image(img.image.path)
+            except Exception as e:
+                """Skip image if not existing on server"""
+                pass
 
             # pdf.add_lines_of_text([
             #     "Resolutions Included:",
@@ -262,11 +266,14 @@ class CertificateImageDeleteView(LoginRequiredMixin, generic.DeleteView):
 
 class ResolutionDumpExportView(LoginRequiredMixin, HasAdminPermission, View):
     def get(self, request):
-        dump_zip_filepath = app_db_export('resolutions', 'media/certificates')
+        try:
+            dump_zip_filepath = app_db_export(
+                'resolutions', 'media/certificates')
+            messages.success(request, f"Exported Resolutions in ZIP.")
 
-        messages.success(request, f"Exported Resolutions in ZIP.")
-
-        return FileResponse(open(dump_zip_filepath, 'rb'), as_attachment=True)
+            return FileResponse(open(dump_zip_filepath, 'rb'), as_attachment=True)
+        except Exception as e:
+            messages.error(request, f"Error in exporting ZIP: {e}")
 
 
 class ResolutionDumpImportView(LoginRequiredMixin, HasAdminPermission, View):
@@ -275,8 +282,10 @@ class ResolutionDumpImportView(LoginRequiredMixin, HasAdminPermission, View):
 
     def post(self, request):
         uploaded_zip = request.FILES['dump_zip']
-        app_db_import(uploaded_zip, media_path='media/certificates')
-
-        messages.success(request, f"Imported Resolutions from ZIP.")
+        try:
+            app_db_import(uploaded_zip, media_path='media/certificates')
+            messages.success(request, f"Imported Resolutions from ZIP.")
+        except Exception as e:
+            messages.error(request, f"Error in importing ZIP: {e}")
 
         return redirect(reverse('resolutions:index'))
