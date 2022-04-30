@@ -268,6 +268,15 @@ document.addEventListener("keyup", (e) => {
   }
 });
 
+// Disable submit button to prevent spam
+document.querySelectorAll("form").forEach((form) => {
+  form.addEventListener("submit", (e) => {
+    form.querySelectorAll('button[type="submit"]').forEach((b) => {
+      b.disabled = true;
+    });
+  });
+});
+
 function deleteParent(e) {
   console.log(e.target);
 }
