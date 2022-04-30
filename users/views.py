@@ -6,12 +6,13 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from board_resolution_is.utils import get_form_errors
 from resolutions.utils import compress_image
 from django.contrib import messages
+from django.contrib.auth import password_validation
 
 from os import linesep
 
 from users.mixins import HasAdminPermission
 
-from .forms import UserChangeEmailForm, UserChangePasswordForm, UserCreateForm, UserProfileForm
+from .forms import AdminUserChangePasswordForm, UserChangeEmailForm, UserChangePasswordForm, UserCreateForm, UserProfileForm
 
 from django.contrib.auth import get_user_model
 
@@ -156,35 +157,31 @@ class AdminUserCreateView(LoginRequiredMixin, HasAdminPermission, View):
 class AdminUserChangePasswordView(LoginRequiredMixin, HasAdminPermission, View):
     def get(self, request, pk):
         user = get_object_or_404(_User, pk=pk)
+        form = AdminUserChangePasswordForm(user_id=user.pk)
 
-        return render(request, 'users/admin/user_change_password.html', {'selected_user': user, 'errors': []})
+        return render(request, 'users/admin/user_change_password.html', {
+            'selected_user': user,
+            'form': form,
+        })
 
     def post(self, request, pk):
         user = get_object_or_404(_User, pk=pk)
-
-        password = request.POST.get('password', '')
-        confirm_password = request.POST.get('confirm_password', '')
-
-        errors = get_form_errors([
-            (password != '' and confirm_password !=
-             '', 'Password cannot be empty.'),
-            (password == confirm_password, 'Password does not match.')
-        ])
+        form = AdminUserChangePasswordForm(request.POST, user_id=user.pk)
 
         # If no errors, try change password
-        if len(errors) <= 0:
-            user.set_password(password)
+        if form.is_valid():
+            user.set_password(form.cleaned_data['new_password'])
             user.save()
 
             messages.success(
                 request, f'Successfully changed password for user: {user.username}.')
 
             return redirect(reverse('users:admin:manage'))
-        else:
-            messages.error(
-                request, f'Errors found:{linesep}{linesep.join(errors)}')
 
-        return render(request, 'users/admin/user_change_password.html', {'selected_user': user, 'errors': errors})
+        return render(request, 'users/admin/user_change_password.html', {
+            'selected_user': user,
+            'form': form,
+        })
 
 
 class AdminUserDeleteView(LoginRequiredMixin, HasAdminPermission, generic.DeleteView):

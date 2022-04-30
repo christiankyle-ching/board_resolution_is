@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model, password_validation
 
 from users.models import ROLE_CHOICES, Profile
 
@@ -43,6 +43,8 @@ class UserChangePasswordForm(forms.Form):
         if new_password != confirm_new_password:
             raise ValidationError(
                 _('New Password does not match.'), code='password_does_not_match')
+
+        password_validation.validate_password(new_password)
 
         return cleaned_data
 
@@ -114,5 +116,32 @@ class UserCreateForm(forms.ModelForm):
 
         if len(errors) > 0:
             raise ValidationError(errors)
+
+        password_validation.validate_password(cleaned_data['password'])
+
+        return cleaned_data
+
+
+class AdminUserChangePasswordForm(forms.Form):
+    new_password = forms.CharField(required=True, widget=forms.PasswordInput)
+    confirm_new_password = forms.CharField(
+        required=True, widget=forms.PasswordInput)
+
+    def __init__(self, *args, **kwargs):
+        uid = kwargs.pop('user_id', None)
+        self.user = _User.objects.get(pk=uid)
+        super(AdminUserChangePasswordForm, self).__init__(*args, **kwargs)
+
+    def clean(self):
+        cleaned_data = super(AdminUserChangePasswordForm, self).clean()
+
+        new_password = cleaned_data.get('new_password', '')
+        confirm_new_password = cleaned_data.get('confirm_new_password', '')
+
+        if new_password != confirm_new_password:
+            raise ValidationError(
+                _('New Password does not match.'), code='password_does_not_match')
+
+        password_validation.validate_password(new_password)
 
         return cleaned_data
