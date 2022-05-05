@@ -64,6 +64,12 @@
                 <textarea id="id_remarks" cols="30" rows="7" class="w-full"
                     readonly>{{ certificate.remarks }}</textarea>
             </p>
+
+            <p>
+                <small>
+                    Added By: {{ certificate.added_by.str_username }} - {{ certificate.added_date }}
+                </small>
+            </p>
         </div>
 
         <div class="fixed bottom-6 right-6">

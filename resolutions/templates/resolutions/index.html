@@ -8,10 +8,10 @@
     <!-- Filter -->
     <div class="dropdown">
         <button data-toggle class="button-secondary">
-            <span>Filter</span>
             <img src="{% static 'users/img/filter.svg' %}" alt="Filter" class="icon-sm">
+            <span>Filter</span>
         </button>
-        <div class="dropdown_content bg-white shadow-md rounded-lg p-6 w-64">
+        <div class="dropdown_content bg-white shadow-md rounded-lg p-6 w-64 mt-4">
             <form method="POST" class="flex flex-col gap-2">
                 {% csrf_token %}
 
@@ -47,7 +47,7 @@
 <table class="w-full table-dashed text-center">
     <thead>
         <tr>
-            <th>Resolution No.</th>
+            <th>Res. No.</th>
             <th>Title</th>
             <th class="hidden md:table-cell">Date Approved</th>
             <th>
@@ -62,7 +62,7 @@
             <td>{{ res.title }}</td>
             <td class="hidden md:table-cell">{{ res.certificate.date_approved }}</td>
             <td>
-                <div class="flex items-center justify-center py-1 gap-2">
+                <div class="flex items-center justify-center py-2 gap-2">
                     <a href="{% url 'resolutions:cert_detail' res.certificate.pk %}" class="button">
                         <img src="{% static 'resolutions/img/open.svg' %}" alt="" class="icon-sm">
                         <span>View More</span>

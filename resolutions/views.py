@@ -86,8 +86,7 @@ class CertificateFormView(LoginRequiredMixin, View):
             if pk is not None:
                 cert = get_object_or_404(Certificate, pk=pk)
             else:
-                cert = Certificate()
-                cert.added_by = request.user
+                cert = Certificate(added_by=request.user)
 
             is_editing = pk is not None
 
@@ -105,7 +104,10 @@ class CertificateFormView(LoginRequiredMixin, View):
                 title_stripped = title.strip()
                 if num_stripped != "" and title_stripped != "":
                     res = Resolution(number=num_stripped,
-                                     title=title_stripped, certificate=cert)
+                                     title=title_stripped,
+                                     certificate=cert,
+                                     added_by=request.user,
+                                     )
                     resolutions.append(res)
 
             # Add New Files

@@ -8,9 +8,9 @@ from board_resolution_is import abstract_models
 _User = get_user_model()
 
 
-class Certificate(abstract_models.NoDeleteModel):
-    added_by = models.ForeignKey(_User, null=True, on_delete=models.SET_NULL)
-    added_date = models.DateTimeField(null=False, default=timezone.now)
+class Certificate(abstract_models.NoDeleteModel, abstract_models.AddedByModel):
+    # added_by = models.ForeignKey(_User, null=True, on_delete=models.SET_NULL)
+    # added_date = models.DateTimeField(null=False, default=timezone.now)
 
     is_minutes_of_meeting = models.BooleanField(default=False)
     date_approved = models.DateField(blank=False, null=False)
@@ -39,8 +39,8 @@ class Certificate(abstract_models.NoDeleteModel):
         return reverse("resolutions:cert_detail", kwargs={'pk': self.pk})
 
 
-class Resolution(abstract_models.NoDeleteModel):
-    added_date = models.DateTimeField(null=False, default=timezone.now)
+class Resolution(abstract_models.NoDeleteModel, abstract_models.AddedByModel):
+    # added_date = models.DateTimeField(null=False, default=timezone.now)
 
     certificate = models.ForeignKey(Certificate, on_delete=models.CASCADE)
 

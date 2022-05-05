@@ -129,6 +129,10 @@ form:not(.grid) > p {
   height: calc(100vh - 64px);
 }
 
+.shorten-text-ellipsis {
+  @apply overflow-hidden whitespace-nowrap text-ellipsis;
+}
+
 /* -------------------- Components -------------------- */
 
 /* #region Button */
@@ -182,7 +186,7 @@ for button elements and .button classed elements
 }
 
 .button > span {
-  @apply hidden lg:block;
+  @apply hidden lg:block text-sm;
 }
 
 /* #endregion */
