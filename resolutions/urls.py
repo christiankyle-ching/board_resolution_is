@@ -34,4 +34,7 @@ urlpatterns = [
          views.ResolutionDumpImportView.as_view(), name="db_res_import"),
     path('db_dump/resolutions/export/',
          views.ResolutionDumpExportView.as_view(), name="db_res_export"),
+
+    # History
+    path('history/', views.HistoryView.as_view(), name='history'),
 ]

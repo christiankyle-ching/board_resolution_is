@@ -139,6 +139,7 @@ class CertificateDetailView(LoginRequiredMixin, View):
         try:
             cert = Certificate.objects.get(pk=pk)
         except:
+            messages.error(request, "Certificate or Resolution not found.")
             return redirect('resolutions:index')
 
         return render(request, 'resolutions/certificate_detail.html', {
@@ -291,3 +292,12 @@ class ResolutionDumpImportView(LoginRequiredMixin, HasAdminPermission, View):
             messages.error(request, f"Error in importing ZIP: {e}")
 
         return redirect(reverse('resolutions:index'))
+
+
+# -------------------- History Views --------------------
+
+class HistoryView(LoginRequiredMixin, HasAdminPermission, View):
+    def get(self, request):
+        return render(request, "resolutions/history.html", {
+            "history": Resolution.history.all()
+        })

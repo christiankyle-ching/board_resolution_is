@@ -12,6 +12,7 @@ fpdf2 = "*"
 whitenoise = "*"
 waitress = "*"
 mod-wsgi = "*"
+django-simple-history = "*"
 
 [dev-packages]
 autopep8 = "*"

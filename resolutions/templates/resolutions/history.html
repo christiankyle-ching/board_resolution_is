@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load history_tags %}
+
+{% block content %}
+
+<h1>History</h1>
+<hr>
+
+{% for log in history %}
+
+<li>
+    {{ log.history_user }} {% get_history_type_string log %}
+    <a href="{{ log.history_object.get_absolute_url }}" class="underline">
+        {{ log.history_object }}
+    </a>
+    at {{ log.history_date }}</li>
+
+{% endfor %}
+
+
+{% endblock %}

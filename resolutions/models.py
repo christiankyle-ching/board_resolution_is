@@ -2,6 +2,7 @@ from django.urls import reverse
 from django.utils import timezone
 from django.db import models
 from django.contrib.auth import get_user_model
+from simple_history.models import HistoricalRecords
 
 from board_resolution_is import abstract_models
 
@@ -15,6 +16,8 @@ class Certificate(abstract_models.NoDeleteModel, abstract_models.AddedByModel):
     is_minutes_of_meeting = models.BooleanField(default=False)
     date_approved = models.DateField(blank=False, null=False)
     remarks = models.TextField(blank=True)
+
+    history = HistoricalRecords()
 
     class Meta:
         ordering = ['-added_date']
@@ -47,6 +50,8 @@ class Resolution(abstract_models.NoDeleteModel, abstract_models.AddedByModel):
     number = models.CharField(max_length=50, blank=False, null=False)
     title = models.TextField(blank=False, null=False)
 
+    history = HistoricalRecords()
+
     class Meta:
         ordering = ['-added_date']
 
@@ -62,8 +67,9 @@ class CertificateImage(abstract_models.NoDeleteModel):
         return f"certificates/cert-{instance.certificate.id}/{filename}"
 
     certificate = models.ForeignKey(Certificate, on_delete=models.CASCADE)
-
     image = models.ImageField(upload_to=certificate_image_path)
+
+    history = HistoricalRecords()
 
     def __str__(self):
         return self.image.name
