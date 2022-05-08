@@ -10,33 +10,42 @@
   html {
     font-family: "Poppins", sans-serif;
   }
+
+  body {
+    @apply [font-size:0.75rem] sm:[font-size:0.875rem] md:[font-size:1rem];
+  }
 }
 
 /* -------------------- Globals -------------------- */
 
 /* #region Headers */
 h1 {
-  @apply text-4xl font-bold;
+  @apply font-bold;
+  font-size: 2.25em;
 }
 
 h2 {
-  @apply text-3xl font-bold;
+  @apply font-bold;
+  font-size: 1.875em;
 }
 
 h3 {
-  @apply text-2xl font-bold;
+  @apply font-bold;
+  font-size: 1.5em;
 }
 
 h4 {
-  @apply text-xl font-bold;
+  @apply font-bold;
+  font-size: 1.25em;
 }
 
 h5 {
-  @apply text-lg font-medium;
+  @apply font-medium;
+  font-size: 1.125em;
 }
 
 h6 {
-  @apply text-base font-medium;
+  @apply font-medium;
 }
 /* #endregion */
 
@@ -101,9 +110,9 @@ form:not(.grid) > p {
 }
 
 .icon {
-  @apply min-h-fit min-w-fit;
+  /* @apply min-h-fit min-w-fit; */
   @apply h-10 w-10;
-  @apply scale-75 md:scale-100;
+  /* @apply scale-75 md:scale-100; */
 }
 
 .icon-md {
@@ -141,7 +150,8 @@ Use @apply then the list of all utility classes you want
 for button elements and .button classed elements 
 */
 .button {
-  @apply inline-flex items-center justify-center py-2 px-4 font-semibold rounded-2xl shadow-md text-center focus:outline-none focus:ring-2 focus:ring-opacity-75 cursor-pointer;
+  @apply py-2 px-1 md:px-2;
+  @apply inline-flex items-center justify-center font-semibold rounded-2xl shadow-md text-center focus:outline-none focus:ring-2 focus:ring-opacity-75 cursor-pointer;
   @apply text-black hover:ring-primary hover:ring-2;
   @apply no-underline !important;
   @apply bg-white;
@@ -275,7 +285,7 @@ label[data-drag-drop] ul.errors {
   @apply rounded-full object-top bg-white;
   @apply icon;
   @apply object-cover min-h-0 min-w-0 !important;
-  @apply scale-100 md:scale-100 !important;
+  /* @apply scale-100 md:scale-100 !important; */
 }
 
 .avatar-md {
@@ -314,7 +324,7 @@ textarea[data-filename-preview] {
 }
 
 .dropdown > .dropdown_content {
-  @apply cursor-pointer;
+  @apply cursor-pointer z-30;
 
   left: 0;
   right: unset;

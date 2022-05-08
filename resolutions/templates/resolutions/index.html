@@ -103,13 +103,13 @@
     </a>
     {% endif %}
 
-    <span>
+    <small>
         Page
         <form method="GET" class="inline">
             <input type="text" name="page" value="{{ resolutions.number }}" class="w-12 text-center">
         </form>
         of {{ resolutions.paginator.num_pages }}
-    </span>
+    </small>
 
     {% if resolutions.has_next %}
     <a href="?page={{ resolutions.next_page_number }}" class="button float-right">
