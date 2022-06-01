@@ -6,6 +6,7 @@ cd %~dp0
 py manage.py tailwind install
 py manage.py tailwind build
 py manage.py collectstatic
+py manage.py migrate
 
 @REM Register Scheduled Task
 call scripts\create_task_cleandumps.bat

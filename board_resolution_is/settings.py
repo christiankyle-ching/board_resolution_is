@@ -174,10 +174,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-MEDIA_ROOT = 'media'  # Folder path where files are stored in server
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media') # Folder path where files are stored in server
 MEDIA_URL = '/media/'  # URL path for download
 
-STATIC_ROOT = 'static'  # Folder path where files are stored in server
+STATIC_ROOT = os.path.join(BASE_DIR, 'static') # Folder path where files are stored in server
 STATIC_URL = '/static/'  # URL path for download
 
 AUTH_USER_MODEL = 'users.User'
