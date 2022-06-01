@@ -26,6 +26,7 @@ SECRET_KEY = os.environ['BRIS_SECRET']
 # SECURITY WARNING: don't run with debug turned on in production!
 # This will only turn to true if environment variable is equals to "True"
 DEBUG = os.environ.get('BRIS_DEBUG', 'False') == 'True'
+# DEBUG = True
 
 INTERNAL_IPS = [
     '127.0.0.1',
@@ -45,6 +46,7 @@ ALLOWED_HOSTS = [
     # Consider also using * if port 80 and 443 will not be opened in firewall anyway
     # PCs in the local network
     '*',
+    '192.168.1.*',
 ] + (DEBUG_ALLOWED_HOSTS if DEBUG else [])
 
 
@@ -65,16 +67,18 @@ INSTALLED_APPS = [
 
     # Custom Apps
     'resolutions.apps.ResolutionsConfig',
-    'users.apps.UsersConfig'
+    'users.apps.UsersConfig',
 
     # Deployment
-    # 'mod_wsgi.server',
+    'mod_wsgi.server',
+    "corsheaders",
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    # 'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -196,6 +200,9 @@ DEFAULT_FROM_EMAIL = os.environ.get('BRIS_EMAIL_USERNAME', '')
 LOGIN_URL = 'users:auth:login'
 LOGIN_REDIRECT_URL = 'resolutions:index'
 LOGOUT_REDIRECT_URL = 'users:auth:login'
+
+# CORS
+CORS_ALLOW_ALL_ORIGINS = True
 
 print(f"----- Starting {CLIENT_NAME} -----")
 print(f"DEBUG: {DEBUG} {'!!!WARNING!!!' if DEBUG else ''}")

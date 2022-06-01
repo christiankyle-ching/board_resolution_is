@@ -12,6 +12,7 @@ fpdf2 = "*"
 whitenoise = "*"
 waitress = "*"
 mod-wsgi = "*"
+django-cors-headers = "*"
 
 [dev-packages]
 autopep8 = "*"
