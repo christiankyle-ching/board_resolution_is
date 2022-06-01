@@ -51,9 +51,15 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'board_resolution_is.settings')
 ## Start the service (server)
 `httpd -k start`
 
+## Stop the service (server)
+`httpd -k stop`
+
 ## Verify if it's working
 - Use Task Manager to see if `Apache HTTP Server` is running.
 - Visit `localhost:80` on a browser and the web app should be visible.
 
 ## Troubleshooting
 If errors occur, you can check the logs at `C:\Apache24\logs`.
+
+## User Accessibility
+Create shortcuts for the batch files in [scripts](scripts) for starting and stopping the server.
