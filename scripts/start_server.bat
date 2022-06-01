@@ -7,7 +7,7 @@ httpd -k start
 for /f "tokens=14" %%a in ('ipconfig ^| findstr IPv4') do set _IPaddr=%%a
 
 echo.
-echo Access PLV-BRS in other devices using this address: %_IPaddr%
+echo Access PLV-BRS in other devices using this address: http://%_IPaddr%
 echo.
 
 pause
