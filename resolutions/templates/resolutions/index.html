@@ -48,9 +48,9 @@
     <thead>
         <tr>
             <th>Res. No.</th>
-            <th>Title</th>
+            <th class="">Title</th>
             <th class="hidden md:table-cell">Date Approved</th>
-            <th>
+            <th class="max-w-full whitespace-nowrap">
                 <!-- Operations -->
             </th>
         </tr>
@@ -59,25 +59,23 @@
         {% for res in resolutions %}
         <tr>
             <td>{{ res.number }}</td>
-            <td>{{ res.title }}</td>
+            <td class="">{{ res.title }}</td>
             <td class="hidden md:table-cell">{{ res.certificate.date_approved }}</td>
-            <td>
-                <div class="flex items-center justify-center py-2 gap-2">
-                    <a href="{% url 'resolutions:cert_detail' res.certificate.pk %}" class="button">
-                        <img src="{% static 'resolutions/img/open.svg' %}" alt="" class="icon-sm">
-                        <span>View More</span>
-                    </a>
+            <td class="flex items-center justify-center py-2 gap-2 flex-wrap lg:min-w-[20rem]">
+                <a href="{% url 'resolutions:cert_detail' res.certificate.pk %}" class="button">
+                    <img src="{% static 'resolutions/img/open.svg' %}" alt="" class="icon-sm">
+                    <span>View More</span>
+                </a>
 
-                    <!-- Edit -->
-                    <a href="{% url 'resolutions:res_edit' res.pk %}" class="button">
-                        <img src="{% static 'users/img/edit.png' %}" alt="Edit" class="icon-sm">
-                    </a>
+                <!-- Edit -->
+                <a href="{% url 'resolutions:res_edit' res.pk %}" class="button">
+                    <img src="{% static 'users/img/edit.png' %}" alt="Edit" class="icon-sm">
+                </a>
 
-                    <!-- Delete -->
-                    <a href="{% url 'resolutions:res_delete' res.pk %}" class="button-danger">
-                        <img src="{% static 'users/img/trash.png' %}" alt="Edit" class="icon-sm">
-                    </a>
-                </div>
+                <!-- Delete -->
+                <a href="{% url 'resolutions:res_delete' res.pk %}" class="button-danger">
+                    <img src="{% static 'users/img/trash.png' %}" alt="Edit" class="icon-sm">
+                </a>
             </td>
         </tr>
         {% endfor %}

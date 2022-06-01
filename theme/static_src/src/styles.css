@@ -155,6 +155,7 @@ for button elements and .button classed elements
   @apply text-black hover:ring-primary hover:ring-2;
   @apply no-underline !important;
   @apply bg-white;
+  @apply min-w-fit;
   @apply transition-colors transition-shadow;
 }
 
