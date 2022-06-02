@@ -11,7 +11,7 @@
     <div class="card p-6 col-span-full md:col-span-4">
         <div class="relative">
             <a href="{% url 'resolutions:index' %}"
-                class="button-danger button-rounded absolute top-4 right-4 invisible md:visible">X</a>
+                class="button-danger h-8 w-8 button-rounded absolute top-4 right-4 invisible md:visible">X</a>
 
             {% for img in certificate.images %}
             <a href="{{ img.image.url }}" target="_blank">

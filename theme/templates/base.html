@@ -51,7 +51,7 @@
       <!-- Left Column -->
       <a href="{% url 'resolutions:index' %}" class="flex justify-center items-center">
         <img src="{% static 'client-logo.png' %}" class="h-10 w-10 mr-2">
-        <h3 class="font-semibold leading-none">{% get_settings_val 'CLIENT_NAME' %}</h3>
+        <span class="font-semibold !leading-none text-lg md:text-2xl">{% get_settings_val 'CLIENT_NAME' %}</span>
       </a>
 
       <!-- Right Column -->

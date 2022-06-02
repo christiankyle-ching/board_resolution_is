@@ -9,10 +9,13 @@
 @layer base {
   html {
     font-family: "Poppins", sans-serif;
+
+    font-size: 16px;
   }
 
   body {
-    @apply [font-size:0.75rem] sm:[font-size:0.875rem] md:[font-size:1rem];
+    /* @apply [font-size:0.875rem]  md:[font-size:1rem]; */
+    /* sm:[font-size:0.875rem] */
   }
 }
 
@@ -150,7 +153,7 @@ Use @apply then the list of all utility classes you want
 for button elements and .button classed elements 
 */
 .button {
-  @apply py-2 px-1 md:px-2;
+  @apply p-2;
   @apply inline-flex items-center justify-center font-semibold rounded-2xl shadow-md text-center focus:outline-none focus:ring-2 focus:ring-opacity-75 cursor-pointer;
   @apply text-black hover:ring-primary hover:ring-2;
   @apply no-underline !important;
