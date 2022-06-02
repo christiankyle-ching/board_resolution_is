@@ -64,6 +64,7 @@ class CertificateImage(abstract_models.NoDeleteModel):
     certificate = models.ForeignKey(Certificate, on_delete=models.CASCADE)
 
     image = models.ImageField(upload_to=certificate_image_path)
+    ocr = models.TextField(blank=True, null=False, default="")
 
     def __str__(self):
         return self.image.name

@@ -13,7 +13,7 @@
    6. Install and done.
 3. Install pipenv.
    - `pip install pipenv`
-4. Clone this repository and open the folder in **Visual Studio Code**. Using the terminal within `vscode` (`` CTRL + ` ``), run the following to install required packages:
+4. Clone this repository and open the folder in **Visual Studio Code**. Using the terminal within `vscode` (`` CTRL + ` ``), run the following to install required Python packages:
 ```bat
 pipenv install
 ```
@@ -26,8 +26,9 @@ INSTALLED_APPS = [
    'django.contrib.sessions',
    'django.contrib.messages',
    'django.contrib.staticfiles',
-   # 'mod_wsgi.server',
 
+   # For Deployment
+   # 'mod_wsgi.server',
    ...
 ]
 ```
@@ -54,7 +55,7 @@ Setup [environment variables](https://www.computerhope.com/issues/ch000549.htm) 
 ```py
 py -c "import secrets; print(secrets.token_hex(64))"
 ```
-- `BRIS_DEBUG` = `True` (set this to `True` for local development only. **For deployment, you should remove this environment variable**)
+- `BRIS_DEBUG` = `True` (set this to `True` for local development only. **If you're already deploying/installing, you should remove this environment variable**)
 - `NPM_BIN_PATH` = [See this](#tailwindcss-front-end-css-framework)
 
 Optional environment variables:
@@ -62,6 +63,10 @@ Optional environment variables:
 - `PSQL_USER` = User in psql (default: `postgres`)
 - `PSQL_HOST` = IP Address where database is located (default: `127.0.0.1`)
 - `PSQL_PORT` = Port that PostgreSQL runs on (default: `5432`)
+
+**Note:** You need to restart `vscode` or the web server (if deployed) to fetch/refresh the new environment variables.
+
+### Password Reset via Email using Gmail App Passwords
 
 For password reset using email, you need to add a **Gmail Account with 2FA enabled**. [Add an App Password](https://support.google.com/accounts/answer/185833?hl=en), and take note of the password. Then assign the following environment variables:
 - `BRIS_EMAIL_USERNAME` - Your Gmail Account (email address).
@@ -91,6 +96,13 @@ Read more [here](https://django-tailwind.readthedocs.io/en/latest/installation.h
 
 #### Use VSCode Tailwind CSS IntelliSense extension for previews.
 VS Marketplace Link: https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss
+
+### Tesseract OCR
+
+Tesseract OCR is used to detect the text content of the images uploaded. To install:
+
+1. Download an installer of the Tesseract binaries: https://tesseract-ocr.github.io/tessdoc/Home.html#binaries. Follow the installer steps.
+2. For Windows: Add the install location to `PATH` [environment variable](#set-environment-variables) (Default: `C:\`)
 
 ### Setup Python Interpreter (For automatic activation of virtual environment)
 Install the [Python Extension in VSCode](https://marketplace.visualstudio.com/items?itemName=ms-python.python).

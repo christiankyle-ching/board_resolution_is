@@ -10,13 +10,17 @@ from django.urls import reverse_lazy, reverse
 from django.db.models.query import Q
 from django.core.paginator import Paginator
 from django.http import FileResponse
+from django.core.files.uploadedfile import InMemoryUploadedFile
+import pytesseract
+from PIL import Image, ImageOps, ExifTags
 
 from resolutions.forms import ResolutionSearchForm
 from resolutions.models import Certificate, CertificateImage, Resolution
-from resolutions.utils import PDFWithImageAndLabel, app_db_import, compress_image, app_db_export
+from resolutions.utils import PDFWithImageAndLabel, app_db_import, compress_image, app_db_export, fix_exif_image
 from users.mixins import HasAdminPermission
 
 RESOLUTION_PER_PAGE = 10
+OCR_TIMEOUT = 5
 
 
 class IndexView(LoginRequiredMixin, View):
@@ -35,22 +39,45 @@ class IndexView(LoginRequiredMixin, View):
         })
 
     def post(self, request):
-        res = Resolution.objects.all()
+        res_searched = Resolution.objects.all()
 
         search_form = ResolutionSearchForm(request.POST)
         has_searched = 'search' in request.POST and search_form.has_changed()
 
         if has_searched and search_form.is_valid():
-            res = Resolution.objects.filter(
-                (
-                    Q(title__icontains=search_form.cleaned_data['title']) &
-                    Q(number__icontains=search_form.cleaned_data['number'])
-                )
-            )
+            _keyword = search_form.cleaned_data['keyword']
+            _res_num = search_form.cleaned_data['number']
+            _date_approved = search_form.cleaned_data['date_approved']
 
-            if search_form.cleaned_data['date_approved'] is not None:
-                res = res.filter(
+            res_searched = Resolution.objects.all()
+
+            # Search Title and Remarks
+            if _keyword != '':
+                res_searched = res_searched.filter(
+                    Q(title__icontains=_keyword) |
+                    Q(certificate__remarks__icontains=_keyword)
+                )
+
+            if _res_num != '':
+                res_searched = res_searched.filter(number__icontains=_res_num)
+
+            # Search Date Approved
+            if _date_approved is not None:
+                res_searched = res_searched.filter(
                     certificate__date_approved=search_form.cleaned_data['date_approved'])
+
+            # Search using OCR only if searching using keyword (for performance)
+            res_from_images = None
+            if _keyword != '':
+                cert_id_from_image_ocr = CertificateImage.objects.filter(
+                    ocr__icontains=_keyword).values_list("certificate", flat=True)
+                res_from_images = Resolution.objects.filter(
+                    certificate__pk__in=[cert_id_from_image_ocr])
+
+            # All Results
+            res = res_searched.union(
+                res_from_images) if res_from_images is not None else res_searched
+
         else:
             return redirect('resolutions:index')
 
@@ -72,66 +99,87 @@ class CertificateFormView(LoginRequiredMixin, View):
         })
 
     def post(self, request, pk=None):
-        try:
-            # Get Form Values
-            date_approved = request.POST.get('date_approved')
-            is_minutes_of_meeting = request.POST.get(
-                'is_minutes_of_meeting') is not None
-            remarks = request.POST.get('remarks', '')
-            res_nums = request.POST.getlist('resolution_numbers')
-            res_titles = request.POST.getlist('resolution_titles')
+        # try:
+        # Get Form Values
+        date_approved = request.POST.get('date_approved')
+        is_minutes_of_meeting = request.POST.get(
+            'is_minutes_of_meeting') is not None
+        remarks = request.POST.get('remarks', '')
+        res_nums = request.POST.getlist('resolution_numbers')
+        res_titles = request.POST.getlist('resolution_titles')
+        use_ocr = False
 
-            # Get existing cert, else create a new one
-            cert = None
-            if pk is not None:
-                cert = get_object_or_404(Certificate, pk=pk)
-            else:
-                cert = Certificate(added_by=request.user)
+        # Get existing cert, else create a new one
+        cert = None
+        if pk is not None:
+            cert = get_object_or_404(Certificate, pk=pk)
+        else:
+            cert = Certificate(added_by=request.user)
 
-            is_editing = pk is not None
+        is_editing = pk is not None
 
-            # Update other fields
-            cert.date_approved = dateparse.parse_date(date_approved)
-            cert.is_minutes_of_meeting = is_minutes_of_meeting
-            cert.remarks = remarks
+        # Update other fields
+        cert.date_approved = dateparse.parse_date(date_approved)
+        cert.is_minutes_of_meeting = is_minutes_of_meeting
+        cert.remarks = remarks
 
-            cert_images = []
-            resolutions = []
+        cert_images = []
+        resolutions = []
 
-            # Add New Resolutions
-            for num, title in zip(res_nums, res_titles):
-                num_stripped = num.strip()
-                title_stripped = title.strip()
-                if num_stripped != "" and title_stripped != "":
-                    res = Resolution(number=num_stripped,
-                                     title=title_stripped,
-                                     certificate=cert,
-                                     added_by=request.user,
-                                     )
-                    resolutions.append(res)
+        # Add New Resolutions
+        for num, title in zip(res_nums, res_titles):
+            num_stripped = num.strip()
+            title_stripped = title.strip()
+            if num_stripped != "" and title_stripped != "":
+                res = Resolution(number=num_stripped,
+                                 title=title_stripped,
+                                 certificate=cert,
+                                 added_by=request.user,
+                                 )
+                resolutions.append(res)
 
-            # Add New Files
-            for f in request.FILES.getlist('images'):
-                cert_image = CertificateImage(
-                    image=compress_image(f, force_jpeg=True), certificate=cert)
-                cert_images.append(cert_image)
+        # Add New Files
+        for f in request.FILES.getlist('images'):
+            # image = Image.open(f)
 
-            with transaction.atomic():
-                cert.save()
-                for r in resolutions:
-                    r.save()
-                for ci in cert_images:
-                    ci.save()
+            # # TODO: Fix orientaion on images from cameras with EXIF
+            # django_img = fix_exif_image(f, filename=f.name)
 
-            messages.success(
-                request, f"Successfully {'edited' if is_editing else 'created'} {cert}.")
+            # # Try read image for keywords
+            _ocr = ''
+            # if use_ocr:
+            #     try:
+            #         _ocr = pytesseract.image_to_string(
+            #             ImageOps.exif_transpose(image), timeout=OCR_TIMEOUT)
+            #         print("OCR: " + _ocr)
+            #     except Exception as e:
+            #         print(f'OCR Error: Cannot read text - {e}')
+            #         pass
 
-            return redirect('resolutions:cert_detail', pk=cert.pk)
-        except Exception as e:
-            messages.error(request, e)
-            return render(request, 'resolutions/certificate_form.html', {
-                'certificate': cert,
-            })
+            # Add to list of to save
+            cert_image = CertificateImage(
+                image=compress_image(f), certificate=cert, ocr=_ocr)
+            cert_images.append(cert_image)
+
+            # image.close()
+
+        with transaction.atomic():
+            cert.save()
+            for r in resolutions:
+                r.save()
+            for ci in cert_images:
+                ci.save()
+
+        messages.success(
+            request, f"Successfully {'edited' if is_editing else 'created'} {cert}.")
+
+        return redirect('resolutions:cert_detail', pk=cert.pk)
+        # except Exception as e:
+        #     messages.error(request, e)
+        #     print(e)
+        #     return render(request, 'resolutions/certificate_form.html', {
+        #         'certificate': cert,
+        #     })
 
 
 class CertificateDetailView(LoginRequiredMixin, View):
@@ -180,16 +228,6 @@ class CertificateExportView(LoginRequiredMixin, HasAdminPermission, View):
             except Exception as e:
                 """Skip image if not existing on server"""
                 pass
-
-            # pdf.add_lines_of_text([
-            #     "Resolutions Included:",
-            #     *map(
-            #         lambda r: f"Resolution No. {r.number} - {r.title}",
-            #         cert.resolutions),
-            #     "",
-            #     "Date Approved:",
-            #     cert.date_approved.strftime('%B %d, %Y'),
-            # ])
 
         byte_str = pdf.output(dest='S')
         stream = BytesIO(byte_str)

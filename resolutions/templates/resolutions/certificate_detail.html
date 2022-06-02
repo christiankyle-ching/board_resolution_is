@@ -15,7 +15,8 @@
 
             {% for img in certificate.images %}
             <a href="{{ img.image.url }}" target="_blank">
-                <img id="img-{{ img.image.name }}" src="{{ img.image.url }}" alt="{{ img.image.name }}" class="w-full">
+                <img id="img-{{ img.image.name }}" src="{{ img.image.url }}" alt="{{ img.image.name }}" class="w-full"
+                    title="{{ img.ocr }}">
             </a>
             {% empty %}
             <div class="flex h-full w-full">

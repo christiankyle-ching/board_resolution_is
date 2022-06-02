@@ -24,20 +24,6 @@ You can **create an offline installer** instead. Follow the [README](/vs_BuildTo
 ### Installing mod_wsgi
 Run `pipenv install` again while in venv (`pipenv shell`).
 
-## Update wsgi_apache.py
-
-Open the [board_resolution_is/wsgi_apache.py](board_resolution_is/wsgi_apache.py) and edit the following lines:
-
-```py
-# TODO: Add the repo's directory to the PYTHONPATH
-# These 2 lines are needed on a Windows server
-# Root folder and django project folder
-sys.path.append('C:/.../')
-sys.path.append('C:/.../board_resolution_is')
-
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'board_resolution_is.settings')
-```
-
 ## Update httpd.conf
 
 1. Copy the template, and paste on the end of httpd.conf (Default Location: `C:\Apache24\conf\httpd.conf`).
@@ -62,4 +48,4 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'board_resolution_is.settings')
 If errors occur, you can check the logs at `C:\Apache24\logs`.
 
 ## User Accessibility
-Create shortcuts for the batch files in [scripts](scripts) for starting and stopping the server.
+Create shortcuts for the batch files in [scripts](/scripts/) for starting and stopping the server.
