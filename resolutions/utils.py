@@ -43,32 +43,6 @@ def compress_image(img, custom_filename=None, max_px=None, force_jpeg=False, qua
                                 f'image/{image_format.lower()}', img_io.tell(), None)
 
 
-def fix_exif_image(img, filename='image'):
-    image = Image.open(img)
-    buffer = BytesIO()
-
-    try:
-        for orientation in ExifTags.TAGS.keys():
-            if ExifTags.TAGS[orientation] == 'Orientation':
-                break
-
-        exif = image._getexif()
-
-        if exif[orientation] == 3:
-            image = image.rotate(180, expand=True)
-        elif exif[orientation] == 6:
-            image = image.rotate(270, expand=True)
-        elif exif[orientation] == 8:
-            image = image.rotate(90, expand=True)
-    except Exception as e:
-        print(f"No EXIF Data: {e}")
-
-    image.save(buffer, format="PNG")
-
-    return InMemoryUploadedFile(buffer, None, filename,
-                                f'image/png', buffer.tell(), None)
-
-
 def get_highest_length_in_list(arr):
     max_length = 0
 

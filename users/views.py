@@ -1,3 +1,4 @@
+from io import BytesIO
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth.views import LoginView, LogoutView
@@ -7,14 +8,15 @@ from board_resolution_is.utils import get_form_errors
 from resolutions.utils import compress_image
 from django.contrib import messages
 from django.contrib.auth import password_validation
+from django.contrib.auth import get_user_model
 
 from os import linesep
+from PIL import Image, ImageOps, ExifTags
+from django.core.files import File
 
 from users.mixins import HasAdminPermission
-
 from .forms import AdminUserChangePasswordForm, UserChangeEmailForm, UserChangePasswordForm, UserCreateForm, UserProfileForm
 
-from django.contrib.auth import get_user_model
 
 _User = get_user_model()
 
@@ -39,8 +41,33 @@ class UserProfileView(LoginRequiredMixin, View):
         elif 'update_avatar' in request.POST:
             avatar = request.FILES.get('avatar', '')
             if avatar != '':
-                request.user.profile.avatar = compress_image(
-                    avatar, max_px=512, force_jpeg=False)
+                pilImage = Image.open(BytesIO(avatar.read()))
+                output = BytesIO()
+
+                print("Process Image EXIF")
+                try:
+                    for orientation in ExifTags.TAGS.keys():
+                        if ExifTags.TAGS[orientation] == 'Orientation':
+                            break
+
+                    exif = pilImage._getexif()
+
+                    if exif[orientation] == 3:
+                        pilImage = pilImage.rotate(180, expand=True)
+                    elif exif[orientation] == 6:
+                        pilImage = pilImage.rotate(270, expand=True)
+                    elif exif[orientation] == 8:
+                        pilImage = pilImage.rotate(90, expand=True)
+                except Exception as e:
+                    print(f"No EXIF Data: {e}")
+
+                pilImage.thumbnail((512, 512))
+
+                pilImage.convert("RGB").save(
+                    output, format="JPEG", quality=75)
+                output.seek(0)
+                request.user.profile.avatar = File(output, avatar.name)
+
                 request.user.profile.save()
 
                 messages.success(request, 'Successfully updated avatar.')

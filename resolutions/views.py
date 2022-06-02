@@ -16,7 +16,7 @@ from PIL import Image, ImageOps, ExifTags
 
 from resolutions.forms import ResolutionSearchForm
 from resolutions.models import Certificate, CertificateImage, Resolution
-from resolutions.utils import PDFWithImageAndLabel, app_db_import, compress_image, app_db_export, fix_exif_image
+from resolutions.utils import PDFWithImageAndLabel, app_db_import, compress_image, app_db_export
 from users.mixins import HasAdminPermission
 
 RESOLUTION_PER_PAGE = 10
@@ -107,7 +107,7 @@ class CertificateFormView(LoginRequiredMixin, View):
         remarks = request.POST.get('remarks', '')
         res_nums = request.POST.getlist('resolution_numbers')
         res_titles = request.POST.getlist('resolution_titles')
-        use_ocr = False
+        use_ocr = request.POST.get('use_ocr') is not None
 
         # Get existing cert, else create a new one
         cert = None
@@ -140,46 +140,21 @@ class CertificateFormView(LoginRequiredMixin, View):
 
         # Add New Files
         for f in request.FILES.getlist('images'):
-            # image = Image.open(f)
-
-            # # TODO: Fix orientaion on images from cameras with EXIF
-            # django_img = fix_exif_image(f, filename=f.name)
-
-            # # Try read image for keywords
-            _ocr = ''
-            # if use_ocr:
-            #     try:
-            #         _ocr = pytesseract.image_to_string(
-            #             ImageOps.exif_transpose(image), timeout=OCR_TIMEOUT)
-            #         print("OCR: " + _ocr)
-            #     except Exception as e:
-            #         print(f'OCR Error: Cannot read text - {e}')
-            #         pass
-
             # Add to list of to save
-            cert_image = CertificateImage(
-                image=compress_image(f), certificate=cert, ocr=_ocr)
+            cert_image = CertificateImage(image=f, certificate=cert)
             cert_images.append(cert_image)
-
-            # image.close()
 
         with transaction.atomic():
             cert.save()
             for r in resolutions:
                 r.save()
             for ci in cert_images:
-                ci.save()
+                ci.save(use_ocr=use_ocr)
 
         messages.success(
             request, f"Successfully {'edited' if is_editing else 'created'} {cert}.")
 
         return redirect('resolutions:cert_detail', pk=cert.pk)
-        # except Exception as e:
-        #     messages.error(request, e)
-        #     print(e)
-        #     return render(request, 'resolutions/certificate_form.html', {
-        #         'certificate': cert,
-        #     })
 
 
 class CertificateDetailView(LoginRequiredMixin, View):
@@ -326,6 +301,7 @@ class ResolutionDumpImportView(LoginRequiredMixin, HasAdminPermission, View):
             app_db_import(uploaded_zip, media_path='media/certificates')
             messages.success(request, f"Imported Resolutions from ZIP.")
         except Exception as e:
+            raise e
             messages.error(request, f"Error in importing ZIP: {e}")
 
         return redirect(reverse('resolutions:index'))
