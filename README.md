@@ -2,6 +2,8 @@
 
 ## How to setup a local development server?
 
+If you're looking to install this site on a deployment environment immediately (you don't intend to develop), follow [this guide](docs/README_DEPLOY.md) instead.
+
 ### Python and Django
 1. Download [Python 3.10](https://www.python.org/downloads/).
 2. **(IMPORTANT)** Use these steps to install your Python!
@@ -95,6 +97,7 @@ where npm
 Read more [here](https://django-tailwind.readthedocs.io/en/latest/installation.html#configuration-of-the-path-to-the-npm-executable).
 
 #### Use VSCode Tailwind CSS IntelliSense extension for previews.
+
 VS Marketplace Link: https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss
 
 ### Tesseract OCR

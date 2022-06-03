@@ -10,6 +10,7 @@ https://www.apachelounge.com/download/
 3. Add `C:\Apache24\bin` to PATH (environment variable).
 
 ### Setup of MSVC C++ Build Tools
+**This step requires at least 1GB of internet download. Use the [Offline Installer method](#offline-installer)**
 1. Go to [Visual Studio Downloads](https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2022). Under **Tools for Visual Studio**, download **Build Tools for Visual Studio**.
 2. Run the installer, then click **Install**.
 3. After installation, click **More > Import Config**
@@ -19,7 +20,7 @@ https://www.apachelounge.com/download/
 
 #### Offline Installer
 
-You can **create an offline installer** instead. Follow the [README](/vs_BuildTools/README.md) at [vs_BuildTools](/vs_BuildTools/).
+(Alternative) You can **create an offline installer** instead. Follow the [README](/vs_BuildTools/README.md) at [vs_BuildTools](/vs_BuildTools/).
 
 ### Installing mod_wsgi
 Run `pipenv install` again while in venv (`pipenv shell`).
@@ -30,6 +31,9 @@ Run `pipenv install` again while in venv (`pipenv shell`).
 2. In the httpd.conf (`C:\Apache24\conf\httpd.conf`) file (NOT THE TEMPLATE), change the following values:
    1. Run `mod_wsgi-express module-config` **(not on venv)**. Copy the three lines and replace in the `httpd.conf`.
    2. Replace paths with "..." to point to the project folder (static, media, and wsgi). **NOTE**: Use forward slashes `/`.
+
+## Set Static IP of the server
+Change the IP settings of the server from DHCP (Automatic) to Static. For Windows: follow this guide (https://docs.microsoft.com/en-us/troubleshoot/windows-server/networking/change-ip-address-network-adapter#how-to-specify-an-ip-address).
 
 ## Install httpd service
 `httpd -k install`

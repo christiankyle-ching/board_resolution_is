@@ -2,11 +2,15 @@
 
 cd %~dp0
 
-@REM Generate CSS
+@REM Python Packages
+pipenv requirements > requirements.txt
+pip install -r requirements.txt
+
+@REM Django Setup
+py manage.py migrate
 py manage.py tailwind install
 py manage.py tailwind build
-py manage.py collectstatic
-py manage.py migrate
+py manage.py collectstatic --noinput
 
 @REM Register Scheduled Task
 call scripts\create_task_cleandumps.bat

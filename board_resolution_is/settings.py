@@ -26,7 +26,7 @@ SECRET_KEY = os.environ['BRIS_SECRET']
 # SECURITY WARNING: don't run with debug turned on in production!
 # This will only turn to true if environment variable is equals to "True"
 DEBUG = os.environ.get('BRIS_DEBUG', 'False') == 'True'
-DEBUG = True
+# DEBUG = True
 
 INTERNAL_IPS = [
     '127.0.0.1',
