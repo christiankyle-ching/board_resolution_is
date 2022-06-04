@@ -17,16 +17,28 @@ First of all, **this requires a 64-bit Windows PC** (though most PCs are now 64-
 
 You'll also need to be somewhat knowledgable of using the Command Prompt (`cmd`), as we'll need to use it a few times.
 
+---
+
+1. **Download the project files at PLV Board Resolution System Github Repository** - https://github.com/christiankyle-ching/board_resolution_is (Click `Code (Green Button) > Download ZIP`)
+2. **Download the installers required here (2 GB total)** - https://drive.google.com/file/d/1EBrT0F_34Pf9jGYFX5OXWEntwDPJiTbL/view?usp=sharing (*I have pre-compiled the necessary installers in a single ZIP file for your convenience*)
+
+<details>
+
+<summary>
+Click here to show the full list of installers included in this ZIP.
+</summary>
+
 In order for you to prepare the installers in advance, here is a list of the pre-requisite installers and their download links:
 
-1. **PLV Board Resolution System Files** - https://github.com/christiankyle-ching/board_resolution_is (Click `Code > Download ZIP`)
-2. **Python 3.10** - https://www.python.org/downloads/release/python-3104/ (Select the `Windows installer (64-bit)`)
-3. **NodeJS** - https://nodejs.org/en/download/ (Select `LTS > Windows Installer`)
-4. **PostgreSQL (Database)** - https://www.enterprisedb.com/downloads/postgres-postgresql-downloads (Select `PostgreSQL Version 14.3 > Windows x86-64`)
-5. **Tesseract for Windows** - https://github.com/UB-Mannheim/tesseract/wiki#tesseract-installer-for-windows (Select the `(64-bit)`)
-6. **Apache** - https://www.apachelounge.com/download/ (Select `Win64`)
-7. **Visual Studio C++ Build Tools** - https://drive.google.com/file/d/1WGwRLyx2mRVLWkLYrU7xb0dJCWCze_Li/view?usp=sharing (*This is an offline installer I prepared for one-click install of C++ Build Tools*)
-8. (Optional: For easier code editing) **VSCode** - https://code.visualstudio.com/download
+1. **Python 3.10** - https://www.python.org/downloads/release/python-3104/ (Select the `Windows installer (64-bit)`)
+2. **NodeJS** - https://nodejs.org/en/download/ (Select `LTS > Windows Installer`)
+3. **PostgreSQL (Database)** - https://www.enterprisedb.com/downloads/postgres-postgresql-downloads (Select `PostgreSQL Version 14.3 > Windows x86-64`)
+4. **Tesseract for Windows** - https://github.com/UB-Mannheim/tesseract/wiki#tesseract-installer-for-windows (Select the `(64-bit)`)
+5. **Apache** - https://www.apachelounge.com/download/ (Select `Win64`)
+6. **Visual Studio C++ Build Tools** - https://drive.google.com/file/d/1WGwRLyx2mRVLWkLYrU7xb0dJCWCze_Li/view?usp=sharing (*This is an offline installer I prepared for one-click install of C++ Build Tools*)
+7. (Optional: For easier code editing) **VSCode** - https://code.visualstudio.com/download
+
+</details>
 
 ## Installing Softwares
 
@@ -66,6 +78,8 @@ Just follow the installer steps of [Node.js](https://nodejs.org/en/download/). N
 
 Tesseract OCR is used to detect the text content of the images uploaded. To install, just run the installer and click **Next** a bunch of times.
 
+**Note:** Windows Defender Smartscreen will block your installation. Click the **Run Anyway** button to proceed. Read [this](https://github.com/UB-Mannheim/tesseract/issues/32) for the reason of UB Mannheim.
+
 ### Visual Studio C++ Build Tools
 
 1. Extract all the files in [vs_BuildTools.zip](https://drive.google.com/file/d/1WGwRLyx2mRVLWkLYrU7xb0dJCWCze_Li/view?usp=sharing) in the root of `C:\`.
@@ -88,10 +102,15 @@ First, we'll need to tell the PC where to locate the programs we installed, then
 To tell the PC where to locate the programs we installed, we'll need to add several **environment variables** to the system. To add environment variables:
 
 1. Search for "environment" in Windows Search.
+
 ![](images/env_vars.png)
+
 2. Select **Environment Variables**.
+
 ![](images/env_vars_2.png)
+
 3. We will be adding variables under the **System Variables**
+
 ![](images/env_vars_3.png)
 
 **Add the following variable names and their values.**
@@ -111,7 +130,10 @@ To tell the PC where to locate the programs we installed, we'll need to add seve
 
 #### Password Reset via Email using Gmail App Passwords
 
-For password reset using email, you need to add a **Gmail Account with 2FA enabled**. Gmail is used to send the Password Reset links securely to accounts within the system. [Add an Google App Password](https://support.google.com/accounts/answer/185833?hl=en), and **copy this password**. Then assign the following environment variables:
+For password reset using email, you need to add a **Gmail Account with 2FA enabled**. Gmail is used to send the Password Reset links securely to accounts who forgot their password, so that they'll be able to reset their password without asking the Admin.
+
+[Add an Google App Password](https://support.google.com/accounts/answer/185833?hl=en), and **copy this password**. Then assign the following environment variables:
+
 | Variable Name | How to get variable value? |
 | --- | --- |
 | `BRIS_EMAIL_USERNAME` | Your Gmail Account (email address) |
