@@ -52,10 +52,11 @@ Now that you have all the installers, we'll walk through installing each of the 
    3. Click **Next**.
    4. Check **Install for All Users**.
    5. **IMPORTANT! Change install location to `C:\Python310` only! Remove the "Program Files"**.
-   6. Install and done.
+   6. Install and wait.
+   7. If there's a button to "Disable the PATH limit", just click it, then click "Finish".
 3. Install `pipenv` by:
-   1. Open a `cmd`
-   2. Enter: `pip install pipenv`
+   1. Open a `cmd` in Administrator mode (`WIN + R > Type 'cmd' > CTRL + SHIFT + ENTER`)
+   2. Enter: `py -m pip install pipenv`
 
 ### PostgreSQL Database
 **Database Name: `db_board_resolution_is`**
@@ -63,6 +64,7 @@ Now that you have all the installers, we'll walk through installing each of the 
 1. Install [PostgreSQL](https://www.postgresql.org/download/).
    - Use the default values (just press `Next`).
    - **NOTE: Remember your password** and make it secure!
+   - Uncheck the "Launch Stack Builder at exit?", then click Finish.
 2. Create a database by:
    1. Run `psql`. On Windows, search for `psql`.
    2. **Enter your password**.
