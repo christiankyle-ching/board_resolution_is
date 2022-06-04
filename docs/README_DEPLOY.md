@@ -169,7 +169,9 @@ Enter valid credentials that you'll use to log into the system. Also use valid e
 ```bat
 py manage.py runserver
 ```
-Then open the link shown in the browser (default is: `http://127.0.0.1:8000/`)
+Then open the link shown in the browser (default is: `http://127.0.0.1:8000/`).
+
+**Note:** The website will look ugly, because the styling is not served on development server. Ignore this for now, but **try to log in** your username and password created in the previous step.
 
 Once it is confirmed to be working, stop the server by pressing `CTRL + C` in the `cmd`.
 
@@ -217,7 +219,7 @@ httpd -k start
 If errors occur, you can check the logs at `C:\Apache24\logs`.
 
 ### Register Scheduled Tasks for Regular Cleanup
-Using the Backup & Restore within the system generates files that can easily fill the hard drive. **Run the [/scripts/create_task_cleandumps.bat](/scripts/create_task_cleandumps.bat) to Create a Scheduled Task** that clears these temporary folders for Backup & Restore regularly.
+Using the Backup & Restore within the system generates files that can easily fill the hard drive. **Run the [create_task_cleandumps.bat](/scripts/create_task_cleandumps.bat)(located in `C:\board_resolution_is\scripts\`) to Create a Scheduled Task** that clears these temporary folders for Backup & Restore regularly.
 
 ### Stop the service (server)
 If you ever want to stop (or restart) the server, in a `cmd (Admin)`, enter: `httpd -k stop`.
