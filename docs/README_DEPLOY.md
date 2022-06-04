@@ -82,7 +82,7 @@ Tesseract OCR is used to detect the text content of the images uploaded. To inst
 
 ### Visual Studio C++ Build Tools
 
-1. Extract all the files in [vs_BuildTools.zip](https://drive.google.com/file/d/1WGwRLyx2mRVLWkLYrU7xb0dJCWCze_Li/view?usp=sharing) in the root of `C:\`.
+1. Extract all the files in `vs_BuildTools.zip` in the root of `C:\`.
 2. Run the `vs_BuildTools_install.bat` (double-click).
 
 *(Alternative) Use online method shown [here](/docs/deploy_windows_apache.md#setup-of-msvc-c-build-tools).*
