@@ -5,19 +5,44 @@ that cuts off the steps for development server only.
 
 # PLV Board Resolution System - Installation
 
+- [PLV Board Resolution System - Installation](#plv-board-resolution-system---installation)
+  - [System and Self Requirements](#system-and-self-requirements)
+  - [Pre-Requisite Installers](#pre-requisite-installers)
+  - [Installing Softwares](#installing-softwares)
+    - [Python](#python)
+    - [PostgreSQL Database](#postgresql-database)
+    - [NodeJS](#nodejs)
+    - [Tesseract OCR](#tesseract-ocr)
+    - [Visual Studio C++ Build Tools](#visual-studio-c-build-tools)
+    - [Apache (Web Server)](#apache-web-server)
+  - [Setup the System](#setup-the-system)
+    - [Set Environment Variables](#set-environment-variables)
+      - [Password Reset via Email using Gmail App Passwords](#password-reset-via-email-using-gmail-app-passwords)
+    - [Setting and Testing the Website](#setting-and-testing-the-website)
+    - [Setting up Apache Web Server (Final Step)](#setting-up-apache-web-server-final-step)
+      - [Update httpd.conf](#update-httpdconf)
+      - [Setup the Network](#setup-the-network)
+    - [Install and Start the Server](#install-and-start-the-server)
+    - [Verify if it's working](#verify-if-its-working)
+    - [Troubleshooting](#troubleshooting)
+    - [Register Scheduled Tasks for Regular Cleanup](#register-scheduled-tasks-for-regular-cleanup)
+    - [Stop the service (server)](#stop-the-service-server)
+
 This setup guide is for installing the system complete with a web server for serving the site and its files.
 
 This guide is intended for running the server on a **Windows** PC or server.
 
 You'll also need **internet connection** for downloading the required installers for the system (*we recommend that you pre-download these files where internet connection is good*).
 
+## System and Self Requirements
+
+1. **Windows 10 (64-bit)**. Follow [these steps](https://support.microsoft.com/en-us/windows/32-bit-and-64-bit-windows-frequently-asked-questions-c6ca9541-8dce-4d48-0415-94a3faa2e13d) to check your System Type.
+2. For the **"Forgot Password"** feature, we need:
+   - **Internet Connection**, and
+   - **Google Account (Gmail)**
+3. Basic knowledge of using **Command Prompt (`cmd`)**.
+
 ## Pre-Requisite Installers
-
-First of all, **this requires a 64-bit Windows PC** (though most PCs are now 64-bit). Follow [these steps](https://support.microsoft.com/en-us/windows/32-bit-and-64-bit-windows-frequently-asked-questions-c6ca9541-8dce-4d48-0415-94a3faa2e13d) to check your System Type. 
-
-You'll also need to be somewhat knowledgable of using the Command Prompt (`cmd`), as we'll need to use it a few times.
-
----
 
 1. **Download the project files at PLV Board Resolution System Github Repository** - https://github.com/christiankyle-ching/board_resolution_is (Click `Code (Green Button) > Download ZIP`)
 2. **Download the installers required here (2 GB total)** - https://drive.google.com/file/d/1EBrT0F_34Pf9jGYFX5OXWEntwDPJiTbL/view?usp=sharing (*I have pre-compiled the necessary installers in a single ZIP file for your convenience*)
