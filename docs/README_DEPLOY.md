@@ -19,6 +19,8 @@ that cuts off the steps for development server only.
     - [Set Environment Variables](#set-environment-variables)
       - [Password Reset via Email using Gmail App Passwords](#password-reset-via-email-using-gmail-app-passwords)
     - [Setting and Testing the Website](#setting-and-testing-the-website)
+      - [Creating an Admin Account](#creating-an-admin-account)
+      - [Test the Website](#test-the-website)
     - [Setting up Apache Web Server (Final Step)](#setting-up-apache-web-server-final-step)
       - [Update httpd.conf](#update-httpdconf)
       - [Setup the Network](#setup-the-network)
@@ -184,19 +186,28 @@ py manage.py tailwind install
 py manage.py tailwind build
 py manage.py collectstatic --noinput
 ```
-4. We'll need to create a default admin account. In the same `cmd` window, enter:
+
+#### Creating an Admin Account
+
+We'll need to create a default admin account. In the same `cmd` window, enter:
+
 ```bat
 py manage.py createsuperuser
 ```
+
 Enter valid credentials that you'll use to log into the system. Also use valid email address in order for reset password feature to work.
 
-5. Next, we'll test first if the installation is working by entering:
+#### Test the Website
+
+Next, we'll test first if the installation is working by entering:
+
 ```bat
 py manage.py runserver
 ```
+
 Then open the link shown in the browser (default is: `http://127.0.0.1:8000/`).
 
-**Note:** The website will look ugly, because the styling is not served on development server. Ignore this for now, but **try to log in** your username and password created in the previous step.
+**Note:** The website will look ugly, because the styling is not served on development server. **Ignore this for now, but try to log in** your username and password created in the previous step.
 
 Once it is confirmed to be working, stop the server by pressing `CTRL + C` in the `cmd`.
 
